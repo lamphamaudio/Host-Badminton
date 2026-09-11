@@ -1,0 +1,8 @@
+{
+  "scan_date": "2026-09-11",
+  "font_stack": "Inter + JetBrains Mono (frontend/src/index.css L25-28)",
+  "palette": "Sport Dark tokens: emerald green primary (#10b981), lime accent (#84cc16), dark navy paper (#090d16) (frontend/src/index.css @theme)",
+  "motion": "motion-cut (no motion library installed)",
+  "spacing": "Tailwind CSS v4 4-pt scale",
+  "framework": "React 19 + Vite 8 + Tailwind CSS v4"
+}

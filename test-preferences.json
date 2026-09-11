@@ -1,0 +1,9 @@
+{
+  "tool": "pytest",
+  "gate": null,
+  "additionalTools": ["pytest-asyncio", "vitest", "@testing-library/react"],
+  "e2eTool": "none",
+  "testDir": "backend/tests,frontend/src",
+  "filePattern": "test_*.py,*.test.ts,*.test.tsx",
+  "packageManager": "uv"
+}
