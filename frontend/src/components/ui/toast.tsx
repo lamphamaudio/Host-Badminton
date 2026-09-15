@@ -22,14 +22,14 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(
-  'group pointer-events-auto relative flex w-full items-center justify-between space-x-3 overflow-hidden rounded-2xl border p-4 pr-6 shadow-2xl transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-top-full sm:data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-top-full sm:data-[state=open]:slide-in-from-bottom-full backdrop-blur-md',
+  'group pointer-events-auto relative flex w-full items-center justify-between space-x-3 overflow-hidden rounded-2xl border p-4 pr-6 shadow-xl transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[swipe=end]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-top-full sm:data-[state=closed]:slide-out-to-bottom-full data-[state=open]:slide-in-from-top-full sm:data-[state=open]:slide-in-from-bottom-full backdrop-blur-md',
   {
     variants: {
       variant: {
-        default: 'border-[#1e293b] bg-[#111927]/95 text-slate-100',
-        success: 'border-emerald-500/40 bg-emerald-950/90 text-emerald-100 shadow-emerald-950/50',
-        error: 'border-red-500/40 bg-red-950/90 text-red-100 shadow-red-950/50',
-        info: 'border-sky-500/40 bg-sky-950/90 text-sky-100 shadow-sky-950/50',
+        default: 'border-slate-200 bg-white/95 text-slate-900',
+        success: 'border-emerald-200 bg-emerald-50/95 text-emerald-950 shadow-emerald-500/10',
+        error: 'border-red-200 bg-red-50/95 text-red-950 shadow-red-500/10',
+        info: 'border-sky-200 bg-sky-50/95 text-sky-950 shadow-sky-500/10',
       },
     },
     defaultVariants: {
@@ -59,7 +59,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'inline-flex h-8 shrink-0 items-center justify-center rounded-lg border border-[#334155] bg-transparent px-3 text-xs font-bold text-slate-200 hover:bg-[#182338] transition-colors',
+      'inline-flex h-8 shrink-0 items-center justify-center rounded-lg border border-slate-300 bg-transparent px-3 text-xs font-bold text-slate-800 hover:bg-slate-100 transition-colors',
       className
     )}
     {...props}
@@ -74,7 +74,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      'absolute right-2 top-2 rounded-full p-1 text-slate-400 opacity-0 transition-opacity hover:text-white group-hover:opacity-100 focus:opacity-100',
+      'absolute right-2 top-2 rounded-full p-1 text-slate-400 opacity-0 transition-opacity hover:text-slate-700 group-hover:opacity-100 focus:opacity-100',
       className
     )}
     toast-close=""
@@ -91,7 +91,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn('text-sm font-bold text-white leading-tight', className)}
+    className={cn('text-sm font-bold text-slate-900 leading-tight', className)}
     {...props}
   />
 ))
@@ -103,11 +103,14 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn('text-xs text-slate-300 leading-relaxed mt-0.5', className)}
+    className={cn('text-xs text-slate-600 leading-relaxed', className)}
     {...props}
   />
 ))
 ToastDescription.displayName = ToastPrimitives.Description.displayName
+
+type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
+type ToastActionElement = React.ReactElement<typeof ToastAction>
 
 export {
   type ToastProps,
@@ -120,6 +123,3 @@ export {
   ToastClose,
   ToastAction,
 }
-
-type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
-type ToastActionElement = React.ReactElement<typeof ToastAction>

@@ -44,10 +44,10 @@ export function MoneyInput({
   return (
     <div className={cn('flex flex-col gap-2 w-full', className)}>
       {label && (
-        <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center justify-between">
+        <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center justify-between">
           <span>{label}</span>
           {value > 0 && (
-            <span className="text-emerald-400 font-mono tabular-nums font-bold">
+            <span className="text-emerald-700 font-mono tabular-nums font-bold">
               {formatVND(value)}
             </span>
           )}
@@ -63,20 +63,20 @@ export function MoneyInput({
           onChange={handleInputChange}
           placeholder={placeholder}
           disabled={disabled}
-          className="flex h-12 min-h-[48px] w-full rounded-xl border border-[#1e293b] bg-[#111927] pl-4 pr-16 py-2 text-base font-mono tabular-nums font-bold text-slate-100 placeholder:text-slate-600 outline-none transition-all duration-150 focus:border-emerald-500/80 focus:ring-2 focus:ring-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex h-12 min-h-[48px] w-full rounded-xl border border-slate-200 bg-white pl-4 pr-16 py-2 text-base font-mono tabular-nums font-bold text-slate-900 placeholder:text-slate-400 outline-none transition-all duration-150 focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10 disabled:cursor-not-allowed disabled:opacity-50 shadow-sm"
         />
         <div className="absolute right-3 flex items-center gap-1.5">
           {value > 0 && !disabled && (
             <button
               type="button"
               onClick={handleClear}
-              className="p-1 text-slate-400 hover:text-slate-200 hover:bg-[#182338] rounded-full transition-colors"
+              className="p-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
               title="Xóa số tiền"
             >
               <X className="w-4 h-4" />
             </button>
           )}
-          <span className="text-xs font-bold text-emerald-400 select-none">VNĐ</span>
+          <span className="text-xs font-bold text-slate-500 select-none">VNĐ</span>
         </div>
       </div>
 
@@ -88,7 +88,7 @@ export function MoneyInput({
               key={inc}
               type="button"
               onClick={() => handleAddAmount(inc)}
-              className="h-8 min-h-[32px] px-2.5 rounded-lg bg-[#182338] border border-[#1e293b] text-xs font-mono font-semibold text-slate-300 hover:text-emerald-400 hover:border-emerald-500/40 hover:bg-[#22314e] active:scale-95 transition-all select-none cursor-pointer shrink-0"
+              className="h-8 min-h-[32px] px-2.5 rounded-lg bg-slate-100 border border-slate-200/80 text-xs font-mono font-semibold text-slate-700 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-200 active:scale-95 transition-all select-none cursor-pointer shrink-0"
             >
               +{inc >= 1_000_000 ? `${inc / 1_000_000}M` : `${inc / 1_000}k`}
             </button>

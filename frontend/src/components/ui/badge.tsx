@@ -7,13 +7,13 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border border-emerald-500/30 bg-emerald-950/60 text-emerald-400',
-        paid: 'border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold',
-        pending: 'border border-amber-500/40 bg-amber-500/10 text-amber-400 font-bold',
-        unpaid: 'border border-red-500/40 bg-red-500/10 text-red-400 font-bold',
-        member: 'border border-sky-500/40 bg-sky-500/10 text-sky-400 font-bold',
-        secondary: 'border border-[#334155] bg-[#182338] text-slate-300',
-        outline: 'border border-[#334155] text-slate-300',
+        default: 'border border-emerald-200 bg-emerald-50 text-emerald-800',
+        paid: 'border border-emerald-200 bg-emerald-50 text-emerald-800 font-semibold',
+        pending: 'border border-amber-200 bg-amber-50 text-amber-800 font-semibold',
+        unpaid: 'border border-red-200 bg-red-50 text-red-800 font-semibold',
+        member: 'border border-sky-200 bg-sky-50 text-sky-800 font-semibold',
+        secondary: 'border border-slate-200 bg-slate-100 text-slate-700',
+        outline: 'border border-slate-200 bg-white text-slate-700',
       },
       size: {
         default: 'h-6 text-xs px-2.5',
@@ -41,14 +41,14 @@ function Badge({ className, variant, size, dot, children, ...props }: BadgeProps
           className={cn(
             'w-1.5 h-1.5 rounded-full shrink-0',
             variant === 'paid' || variant === 'default'
-              ? 'bg-emerald-400'
+              ? 'bg-emerald-600'
               : variant === 'pending'
-                ? 'bg-amber-400'
+                ? 'bg-amber-600'
                 : variant === 'unpaid'
-                  ? 'bg-red-400'
+                  ? 'bg-red-600'
                   : variant === 'member'
-                    ? 'bg-sky-400'
-                    : 'bg-slate-400'
+                    ? 'bg-sky-600'
+                    : 'bg-slate-500'
           )}
         />
       )}

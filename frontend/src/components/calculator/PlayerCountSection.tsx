@@ -31,14 +31,14 @@ export const PlayerCountSection: React.FC<PlayerCountSectionProps> = ({
   const selectedCount = selectedMemberIds.length
 
   return (
-    <Card className="border-slate-800 bg-slate-900/90 shadow-lg">
+    <Card className="border-slate-200/90 bg-white shadow-sm">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-teal-500/10 text-teal-400">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
               <Users className="h-4 w-4" />
             </div>
-            <CardTitle className="text-base font-bold text-white">Số người tham gia</CardTitle>
+            <CardTitle className="text-base font-bold text-slate-900">Số người tham gia</CardTitle>
           </div>
           <Badge variant="paid" size="default">
             Tổng: {totalCount} người
@@ -48,24 +48,24 @@ export const PlayerCountSection: React.FC<PlayerCountSectionProps> = ({
       <CardContent className="space-y-3">
         {/* Quick Pick Member Chips Section (AC-2) */}
         {activeMembers.length > 0 && onToggleMember && (
-          <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-2.5">
+          <div className="p-3 rounded-xl bg-slate-50/90 border border-slate-200/80 space-y-2.5">
             <button
               type="button"
               onClick={() => setShowMemberChips(!showMemberChips)}
-              className="w-full flex items-center justify-between text-xs font-semibold text-slate-300 hover:text-white transition-colors"
+              className="w-full flex items-center justify-between text-xs font-semibold text-slate-700 hover:text-slate-900 transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-1.5">
-                <span className="text-emerald-400 font-bold">⚡ Chọn nhanh thành viên</span>
+                <span className="text-emerald-700 font-bold">⚡ Chọn nhanh thành viên</span>
                 {selectedCount > 0 && (
-                  <span className="px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] border border-emerald-500/30">
+                  <span className="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-semibold">
                     Đã chọn {selectedCount}
                   </span>
                 )}
               </div>
               {showMemberChips ? (
-                <ChevronUp className="w-4 h-4 text-slate-500" />
+                <ChevronUp className="w-4 h-4 text-slate-400" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-slate-500" />
+                <ChevronDown className="w-4 h-4 text-slate-400" />
               )}
             </button>
 
@@ -83,17 +83,17 @@ export const PlayerCountSection: React.FC<PlayerCountSectionProps> = ({
                       className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium min-h-[36px] transition-all select-none cursor-pointer border ${
                         isSelected
                           ? isFemale
-                            ? 'bg-pink-500/20 border-pink-500 text-pink-200 shadow-sm'
-                            : 'bg-sky-500/20 border-sky-500 text-sky-200 shadow-sm'
-                          : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700'
+                            ? 'bg-rose-50 border-rose-300 text-rose-800 font-semibold shadow-xs'
+                            : 'bg-sky-50 border-sky-300 text-sky-800 font-semibold shadow-xs'
+                          : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300'
                       }`}
                     >
                       <div
                         className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold ${
-                          isFemale ? 'bg-pink-500/30 text-pink-300' : 'bg-sky-500/30 text-sky-300'
+                          isFemale ? 'bg-rose-100 text-rose-700' : 'bg-sky-100 text-sky-700'
                         }`}
                       >
-                        {isSelected ? <Check className="w-2.5 h-2.5" /> : member.name.charAt(0)}
+                        {isSelected ? <Check className="w-2.5 h-2.5 stroke-[2.5]" /> : member.name.charAt(0)}
                       </div>
                       <span>{member.name}</span>
                       {member.total_debt > 0 && (
@@ -108,13 +108,13 @@ export const PlayerCountSection: React.FC<PlayerCountSectionProps> = ({
         )}
 
         {/* Male Counter */}
-        <div className="flex items-center justify-between rounded-xl bg-slate-950/60 p-3 border border-slate-800">
+        <div className="flex items-center justify-between rounded-xl bg-slate-50/80 p-3 border border-slate-200/80">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-sky-50 text-sky-700 border border-sky-100">
               <User className="h-3.5 w-3.5" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-200">Nam</div>
+              <div className="text-xs font-semibold text-slate-800">Nam</div>
               <div className="text-[11px] text-slate-500">{maleCount} người</div>
             </div>
           </div>
@@ -129,13 +129,13 @@ export const PlayerCountSection: React.FC<PlayerCountSectionProps> = ({
         </div>
 
         {/* Female Counter */}
-        <div className="flex items-center justify-between rounded-xl bg-slate-950/60 p-3 border border-slate-800">
+        <div className="flex items-center justify-between rounded-xl bg-slate-50/80 p-3 border border-slate-200/80">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-pink-500/10 text-pink-400">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-rose-50 text-rose-700 border border-rose-100">
               <UserCheck className="h-3.5 w-3.5" />
             </div>
             <div>
-              <div className="text-xs font-semibold text-slate-200">Nữ</div>
+              <div className="text-xs font-semibold text-slate-800">Nữ</div>
               <div className="text-[11px] text-slate-500">{femaleCount} người</div>
             </div>
           </div>

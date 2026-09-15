@@ -73,30 +73,32 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[90vh] bg-slate-900 border-t border-slate-800 text-slate-100">
+      <DrawerContent className="max-h-[90vh] bg-white border-t border-slate-200 text-slate-900 shadow-2xl">
         <DrawerHeader className="text-left">
-          <DrawerTitle className="flex items-center gap-2 text-lg font-bold text-white">
-            <Receipt className="w-5 h-5 text-emerald-400" />
-            Ghi nhận thanh toán nợ
+          <DrawerTitle className="flex items-center gap-2 text-lg font-bold text-slate-900">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <Receipt className="w-4 h-4" />
+            </div>
+            <span>Ghi nhận thanh toán nợ</span>
           </DrawerTitle>
-          <DrawerDescription className="text-xs text-slate-400">
-            Khấu trừ công nợ của <span className="font-semibold text-slate-200">{member.name}</span>{' '}
+          <DrawerDescription className="text-xs text-slate-500">
+            Khấu trừ công nợ của <span className="font-semibold text-slate-800">{member.name}</span>{' '}
             theo thứ tự từ buổi chơi cũ nhất (FIFO).
           </DrawerDescription>
         </DrawerHeader>
 
         <form onSubmit={handleSubmit} className="p-4 space-y-4 overflow-y-auto">
           {errorMessage && (
-            <div className="p-3 text-sm text-red-400 bg-red-950/40 border border-red-800 rounded-lg">
+            <div className="p-3 text-sm text-rose-800 bg-rose-50 border border-rose-200 rounded-xl">
               {errorMessage}
             </div>
           )}
 
           {/* Current Debt Summary Card */}
-          <div className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between">
+          <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
             <div>
-              <div className="text-xs text-slate-400">Tổng nợ hiện tại</div>
-              <div className="text-base font-bold text-rose-400">
+              <div className="text-xs text-slate-500">Tổng nợ hiện tại</div>
+              <div className="text-base font-bold text-rose-600 tabular-nums">
                 {formatVND(member.total_debt)}
               </div>
             </div>
@@ -108,23 +110,23 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
                 setAmount(member.total_debt)
                 setForgiveRemainder(false)
               }}
-              className="text-xs border-emerald-500/40 text-emerald-400 hover:bg-emerald-950/30"
+              className="text-xs border-slate-200 text-slate-900 hover:bg-slate-100"
             >
-              <Sparkles className="w-3.5 h-3.5 mr-1" />
+              <Sparkles className="w-3.5 h-3.5 mr-1 text-emerald-600" />
               Trả hết
             </Button>
           </div>
 
           {/* Amount Input */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-300">
-              Số tiền thanh toán (VND) <span className="text-red-400">*</span>
+            <label className="text-sm font-medium text-slate-700">
+              Số tiền thanh toán (VND) <span className="text-rose-500">*</span>
             </label>
             <MoneyInput
               value={amount}
               onChangeValue={(val) => setAmount(val)}
               placeholder="0"
-              className="bg-slate-950 border-slate-800 text-lg font-semibold"
+              className="bg-white border-slate-200 text-lg font-semibold"
             />
             {/* Quick amount buttons */}
             <div className="flex gap-2 pt-1">
@@ -133,7 +135,7 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
                   key={preset}
                   type="button"
                   onClick={() => setAmount(preset)}
-                  className="px-2.5 py-1 text-xs rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white transition-colors"
+                  className="px-2.5 py-1 text-xs rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 transition-colors font-medium cursor-pointer"
                 >
                   +{preset / 1000}k
                 </button>
@@ -143,19 +145,19 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
 
           {/* Settlement Note */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-300">Hình thức / Ghi chú</label>
+            <label className="text-sm font-medium text-slate-700">Hình thức / Ghi chú</label>
             <Input
               placeholder="VD: Chuyển khoản VietQR, Tiền mặt..."
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              className="bg-slate-950 border-slate-800"
+              className="bg-white border-slate-200"
             />
           </div>
 
           {/* Forgive Remainder Option */}
-          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
             <div>
-              <div className="text-sm font-medium text-slate-200">Miễn số nợ còn lại</div>
+              <div className="text-sm font-medium text-slate-800">Miễn số nợ còn lại</div>
               <div className="text-xs text-slate-500">
                 Xóa toàn bộ nợ cũ còn lại sau khi thanh toán số tiền này
               </div>
@@ -163,8 +165,8 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
             <button
               type="button"
               onClick={() => setForgiveRemainder(!forgiveRemainder)}
-              className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors ${
-                forgiveRemainder ? 'bg-amber-600' : 'bg-slate-700'
+              className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors cursor-pointer ${
+                forgiveRemainder ? 'bg-amber-600' : 'bg-slate-300'
               }`}
             >
               <div
@@ -176,11 +178,11 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
           </div>
 
           {/* Post-settlement Preview */}
-          <div className="p-3 rounded-xl bg-emerald-950/20 border border-emerald-900/40 flex items-center justify-between text-xs">
-            <span className="text-slate-300">Nợ còn lại sau thanh toán:</span>
+          <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+            <span className="text-slate-600 font-medium">Nợ còn lại sau thanh toán:</span>
             <span
-              className={`font-bold ${
-                remainingAfterPayment === 0 ? 'text-emerald-400' : 'text-amber-400'
+              className={`font-bold tabular-nums ${
+                remainingAfterPayment === 0 ? 'text-emerald-700' : 'text-amber-800'
               }`}
             >
               {formatVND(remainingAfterPayment)}
@@ -192,7 +194,7 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
               <Button
                 type="button"
                 variant="outline"
-                className="flex-1 border-slate-700 text-slate-300 hover:bg-slate-800"
+                className="flex-1 border-slate-200 text-slate-700 hover:bg-slate-100"
               >
                 Hủy
               </Button>
@@ -200,7 +202,7 @@ export const SettleDebtModal: React.FC<SettleDebtModalProps> = ({
             <Button
               type="submit"
               disabled={isSubmitting || (amount <= 0 && !forgiveRemainder)}
-              className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-medium"
+              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-medium"
             >
               <CheckCircle2 className="w-4 h-4 mr-1.5" />
               {isSubmitting ? 'Đang lưu...' : 'Xác nhận thu nợ'}

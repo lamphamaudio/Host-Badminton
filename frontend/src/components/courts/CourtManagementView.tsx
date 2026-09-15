@@ -65,17 +65,19 @@ export const CourtManagementView: React.FC = () => {
       {/* Header & Actions */}
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-bold text-zinc-100 flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-emerald-400" />
-            Sân Cầu Lông
+          <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <Building2 className="w-4 h-4" />
+            </div>
+            <span>Sân Cầu Lông</span>
           </h1>
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-slate-500">
             Quản lý địa điểm và giá tiền sân mặc định
           </p>
         </div>
         <Button
           onClick={handleOpenCreate}
-          className="bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm flex items-center gap-1.5 shadow-lg shadow-emerald-950/40"
+          className="bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm flex items-center gap-1.5 shadow-sm"
         >
           <Plus className="w-4 h-4" />
           <span>Thêm sân</span>
@@ -84,18 +86,18 @@ export const CourtManagementView: React.FC = () => {
 
       {/* Search Input */}
       <div className="relative">
-        <Search className="absolute left-3 top-3 w-4 h-4 text-zinc-500" />
+        <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
         <Input
           placeholder="Tìm kiếm sân theo tên, địa chỉ..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-9 bg-zinc-900/60 border-zinc-800"
+          className="pl-9 bg-white border-slate-200"
         />
       </div>
 
       {/* Error Banner */}
       {error && (
-        <div className="p-3 text-sm text-red-400 bg-red-950/30 border border-red-900 rounded-lg">
+        <div className="p-3 text-sm text-rose-800 bg-rose-50 border border-rose-200 rounded-xl">
           {error}
         </div>
       )}
@@ -104,23 +106,23 @@ export const CourtManagementView: React.FC = () => {
       {isLoading ? (
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="bg-zinc-900/50 border-zinc-800 animate-pulse">
+            <Card key={i} className="bg-white border-slate-200 animate-pulse shadow-sm">
               <CardContent className="p-4 h-24" />
             </Card>
           ))}
         </div>
       ) : filteredVenues.length === 0 ? (
         /* Empty State */
-        <Card className="bg-zinc-900/40 border-zinc-800 border-dashed text-center p-8">
+        <Card className="bg-slate-50 border-slate-200 border-dashed text-center p-8">
           <CardContent className="flex flex-col items-center justify-center space-y-3 p-0">
-            <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400">
+            <div className="w-12 h-12 rounded-full bg-slate-200/70 flex items-center justify-center text-slate-500">
               <Building2 className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <p className="text-sm font-medium text-zinc-200">
+              <p className="text-sm font-semibold text-slate-900">
                 {searchQuery ? 'Không tìm thấy sân phù hợp' : 'Chưa có sân nào được lưu'}
               </p>
-              <p className="text-xs text-zinc-400 max-w-xs">
+              <p className="text-xs text-slate-500 max-w-xs">
                 {searchQuery
                   ? 'Thử tìm với từ khóa khác'
                   : 'Lưu các sân bạn hay tổ chức để tự động điền giá tiền khi chia bill.'}
@@ -130,7 +132,7 @@ export const CourtManagementView: React.FC = () => {
               <Button
                 onClick={handleOpenCreate}
                 variant="outline"
-                className="mt-2 text-emerald-400 border-emerald-800/60 hover:bg-emerald-950/30"
+                className="mt-2 text-slate-900 border-slate-300 hover:bg-slate-100"
               >
                 <Plus className="w-4 h-4 mr-1.5" />
                 Thêm sân đầu tiên
@@ -144,16 +146,16 @@ export const CourtManagementView: React.FC = () => {
           {filteredVenues.map((venue) => (
             <Card
               key={venue.id}
-              className="bg-zinc-900/80 border-zinc-800 hover:border-zinc-700 transition-colors shadow-sm"
+              className="bg-white border-slate-200 hover:border-slate-300 transition-colors shadow-sm"
             >
               <CardContent className="p-4 space-y-2.5">
                 <div className="flex items-start justify-between gap-2">
                   <div className="space-y-1">
-                    <h3 className="font-semibold text-base text-zinc-100 flex items-center gap-2">
+                    <h3 className="font-semibold text-base text-slate-900 flex items-center gap-2">
                       {venue.name}
                     </h3>
                     {venue.court_number && (
-                      <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
+                      <div className="flex items-center gap-1.5 text-xs text-emerald-700 font-medium">
                         <Tag className="w-3.5 h-3.5" />
                         <span>{venue.court_number}</span>
                       </div>
@@ -164,7 +166,7 @@ export const CourtManagementView: React.FC = () => {
                       size="sm"
                       variant="ghost"
                       onClick={() => handleOpenEdit(venue)}
-                      className="h-8 w-8 p-0 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800"
+                      className="h-8 w-8 p-0 text-slate-500 hover:text-slate-900 hover:bg-slate-100"
                       title="Chỉnh sửa"
                     >
                       <Edit2 className="w-4 h-4" />
@@ -174,7 +176,7 @@ export const CourtManagementView: React.FC = () => {
                       variant="ghost"
                       disabled={deletingId === venue.id}
                       onClick={() => handleDeleteVenue(venue)}
-                      className="h-8 w-8 p-0 text-zinc-400 hover:text-red-400 hover:bg-red-950/30"
+                      className="h-8 w-8 p-0 text-slate-400 hover:text-rose-600 hover:bg-rose-50"
                       title="Xóa sân"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -183,15 +185,15 @@ export const CourtManagementView: React.FC = () => {
                 </div>
 
                 {venue.address && (
-                  <div className="flex items-center gap-1.5 text-xs text-zinc-400">
-                    <MapPin className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                     <span className="truncate">{venue.address}</span>
                   </div>
                 )}
 
-                <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs">
-                  <span className="text-zinc-500">Giá thuê mặc định:</span>
-                  <span className="font-semibold text-zinc-200">
+                <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
+                  <span className="text-slate-500">Giá thuê mặc định:</span>
+                  <span className="font-semibold text-slate-900 tabular-nums">
                     {venue.default_court_rate && venue.default_court_rate > 0
                       ? `${venue.default_court_rate.toLocaleString('vi-VN')} đ/giờ`
                       : 'Chưa đặt'}

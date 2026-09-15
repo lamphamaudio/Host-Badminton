@@ -334,18 +334,18 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
   }
 
   return (
-    <div className="flex flex-col gap-4 pb-24 max-w-lg mx-auto w-full px-4 pt-2">
+    <div className="flex flex-col gap-4 pb-28 max-w-lg mx-auto w-full px-4 pt-2">
       {/* Top Action Bar */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
             <span>Tính tiền sân & VietQR</span>
             <Badge variant="paid" size="sm">
-              Slice 2
+              Tally
             </Badge>
           </h2>
-          <p className="text-xs text-slate-400">
-            Chia đều, giảm giá nữ, về sớm & tạo QR thanh toán
+          <p className="text-xs text-slate-500">
+            Chia đều, giảm giá nữ, về sớm & tạo QR thanh toán tức thì
           </p>
         </div>
 
@@ -354,7 +354,7 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
             variant="ghost"
             size="sm"
             onClick={() => setBankModalOpen(true)}
-            className="h-8 px-2 text-xs text-emerald-400 hover:text-emerald-300 hover:bg-emerald-950/40"
+            className="h-8 px-2 text-xs text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50 font-medium"
           >
             <CreditCard className="w-3.5 h-3.5 mr-1" />
             <span>STK VietQR</span>
@@ -363,7 +363,7 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
             variant="ghost"
             size="sm"
             onClick={handleReset}
-            className="h-8 px-2 text-xs text-slate-400 hover:text-slate-200"
+            className="h-8 px-2 text-xs text-slate-500 hover:text-slate-900 hover:bg-slate-100"
             title="Đặt lại thông số"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -375,13 +375,13 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
       {!bankProfile.accountNumber && (
         <div
           onClick={() => setBankModalOpen(true)}
-          className="flex items-center justify-between p-3 rounded-2xl bg-amber-950/40 border border-amber-500/30 text-amber-200 text-xs cursor-pointer hover:bg-amber-950/60 transition-colors"
+          className="flex items-center justify-between p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs cursor-pointer hover:bg-amber-100/80 transition-colors"
         >
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
             <span>Chưa cài STK ngân hàng. Nhấn để tạo mã VietQR</span>
           </div>
-          <span className="font-semibold text-amber-400 underline shrink-0">Cài đặt</span>
+          <span className="font-semibold text-amber-700 underline shrink-0">Cài đặt</span>
         </div>
       )}
 
@@ -433,10 +433,10 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
       />
 
       {/* 5. Live Calculation Summary Card */}
-      <div className="rounded-3xl bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950 border-2 border-emerald-500/40 p-4 shadow-xl shadow-emerald-500/10 space-y-3">
-        <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-            <Sparkles className="w-3.5 h-3.5" />
+      <div className="rounded-3xl bg-white border border-slate-900 p-4 shadow-sm space-y-3">
+        <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Kết quả tính tiền tức thì</span>
           </div>
           <Badge variant="outline" size="sm">
@@ -447,38 +447,38 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
         {/* Split fees grid */}
         {inputs.splitMode === 'multi_stage' && result.earlyCount && result.earlyCount > 0 ? (
           <div className="grid grid-cols-2 gap-2">
-            <div className="bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 text-center">
-              <div className="text-[10px] text-amber-400 font-semibold uppercase">
+            <div className="bg-amber-50/70 rounded-2xl p-2.5 border border-amber-200/80 text-center">
+              <div className="text-[10px] text-amber-800 font-semibold uppercase">
                 Về sớm ({result.earlyCount} người)
               </div>
-              <div className="text-base font-black font-mono text-amber-300">
+              <div className="text-base font-black font-mono text-amber-900 tabular-nums">
                 {formatVND(result.earlyFee || 0)}
               </div>
             </div>
-            <div className="bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 text-center">
-              <div className="text-[10px] text-slate-400 font-semibold uppercase">
+            <div className="bg-slate-50 rounded-2xl p-2.5 border border-slate-200 text-center">
+              <div className="text-[10px] text-slate-500 font-semibold uppercase">
                 Chơi hết ({result.stayCount} người)
               </div>
-              <div className="text-base font-black font-mono text-white">
+              <div className="text-base font-black font-mono text-slate-900 tabular-nums">
                 {formatVND(result.stayFee || 0)}
               </div>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-2">
-            <div className="bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 text-center">
-              <div className="text-[10px] text-slate-400 font-semibold uppercase">
+            <div className="bg-slate-50 rounded-2xl p-2.5 border border-slate-200 text-center">
+              <div className="text-[10px] text-slate-500 font-semibold uppercase">
                 Nam ({result.maleCount} người)
               </div>
-              <div className="text-base font-black font-mono text-white">
+              <div className="text-base font-black font-mono text-slate-900 tabular-nums">
                 {formatVND(result.maleFee)}
               </div>
             </div>
-            <div className="bg-slate-950/80 rounded-2xl p-2.5 border border-slate-800 text-center">
-              <div className="text-[10px] text-slate-400 font-semibold uppercase">
+            <div className="bg-emerald-50/70 rounded-2xl p-2.5 border border-emerald-200/80 text-center">
+              <div className="text-[10px] text-emerald-800 font-semibold uppercase">
                 Nữ ({result.femaleCount} người)
               </div>
-              <div className="text-base font-black font-mono text-lime-400">
+              <div className="text-base font-black font-mono text-emerald-900 tabular-nums">
                 {formatVND(result.femaleFee)}
               </div>
             </div>
@@ -486,9 +486,9 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
         )}
 
         {/* Buffer & collected info */}
-        <div className="flex justify-between items-center text-[11px] text-slate-400 px-1 pt-1">
+        <div className="flex justify-between items-center text-[11px] text-slate-500 px-1 pt-1">
           <span>Thu về: {formatVND(result.totalCollected)}</span>
-          <span className="text-emerald-400 font-medium">
+          <span className="text-emerald-700 font-semibold">
             {result.fundBuffer > 0
               ? `Dư quỹ: +${formatVND(result.fundBuffer)}`
               : 'Vừa khớp chi phí'}
@@ -497,13 +497,13 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
       </div>
 
       {/* Sticky Bottom Bill Card Launcher */}
-      <div className="fixed bottom-16 left-0 right-0 p-3 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent z-40 max-w-lg mx-auto">
+      <div className="fixed bottom-16 left-0 right-0 p-3 bg-gradient-to-t from-[#fafbfc] via-[#fafbfc]/90 to-transparent z-40 max-w-lg mx-auto pointer-events-auto">
         <Button
           size="lg"
           onClick={() => setBillDrawerOpen(true)}
-          className="w-full h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2"
+          className="w-full h-12 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold shadow-lg shadow-slate-900/15 flex items-center justify-center gap-2"
         >
-          <QrCode className="w-5 h-5" />
+          <QrCode className="w-5 h-5 text-emerald-400" />
           <span>Xem hóa đơn & Lưu lịch sử</span>
         </Button>
       </div>
@@ -512,14 +512,14 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
       <Sheet open={billDrawerOpen} onOpenChange={setBillDrawerOpen}>
         <SheetContent
           side="bottom"
-          className="max-h-[92vh] overflow-y-auto bg-slate-950 border-t border-slate-800 p-4 rounded-t-3xl"
+          className="max-h-[92vh] overflow-y-auto bg-white border-t border-slate-200 p-4 rounded-t-3xl shadow-2xl"
         >
           <SheetHeader className="pb-3 text-left">
-            <SheetTitle className="text-base font-bold text-white flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <SheetTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               <span>Hóa đơn VietQR hoàn chỉnh</span>
             </SheetTitle>
-            <SheetDescription className="text-xs text-slate-400">
+            <SheetDescription className="text-xs text-slate-500">
               Quét mã QR để chuyển khoản hoặc lưu buổi chơi vào lịch sử
             </SheetDescription>
           </SheetHeader>

@@ -119,7 +119,7 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
       const dataUrl = await toPng(cardRef.current, {
         cacheBust: true,
         pixelRatio: 2,
-        backgroundColor: '#090d16',
+        backgroundColor: '#ffffff',
       })
 
       const link = document.createElement('a')
@@ -146,22 +146,22 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
       <div
         ref={cardRef}
         id="bill-card-capture"
-        className="relative overflow-hidden bg-gradient-to-b from-[#111927] via-[#0d1422] to-[#090d16] border-2 border-emerald-500/40 p-5 rounded-3xl shadow-2xl shadow-emerald-500/10 text-white"
+        className="relative overflow-hidden bg-white border border-slate-900 p-5 rounded-3xl shadow-sm text-slate-900"
       >
-        {/* Top Decorative Sport Lines */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-lime-400 to-teal-400" />
+        {/* Top Accent Line */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-slate-900" />
 
         {/* Header Summary */}
-        <div className="flex items-center justify-between border-b border-[#1e293b] pb-4">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-800">
               <Building2 className="w-4 h-4" />
             </div>
             <div>
-              <h4 className="text-base font-extrabold text-white tracking-tight leading-tight">
+              <h4 className="text-base font-extrabold text-slate-900 tracking-tight leading-tight">
                 {data.venueName}
               </h4>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500">
                 {formatSessionDateTime(data.sessionDate)}
                 {data.courtNumber && ` · Sân ${data.courtNumber}`}
               </p>
@@ -173,22 +173,22 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
         </div>
 
         {/* Cost Breakdown Table */}
-        <div className="py-4 space-y-2 text-xs border-b border-[#1e293b]">
-          <div className="flex justify-between text-slate-400">
+        <div className="py-4 space-y-2 text-xs border-b border-slate-200">
+          <div className="flex justify-between text-slate-600">
             <span>Tiền sân</span>
-            <span className="font-mono tabular-nums text-slate-200">
+            <span className="font-mono tabular-nums text-slate-900 font-medium">
               {formatVND(data.courtFee)}
             </span>
           </div>
-          <div className="flex justify-between text-slate-400">
+          <div className="flex justify-between text-slate-600">
             <span>Tiền cầu ({data.shuttleCount || 0} quả)</span>
-            <span className="font-mono tabular-nums text-slate-200">
+            <span className="font-mono tabular-nums text-slate-900 font-medium">
               {formatVND(data.shuttleFee)}
             </span>
           </div>
-          <div className="flex justify-between items-center pt-2 border-t border-[#1e293b]/60 font-bold">
-            <span className="text-white text-sm">Tổng cộng</span>
-            <span className="font-mono tabular-nums text-emerald-400 text-base">
+          <div className="flex justify-between items-center pt-2 border-t border-slate-100 font-bold">
+            <span className="text-slate-900 text-sm">Tổng cộng</span>
+            <span className="font-mono tabular-nums text-emerald-700 text-base">
               {formatVND(data.totalAmount)}
             </span>
           </div>
@@ -197,39 +197,39 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
         {/* Player Splits Box */}
         {data.splitMode === 'multi_stage' && data.earlyCount && data.earlyCount > 0 ? (
           <div className="grid grid-cols-2 gap-2.5 my-4">
-            <div className="bg-[#182338]/80 border border-[#1e293b] rounded-2xl p-3 flex flex-col items-center text-center">
-              <div className="flex items-center gap-1 text-[11px] font-semibold text-amber-400 uppercase tracking-wider">
+            <div className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3 flex flex-col items-center text-center">
+              <div className="flex items-center gap-1 text-[11px] font-semibold text-amber-800 uppercase tracking-wider">
                 <Clock className="w-3 h-3" />
                 <span>Về sớm ({data.earlyCount})</span>
               </div>
-              <span className="font-mono tabular-nums text-lg font-extrabold text-amber-300 mt-0.5">
+              <span className="font-mono tabular-nums text-lg font-extrabold text-amber-900 mt-0.5">
                 {formatVND(data.earlyFee || 0)}
               </span>
             </div>
-            <div className="bg-[#182338]/80 border border-[#1e293b] rounded-2xl p-3 flex flex-col items-center text-center">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex flex-col items-center text-center">
+              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
                 Chơi hết ({data.stayCount})
               </span>
-              <span className="font-mono tabular-nums text-lg font-extrabold text-white mt-0.5">
+              <span className="font-mono tabular-nums text-lg font-extrabold text-slate-900 mt-0.5">
                 {formatVND(data.stayFee || 0)}
               </span>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-2.5 my-4">
-            <div className="bg-[#182338]/80 border border-[#1e293b] rounded-2xl p-3 flex flex-col items-center text-center">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex flex-col items-center text-center">
+              <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
                 Nam ({data.maleCount})
               </span>
-              <span className="font-mono tabular-nums text-lg font-extrabold text-white mt-0.5">
+              <span className="font-mono tabular-nums text-lg font-extrabold text-slate-900 mt-0.5">
                 {formatVND(data.maleFee)}
               </span>
             </div>
-            <div className="bg-[#182338]/80 border border-[#1e293b] rounded-2xl p-3 flex flex-col items-center text-center">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-3 flex flex-col items-center text-center">
+              <span className="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider">
                 Nữ ({data.femaleCount})
               </span>
-              <span className="font-mono tabular-nums text-lg font-extrabold text-lime-400 mt-0.5">
+              <span className="font-mono tabular-nums text-lg font-extrabold text-emerald-900 mt-0.5">
                 {formatVND(data.femaleFee)}
               </span>
             </div>
@@ -237,17 +237,17 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
         )}
 
         {/* VietQR Bank Payment Box */}
-        <div className="bg-slate-950 border border-emerald-500/30 rounded-2xl p-4 flex flex-col items-center gap-3">
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col items-center gap-3">
           <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
               <span>Quét VietQR để thanh toán</span>
             </div>
             {onEditBank && (
               <button
                 type="button"
                 onClick={onEditBank}
-                className="flex items-center gap-1 text-[11px] font-semibold text-slate-400 hover:text-emerald-400 transition-colors"
+                className="flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
               >
                 <Settings className="w-3 h-3" />
                 <span>Đổi STK</span>
@@ -256,7 +256,7 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
           </div>
 
           {/* QR Code Frame */}
-          <div className="w-44 h-44 bg-white p-2.5 rounded-2xl shadow-lg flex items-center justify-center">
+          <div className="w-44 h-44 bg-white p-2.5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-center">
             {qrImageSource ? (
               <img
                 src={qrImageSource}
@@ -265,7 +265,7 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
                 className="w-full h-full object-contain"
               />
             ) : (
-              <div className="w-full h-full border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center text-slate-400 text-center p-2">
+              <div className="w-full h-full border border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center text-slate-400 text-center p-2">
                 <QrCode className="w-12 h-12 text-slate-800 mb-1" />
                 <span className="text-[10px] font-semibold text-slate-600">
                   {data.bankName || 'Chưa chọn ngân hàng'}
@@ -276,20 +276,20 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
 
           {/* Account Details */}
           <div className="w-full text-center space-y-0.5 text-xs pt-1">
-            <div className="font-mono font-bold text-white tracking-wider text-sm">
+            <div className="font-mono font-bold text-slate-900 tracking-wider text-sm">
               {data.accountNumber || 'Chưa nhập số tài khoản'}
             </div>
-            <div className="text-[11px] text-slate-400 uppercase font-semibold">
+            <div className="text-[11px] text-slate-500 uppercase font-semibold">
               {data.accountName || 'Chưa nhập tên chủ tài khoản'} · {data.bankName}
             </div>
-            <div className="text-[10px] text-emerald-400/90 font-mono pt-1">
+            <div className="text-[10px] text-slate-700 font-mono pt-1">
               ND: {data.transferContent}
             </div>
           </div>
         </div>
 
         {/* Bottom Card Watermark */}
-        <div className="text-center text-[10px] text-slate-500 pt-3 flex items-center justify-center gap-1">
+        <div className="text-center text-[10px] text-slate-400 pt-3 flex items-center justify-center gap-1">
           <span>Tạo bởi Host Badminton</span>
         </div>
       </div>
@@ -299,22 +299,22 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
         <Button
           onClick={onSaveSession}
           disabled={isSaving || isSaved}
-          className={`w-full h-11 font-bold rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all ${
+          className={`w-full h-11 font-bold rounded-2xl flex items-center justify-center gap-2 shadow-sm transition-all ${
             isSaved
-              ? 'bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 cursor-default'
-              : 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-950/50'
+              ? 'bg-emerald-50 border border-emerald-300 text-emerald-800 cursor-default'
+              : 'bg-slate-900 hover:bg-slate-800 text-white'
           }`}
         >
           {isSaved ? (
             <>
-              <Check className="w-4 h-4 text-emerald-400" />
+              <Check className="w-4 h-4 text-emerald-600" />
               <span>Đã lưu vào lịch sử</span>
             </>
           ) : isSaving ? (
             <span>Đang lưu vào lịch sử...</span>
           ) : (
             <>
-              <Sparkles className="w-4 h-4 text-white" />
+              <Sparkles className="w-4 h-4 text-emerald-400" />
               <span>Lưu buổi chơi vào lịch sử</span>
             </>
           )}
@@ -323,16 +323,15 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
 
       {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-2">
-
         <Button onClick={handleCopySummary} variant="secondary" className="w-full">
           {copied ? (
             <>
-              <Check className="w-4 h-4 text-emerald-400" />
+              <Check className="w-4 h-4 text-emerald-600" />
               <span>Đã sao chép</span>
             </>
           ) : (
             <>
-              <Copy className="w-4 h-4 text-slate-400" />
+              <Copy className="w-4 h-4 text-slate-500" />
               <span>Chép hóa đơn</span>
             </>
           )}
@@ -340,7 +339,7 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
 
         <Button
           onClick={handleDownloadPng}
-          variant="default"
+          variant="outline"
           className="w-full"
           disabled={isExporting}
         >
@@ -348,7 +347,7 @@ Cảm ơn mọi người đã tham gia buổi chơi! 🙌`
             <span>Đang tạo ảnh...</span>
           ) : (
             <>
-              <Download className="w-4 h-4" />
+              <Download className="w-4 h-4 text-slate-700" />
               <span>Tải ảnh bill</span>
             </>
           )}

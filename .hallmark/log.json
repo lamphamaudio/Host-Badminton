@@ -1,6 +1,13 @@
 [
   {
     "date": "2026-09-11",
+    "macrostructure": "Workbench",
+    "theme": "modern-minimal",
+    "enrichment": "none",
+    "brief": "Host Badminton · Tally-inspired light modern-minimal landing page with Plus Jakarta Sans, asymmetric workbench, and live VietQR bill generator"
+  },
+  {
+    "date": "2026-09-11",
     "macrostructure": "Bento Grid",
     "theme": "Sport",
     "enrichment": "none",

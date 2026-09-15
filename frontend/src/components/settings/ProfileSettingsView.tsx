@@ -114,25 +114,25 @@ export const ProfileSettingsView: React.FC = () => {
     <div className="space-y-6 pb-24">
       {/* Account Status Banner */}
       {!isAuthenticated ? (
-        <div className="rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-500/30 p-4">
+        <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4">
           <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 text-amber-400">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-800">
               <ShieldAlert className="h-5 w-5" />
             </div>
             <div className="flex-1 space-y-1">
-              <h3 className="text-sm font-bold text-amber-200">
+              <h3 className="text-sm font-bold text-amber-900">
                 Bạn đang sử dụng ở chế độ Khách (Chưa đăng nhập)
               </h3>
-              <p className="text-xs text-slate-400 leading-relaxed">
+              <p className="text-xs text-amber-800/80 leading-relaxed">
                 Đăng nhập để lưu trữ vĩnh viễn các sân cầu lông, lịch sử trận đấu và đồng bộ giữa các thiết bị.
               </p>
               <div className="pt-2">
                 <Button
                   type="button"
                   onClick={openLoginModal}
-                  className="h-9 px-4 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow-md"
+                  className="h-9 px-4 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-xs"
                 >
-                  <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+                  <Sparkles className="w-3.5 h-3.5 mr-1.5 text-emerald-400" />
                   Đăng nhập ngay
                 </Button>
               </div>
@@ -140,26 +140,26 @@ export const ProfileSettingsView: React.FC = () => {
           </div>
         </div>
       ) : (
-        <Card className="border-slate-800 bg-slate-900/60 shadow-lg backdrop-blur-sm">
+        <Card className="border-slate-200 bg-white shadow-xs">
           <CardContent className="pt-6">
             <div className="flex items-center gap-4">
-              <Avatar className="h-16 w-16 border-2 border-emerald-500/40 shadow-inner">
+              <Avatar className="h-16 w-16 border border-slate-200 shadow-xs">
                 {avatarUrl ? (
                   <AvatarImage src={avatarUrl} alt={fullName} />
                 ) : null}
-                <AvatarFallback className="bg-emerald-950 text-emerald-400 text-lg font-bold">
+                <AvatarFallback className="bg-slate-900 text-white text-lg font-bold">
                   {getInitials(fullName)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-bold text-slate-100 truncate">{fullName}</h2>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/30">
+                  <h2 className="text-lg font-bold text-slate-900 truncate">{fullName}</h2>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 border border-emerald-200">
                     <CheckCircle2 className="w-3 h-3" />
                     Host
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 truncate mt-0.5">
+                <p className="text-xs text-slate-500 truncate mt-0.5">
                   {email || phone || 'Tài khoản Organizer'}
                 </p>
               </div>
@@ -167,7 +167,7 @@ export const ProfileSettingsView: React.FC = () => {
                 type="button"
                 variant="outline"
                 onClick={logout}
-                className="h-9 px-3 text-xs border-slate-700 text-slate-400 hover:text-rose-400 hover:border-rose-500/40 rounded-xl"
+                className="h-9 px-3 text-xs border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl"
               >
                 <LogOut className="w-3.5 h-3.5 mr-1" />
                 Đăng xuất
@@ -180,21 +180,23 @@ export const ProfileSettingsView: React.FC = () => {
       {/* Main Settings Form */}
       <form onSubmit={handleSave} className="space-y-6">
         {/* Profile Card */}
-        <Card className="border-slate-800 bg-slate-900/60 shadow-lg">
-          <CardHeader className="pb-3 border-b border-slate-800/60">
+        <Card className="border-slate-200 bg-white shadow-xs">
+          <CardHeader className="pb-3 border-b border-slate-100">
             <div className="flex items-center gap-2">
-              <User className="h-5 w-5 text-emerald-400" />
-              <CardTitle className="text-base font-bold text-slate-100">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+                <User className="h-4 w-4" />
+              </div>
+              <CardTitle className="text-base font-bold text-slate-900">
                 Thông tin người tổ chức (Host)
               </CardTitle>
             </div>
-            <CardDescription className="text-xs text-slate-400">
+            <CardDescription className="text-xs text-slate-500">
               Tên hiển thị và liên hệ của bạn
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-4 space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300">
+              <label className="text-xs font-semibold text-slate-700">
                 Họ và tên hiển thị *
               </label>
               <Input
@@ -202,14 +204,14 @@ export const ProfileSettingsView: React.FC = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Ví dụ: Nguyễn Văn A"
-                className="h-11 bg-slate-950 border-slate-800 text-slate-100 placeholder:text-slate-600 rounded-xl"
+                className="h-11 bg-white border-slate-200 text-slate-900 rounded-xl"
                 required
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-300">
+                <label className="text-xs font-semibold text-slate-700">
                   Số điện thoại
                 </label>
                 <div className="relative">
@@ -218,14 +220,14 @@ export const ProfileSettingsView: React.FC = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="0912 345 678"
-                    className="h-11 pl-9 bg-slate-950 border-slate-800 text-slate-100 placeholder:text-slate-600 rounded-xl"
+                    className="h-11 pl-9 bg-white border-slate-200 text-slate-900 rounded-xl"
                   />
-                  <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
+                  <Phone className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-300">
+                <label className="text-xs font-semibold text-slate-700">
                   Email
                 </label>
                 <div className="relative">
@@ -234,9 +236,9 @@ export const ProfileSettingsView: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="host@gmail.com"
-                    className="h-11 pl-9 bg-slate-950 border-slate-800 text-slate-100 placeholder:text-slate-600 rounded-xl"
+                    className="h-11 pl-9 bg-white border-slate-200 text-slate-900 rounded-xl"
                   />
-                  <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
+                  <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                 </div>
               </div>
             </div>
@@ -244,48 +246,50 @@ export const ProfileSettingsView: React.FC = () => {
         </Card>
 
         {/* VietQR Bank Account Card */}
-        <Card className="border-slate-800 bg-slate-900/60 shadow-lg">
-          <CardHeader className="pb-3 border-b border-slate-800/60">
+        <Card className="border-slate-200 bg-white shadow-xs">
+          <CardHeader className="pb-3 border-b border-slate-100">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <QrCode className="h-5 w-5 text-emerald-400" />
-                <CardTitle className="text-base font-bold text-slate-100">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+                  <QrCode className="h-4 w-4" />
+                </div>
+                <CardTitle className="text-base font-bold text-slate-900">
                   Tài khoản nhận tiền VietQR mặc định
                 </CardTitle>
               </div>
-              <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+              <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 border border-emerald-200">
                 Tự động đồng bộ
               </span>
             </div>
-            <CardDescription className="text-xs text-slate-400">
+            <CardDescription className="text-xs text-slate-500">
               Tài khoản này sẽ được tự động điền vào mã thanh toán VietQR cho mọi trận đấu
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-4 space-y-4">
             {/* Bank Select */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300">
+              <label className="text-xs font-semibold text-slate-700">
                 Ngân hàng thụ hưởng
               </label>
               <div className="relative">
                 <select
                   value={bankBin}
                   onChange={(e) => setBankBin(e.target.value)}
-                  className="w-full h-11 pl-9 pr-4 appearance-none rounded-xl bg-slate-950 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-emerald-500"
+                  className="w-full h-11 pl-9 pr-4 appearance-none rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-slate-900 focus:bg-white"
                 >
                   {VIETNAM_BANKS.map((b) => (
-                    <option key={b.bin} value={b.bin} className="bg-slate-900 text-slate-100">
+                    <option key={b.bin} value={b.bin} className="bg-white text-slate-900">
                       {b.shortName} - {b.name}
                     </option>
                   ))}
                 </select>
-                <Building2 className="absolute left-3 top-3 h-4 w-4 text-slate-500 pointer-events-none" />
+                <Building2 className="absolute left-3 top-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
               </div>
             </div>
 
             {/* Account Number */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300">
+              <label className="text-xs font-semibold text-slate-700">
                 Số tài khoản nhận tiền
               </label>
               <div className="relative">
@@ -294,15 +298,15 @@ export const ProfileSettingsView: React.FC = () => {
                   value={bankAccountNumber}
                   onChange={(e) => setBankAccountNumber(e.target.value)}
                   placeholder="Ví dụ: 0912345678"
-                  className="h-11 pl-9 font-mono bg-slate-950 border-slate-800 text-slate-100 placeholder:text-slate-600 rounded-xl"
+                  className="h-11 pl-9 font-mono bg-white border-slate-200 text-slate-900 rounded-xl"
                 />
-                <CreditCard className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
+                <CreditCard className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
               </div>
             </div>
 
             {/* Account Name */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300">
+              <label className="text-xs font-semibold text-slate-700">
                 Tên chủ tài khoản (In hoa không dấu)
               </label>
               <Input
@@ -310,25 +314,25 @@ export const ProfileSettingsView: React.FC = () => {
                 value={bankAccountName}
                 onChange={(e) => setBankAccountName(e.target.value.toUpperCase())}
                 placeholder="Ví dụ: NGUYEN VAN A"
-                className="h-11 uppercase font-semibold bg-slate-950 border-slate-800 text-slate-100 placeholder:text-slate-600 rounded-xl"
+                className="h-11 uppercase font-semibold bg-white border-slate-200 text-slate-900 rounded-xl"
               />
             </div>
 
             {/* Preview Card */}
             {bankAccountNumber && bankAccountName && (
-              <div className="rounded-xl bg-gradient-to-br from-slate-950 to-slate-900 p-3.5 border border-emerald-500/20 flex items-center justify-between">
+              <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-200 flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <span className="text-[10px] font-semibold uppercase text-emerald-400 tracking-wider">
+                  <span className="text-[10px] font-semibold uppercase text-emerald-800 tracking-wider">
                     {selectedBank.shortName}
                   </span>
-                  <p className="font-mono text-sm font-bold text-slate-100">
+                  <p className="font-mono text-sm font-bold text-slate-900">
                     {bankAccountNumber}
                   </p>
-                  <p className="text-xs text-slate-300 uppercase font-semibold">
+                  <p className="text-xs text-slate-600 uppercase font-semibold">
                     {bankAccountName}
                   </p>
                 </div>
-                <QrCode className="h-8 w-8 text-emerald-400 opacity-80" />
+                <QrCode className="h-8 w-8 text-slate-700 opacity-80" />
               </div>
             )}
           </CardContent>
@@ -339,13 +343,13 @@ export const ProfileSettingsView: React.FC = () => {
           <Button
             type="submit"
             disabled={isSaving}
-            className="w-full h-12 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-base shadow-lg shadow-emerald-950/50 flex items-center justify-center gap-2"
+            className="w-full h-12 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-base shadow-sm flex items-center justify-center gap-2"
           >
             {isSaving ? (
               'Đang lưu...'
             ) : saveSuccess ? (
               <>
-                <CheckCircle2 className="w-5 h-5" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                 Đã lưu thành công!
               </>
             ) : (

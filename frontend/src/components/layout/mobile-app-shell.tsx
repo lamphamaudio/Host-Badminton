@@ -29,16 +29,9 @@ export function MobileAppShell({
   className,
 }: MobileAppShellProps) {
   return (
-    <div className="min-h-screen bg-[#090d16] text-[#f8fafc] flex justify-center selection:bg-emerald-500 selection:text-slate-950 font-sans">
-      {/* Background Decorative Ambient Glow */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-emerald-500/10 blur-[140px] rounded-full" />
-        <div className="absolute top-1/2 -right-40 w-[400px] h-[400px] bg-lime-500/10 blur-[120px] rounded-full" />
-        <div className="absolute -bottom-40 -left-20 w-[400px] h-[400px] bg-teal-500/10 blur-[130px] rounded-full" />
-      </div>
-
+    <div className="min-h-screen bg-[#fafbfc] text-[#0f172a] flex justify-center selection:bg-emerald-100 selection:text-emerald-900 font-sans">
       {/* Centered Mobile Container */}
-      <div className="w-full max-w-md min-h-screen flex flex-col bg-[#090d16] border-x border-[#1e293b]/60 shadow-2xl relative">
+      <div className="w-full max-w-md min-h-screen flex flex-col bg-white border-x border-slate-200/80 shadow-[0_0_30px_rgba(0,0,0,0.03)] relative">
         {showHeader && (
           <AppHeader
             title={headerTitle}

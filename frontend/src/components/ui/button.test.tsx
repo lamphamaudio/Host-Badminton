@@ -15,10 +15,10 @@ describe('Button component', () => {
   it('renders different variants correctly', () => {
     // covers: AC-3
     const { rerender } = render(<Button variant="secondary">Secondary</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-[#182338]')
+    expect(screen.getByRole('button')).toHaveClass('bg-slate-100')
 
     rerender(<Button variant="accent">Accent</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-lime-500')
+    expect(screen.getByRole('button')).toHaveClass('bg-emerald-600')
 
     rerender(<Button variant="destructive">Destructive</Button>)
     expect(screen.getByRole('button')).toHaveClass('bg-red-600')

@@ -43,18 +43,18 @@ export function Stepper({
     <div className={cn('flex items-center justify-between gap-3', className)}>
       {label && (
         <div className="flex flex-col">
-          <span className="text-sm font-semibold text-slate-200">{label}</span>
-          {unit && <span className="text-xs text-slate-400">{unit}</span>}
+          <span className="text-sm font-semibold text-slate-800">{label}</span>
+          {unit && <span className="text-xs text-slate-500">{unit}</span>}
         </div>
       )}
 
-      <div className="flex items-center gap-2 bg-[#111927] border border-[#1e293b] rounded-2xl p-1">
+      <div className="flex items-center gap-2 bg-slate-50 border border-slate-200/90 rounded-2xl p-1">
         <button
           type="button"
           onClick={handleDecrement}
           disabled={disabled || value <= min}
           className={cn(
-            'flex items-center justify-center rounded-xl bg-[#182338] text-slate-200 hover:text-white hover:bg-[#22314e] border border-[#1e293b] active:scale-90 transition-all select-none disabled:opacity-40 disabled:pointer-events-none cursor-pointer',
+            'flex items-center justify-center rounded-xl bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/90 shadow-sm active:scale-90 transition-all select-none disabled:opacity-40 disabled:pointer-events-none cursor-pointer',
             isSmall
               ? 'w-9 h-9 min-h-[36px]'
               : isLarge
@@ -68,7 +68,7 @@ export function Stepper({
 
         <div
           className={cn(
-            'flex items-center justify-center font-mono tabular-nums font-extrabold text-white select-none',
+            'flex items-center justify-center font-mono tabular-nums font-extrabold text-slate-900 select-none',
             isSmall
               ? 'min-w-[36px] text-base'
               : isLarge
@@ -84,7 +84,7 @@ export function Stepper({
           onClick={handleIncrement}
           disabled={disabled || value >= max}
           className={cn(
-            'flex items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 border border-emerald-500/30 active:scale-90 transition-all select-none disabled:opacity-40 disabled:pointer-events-none cursor-pointer',
+            'flex items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-slate-800 shadow-sm active:scale-90 transition-all select-none disabled:opacity-40 disabled:pointer-events-none cursor-pointer',
             isSmall
               ? 'w-9 h-9 min-h-[36px]'
               : isLarge

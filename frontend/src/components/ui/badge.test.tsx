@@ -7,13 +7,13 @@ describe('Badge component', () => {
     // covers: AC-5
     const { rerender } = render(<Badge variant="paid">Đã thanh toán</Badge>)
     expect(screen.getByText('Đã thanh toán')).toBeInTheDocument()
-    expect(screen.getByText('Đã thanh toán')).toHaveClass('text-emerald-400')
+    expect(screen.getByText('Đã thanh toán')).toHaveClass('text-emerald-800')
 
     rerender(<Badge variant="unpaid">Chưa đóng</Badge>)
-    expect(screen.getByText('Chưa đóng')).toHaveClass('text-red-400')
+    expect(screen.getByText('Chưa đóng')).toHaveClass('text-red-800')
 
     rerender(<Badge variant="pending">Chờ xác nhận</Badge>)
-    expect(screen.getByText('Chờ xác nhận')).toHaveClass('text-amber-400')
+    expect(screen.getByText('Chờ xác nhận')).toHaveClass('text-amber-800')
   })
 
   it('renders with dot indicator', () => {

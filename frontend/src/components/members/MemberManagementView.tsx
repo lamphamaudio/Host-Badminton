@@ -128,17 +128,19 @@ export const MemberManagementView: React.FC = () => {
       {/* Header & Stats Banner */}
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Users className="w-5 h-5 text-emerald-400" />
-            Thành Viên & Sổ Nợ
+          <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <Users className="w-4 h-4" />
+            </div>
+            <span>Thành Viên & Sổ Nợ</span>
           </h1>
-          <p className="text-xs text-slate-400">
-            Quản lý người chơi quen thuộc và theo dõi công nợ
+          <p className="text-xs text-slate-500">
+            Quản lý người chơi quen thuộc và theo dõi công nợ (FIFO)
           </p>
         </div>
         <Button
           onClick={handleOpenCreate}
-          className="bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm flex items-center gap-1.5 shadow-lg shadow-emerald-950/40"
+          className="bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm flex items-center gap-1.5 shadow-sm"
         >
           <Plus className="w-4 h-4" />
           <span>Thêm người</span>
@@ -147,27 +149,27 @@ export const MemberManagementView: React.FC = () => {
 
       {/* Aggregate Debt Stats Card */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center shrink-0">
+        <div className="p-3.5 rounded-2xl bg-white border border-slate-200 flex items-center gap-3 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] text-slate-400">Tổng thành viên</div>
-            <div className="text-lg font-bold text-white">{members.length} người</div>
+            <div className="text-[11px] text-slate-500">Tổng thành viên</div>
+            <div className="text-lg font-bold text-slate-900 tabular-nums">{members.length} người</div>
           </div>
         </div>
 
-        <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center shrink-0">
+        <div className="p-3.5 rounded-2xl bg-white border border-slate-200 flex items-center gap-3 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center shrink-0">
             <TrendingDown className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[11px] text-slate-400">
+            <div className="text-[11px] text-slate-500">
               Tổng tiền nợ ({membersWithDebtCount})
             </div>
             <div
-              className={`text-lg font-bold ${
-                totalRosterDebt > 0 ? 'text-rose-400' : 'text-emerald-400'
+              className={`text-lg font-bold tabular-nums ${
+                totalRosterDebt > 0 ? 'text-rose-600' : 'text-emerald-700'
               }`}
             >
               {formatVND(totalRosterDebt)}
@@ -179,12 +181,12 @@ export const MemberManagementView: React.FC = () => {
       {/* Search & Filter Controls */}
       <div className="space-y-2">
         <div className="relative">
-          <Search className="absolute left-3 top-3 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
           <Input
             placeholder="Tìm theo tên hoặc số điện thoại..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 bg-slate-900/80 border-slate-800 text-slate-200"
+            className="pl-9 bg-white border-slate-200 text-slate-900"
           />
         </div>
 
@@ -196,10 +198,10 @@ export const MemberManagementView: React.FC = () => {
               setActiveOnly(false)
               setFilterDebtOnly(false)
             }}
-            className={`px-3 py-1.5 rounded-xl border transition-all ${
+            className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
               !activeOnly && !filterDebtOnly
-                ? 'bg-slate-800 border-slate-600 text-white font-semibold'
-                : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                ? 'bg-slate-900 border-slate-900 text-white font-semibold'
+                : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900'
             }`}
           >
             Tất cả ({members.length})
@@ -210,13 +212,13 @@ export const MemberManagementView: React.FC = () => {
             onClick={() => {
               setFilterDebtOnly(true)
             }}
-            className={`px-3 py-1.5 rounded-xl border transition-all flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded-xl border transition-all flex items-center gap-1.5 cursor-pointer ${
               filterDebtOnly
-                ? 'bg-rose-950/40 border-rose-500 text-rose-300 font-semibold'
-                : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                ? 'bg-rose-50 border-rose-300 text-rose-800 font-semibold'
+                : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-rose-400" />
+            <span className="w-2 h-2 rounded-full bg-rose-500" />
             <span>Còn nợ ({membersWithDebtCount})</span>
           </button>
 
@@ -226,10 +228,10 @@ export const MemberManagementView: React.FC = () => {
               setActiveOnly(!activeOnly)
               setFilterDebtOnly(false)
             }}
-            className={`px-3 py-1.5 rounded-xl border transition-all ${
+            className={`px-3 py-1.5 rounded-xl border transition-all cursor-pointer ${
               activeOnly && !filterDebtOnly
-                ? 'bg-emerald-950/40 border-emerald-500 text-emerald-300 font-semibold'
-                : 'bg-slate-950/60 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                ? 'bg-emerald-50 border-emerald-300 text-emerald-800 font-semibold'
+                : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900'
             }`}
           >
             Đang hoạt động
@@ -239,7 +241,7 @@ export const MemberManagementView: React.FC = () => {
 
       {/* Error State */}
       {error && (
-        <div className="p-3 text-sm text-red-400 bg-red-950/30 border border-red-900 rounded-xl">
+        <div className="p-3 text-sm text-rose-800 bg-rose-50 border border-rose-200 rounded-xl">
           {error}
         </div>
       )}
@@ -251,13 +253,13 @@ export const MemberManagementView: React.FC = () => {
             Đang tải danh sách thành viên...
           </div>
         ) : filteredMembers.length === 0 ? (
-          <Card className="border-slate-800 bg-slate-900/60 text-center py-10">
+          <Card className="border-slate-200 bg-slate-50 text-center py-10">
             <CardContent className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-slate-500">
+              <div className="w-12 h-12 rounded-full bg-slate-200/70 flex items-center justify-center mx-auto text-slate-500">
                 <Users className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-slate-200">
+                <h3 className="text-sm font-semibold text-slate-900">
                   {searchQuery || filterDebtOnly
                     ? 'Không tìm thấy thành viên phù hợp'
                     : 'Chưa có thành viên nào trong danh sách'}
@@ -272,7 +274,7 @@ export const MemberManagementView: React.FC = () => {
                 <Button
                   onClick={handleOpenCreate}
                   size="sm"
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white text-xs mt-2"
+                  className="bg-slate-900 hover:bg-slate-800 text-white text-xs mt-2"
                 >
                   <Plus className="w-3.5 h-3.5 mr-1" />
                   Thêm thành viên đầu tiên
@@ -288,15 +290,15 @@ export const MemberManagementView: React.FC = () => {
               <div
                 key={member.id}
                 onClick={() => handleOpenDetail(member)}
-                className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 active:scale-[0.99] transition-all cursor-pointer flex items-center justify-between gap-3 shadow-md"
+                className="p-3.5 rounded-2xl bg-white border border-slate-200 hover:border-slate-300 active:scale-[0.99] transition-all cursor-pointer flex items-center justify-between gap-3 shadow-xs"
               >
                 <div className="flex items-center gap-3 min-w-0">
                   {/* Avatar Icon */}
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shrink-0 ${
                       member.gender === 'female'
-                        ? 'bg-pink-500/20 text-pink-400 border border-pink-500/30'
-                        : 'bg-sky-500/20 text-sky-400 border border-sky-500/30'
+                        ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                        : 'bg-sky-50 text-sky-700 border border-sky-200'
                     }`}
                   >
                     {member.name.charAt(0).toUpperCase()}
@@ -305,24 +307,24 @@ export const MemberManagementView: React.FC = () => {
                   {/* Name and Phone */}
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-slate-100 truncate">
+                      <span className="text-sm font-semibold text-slate-900 truncate">
                         {member.name}
                       </span>
                       {!member.is_active && (
-                        <span className="text-[9px] px-1 py-0.2 rounded bg-slate-800 text-slate-400 border border-slate-700">
+                        <span className="text-[9px] px-1 py-0.2 rounded bg-slate-100 text-slate-500 border border-slate-200">
                           Tạm ngưng
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
+                    <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
                       {member.phone ? (
-                        <span className="flex items-center gap-1 text-slate-400">
-                          <Phone className="w-3 h-3 text-slate-500" />
+                        <span className="flex items-center gap-1 text-slate-600">
+                          <Phone className="w-3 h-3 text-slate-400" />
                           {member.phone}
                         </span>
                       ) : (
-                        <span className="text-slate-600">Chưa có SĐT</span>
+                        <span className="text-slate-400">Chưa có SĐT</span>
                       )}
                       {member.default_note && (
                         <span className="truncate max-w-[120px] text-slate-500 text-[11px]">
@@ -337,15 +339,15 @@ export const MemberManagementView: React.FC = () => {
                 <div className="flex items-center gap-2 shrink-0">
                   {hasDebt ? (
                     <div className="text-right">
-                      <div className="text-xs font-bold text-rose-400">
+                      <div className="text-xs font-bold text-rose-600 tabular-nums">
                         {formatVND(member.total_debt)}
                       </div>
-                      <span className="text-[10px] text-rose-400/80 bg-rose-950/40 px-1.5 py-0.5 rounded-full border border-rose-900/40">
+                      <span className="text-[10px] font-semibold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded-full border border-rose-200">
                         Còn nợ
                       </span>
                     </div>
                   ) : (
-                    <span className="text-[11px] font-medium text-emerald-400 bg-emerald-950/30 px-2 py-0.5 rounded-full border border-emerald-900/40">
+                    <span className="text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
                       0 đ
                     </span>
                   )}

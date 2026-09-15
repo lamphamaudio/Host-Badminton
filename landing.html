@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 -->
-<!-- Hallmark · macrostructure: Bento Grid · theme: Sport · enrichment: none · nav: N5 Floating pill · footer: Ft5 Statement -->
+<!-- Hallmark · genre: modern-minimal · macrostructure: Workbench · theme: modern-minimal · enrichment: none (interactive studio) · nav: N5 Floating pill · footer: Ft5 Statement -->
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
@@ -9,26 +9,25 @@
   <meta name="description" content="Bộ công cụ chuyên biệt cho Host cầu lông phong trào. Tính chính xác tiền sân, tiền cầu, chia nam nữ, người về sớm và xuất mã VietQR thanh toán 1-chạm.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Hallmark · Sport Dark OKLCH Tokens */
+    /* Hallmark · Tally Modern Minimal Tokens */
     :root {
-      --color-paper: oklch(14% 0.012 240);       /* #090d16 */
-      --color-paper-2: oklch(18% 0.015 240);     /* #111927 */
-      --color-paper-3: oklch(22% 0.018 240);     /* #182338 */
-      --color-rule: oklch(26% 0.015 240);        /* #1e293b */
-      --color-rule-active: oklch(34% 0.020 240); /* #334155 */
-      --color-ink: oklch(96% 0.005 240);         /* #f8fafc */
-      --color-muted: oklch(68% 0.015 240);       /* #94a3b8 */
-      --color-faint: oklch(50% 0.012 240);       /* #64748b */
-      --color-accent: oklch(72% 0.180 152);      /* #10b981 emerald */
-      --color-accent-hover: oklch(65% 0.190 152);
-      --color-accent-soft: oklch(22% 0.060 152);
-      --color-signal-lime: oklch(80% 0.190 128); /* #84cc16 lime */
-      --color-focus: oklch(72% 0.180 152);
+      --color-paper: oklch(98.8% 0.002 240);     /* #fcfcfd base paper */
+      --color-paper-2: oklch(100% 0 0);          /* #ffffff elevated sheet */
+      --color-paper-3: oklch(96.5% 0.004 240);   /* #f4f5f7 secondary/hover */
+      --color-paper-inset: oklch(97.5% 0.003 240); /* #f8fafc */
+      --color-rule: oklch(92% 0.005 240);        /* #e5e7eb hairline border */
+      --color-rule-active: oklch(82% 0.010 240); /* #cbd5e1 */
+      --color-ink: oklch(18% 0.015 240);         /* #0f172a primary ink */
+      --color-muted: oklch(45% 0.015 240);       /* #475569 secondary text */
+      --color-faint: oklch(65% 0.012 240);       /* #94a3b8 caption */
+      --color-accent: oklch(18% 0.015 240);      /* #0f172a solid black CTA */
+      --color-signal-emerald: oklch(65% 0.190 152); /* #059669 */
+      --color-signal-lime: oklch(75% 0.180 130);    /* #65a30d */
 
-      --font-display: 'Inter', system-ui, -apple-system, sans-serif;
-      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
 
       --space-3xs: 4px;
@@ -48,7 +47,6 @@
       --radius-full: 9999px;
     }
 
-    /* Base Reset & Layout Safety */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -57,8 +55,8 @@
 
     html, body {
       overflow-x: clip;
-      background-color: #090d16;
-      color: #f8fafc;
+      background-color: #fafbfc;
+      color: #0f172a;
       font-family: var(--font-body);
       font-size: 15px;
       line-height: 1.5;
@@ -78,57 +76,55 @@
       background: none;
     }
 
-    /* Container */
     .container {
-      max-width: 1040px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 var(--space-sm);
     }
 
-    /* 1. N5 Floating Pill Navigation */
+    /* 1. Tally-Style Floating Pill Navigation */
     .nav-wrapper {
       position: sticky;
       top: var(--space-xs);
       z-index: 50;
       padding: 0 var(--space-sm);
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-sm);
     }
 
     .nav-pill {
-      max-width: 960px;
+      max-width: 940px;
       margin: 0 auto;
       height: 56px;
-      background: rgba(17, 25, 39, 0.9);
-      border: 1px solid #1e293b;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e2e8f0;
       backdrop-filter: blur(12px);
-      border-radius: var(--radius-xl);
+      border-radius: var(--radius-full);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 var(--space-sm);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      padding: 0 var(--space-md);
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-weight: 700;
-      font-size: 15px;
-      color: #fff;
+      font-size: 14px;
+      color: #0f172a;
     }
 
     .brand-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-md);
-      background: rgba(16, 185, 129, 0.2);
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-full);
+      background: #0f172a;
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #10b981;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .badge-tag {
@@ -136,10 +132,10 @@
       font-size: 10px;
       text-transform: uppercase;
       padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(16, 185, 129, 0.1);
-      color: #10b981;
-      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: var(--radius-full);
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
       font-weight: 600;
     }
 
@@ -149,7 +145,7 @@
       gap: var(--space-md);
       font-size: 13px;
       font-weight: 500;
-      color: #94a3b8;
+      color: #64748b;
     }
 
     @media (min-width: 768px) {
@@ -159,7 +155,7 @@
     }
 
     .nav-links a:hover {
-      color: #10b981;
+      color: #0f172a;
       transition: color 150ms ease;
     }
 
@@ -175,7 +171,7 @@
       justify-content: center;
       gap: 6px;
       font-weight: 600;
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-full);
       transition: background 150ms ease, transform 100ms ease;
       white-space: nowrap;
     }
@@ -185,42 +181,40 @@
     }
 
     .btn-sm {
-      height: 34px;
-      padding: 0 12px;
+      height: 32px;
+      padding: 0 14px;
       font-size: 12px;
     }
 
     .btn-lg {
-      height: 44px;
-      padding: 0 20px;
+      height: 46px;
+      padding: 0 24px;
       font-size: 14px;
-      border-radius: var(--radius-lg);
-    }
-
-    .btn-primary {
-      background: #10b981;
-      color: #022c22;
       font-weight: 700;
     }
 
+    .btn-primary {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
     .btn-primary:hover {
-      background: #059669;
+      background: #1e293b;
     }
 
     .btn-secondary {
-      background: #111927;
-      color: #e2e8f0;
-      border: 1px solid #334155;
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
     }
 
     .btn-secondary:hover {
-      background: #1e293b;
+      background: #f8fafc;
     }
 
     /* 2. Hero Section */
     .hero {
-      text-align: center;
-      padding: var(--space-lg) 0 var(--space-xl);
+      padding: var(--space-lg) 0 var(--space-md);
     }
 
     .hero-kicker {
@@ -229,433 +223,385 @@
       gap: 6px;
       padding: 4px 12px;
       border-radius: var(--radius-full);
-      background: #111927;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #10b981;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #475569;
       font-size: 12px;
       font-weight: 500;
       margin-bottom: var(--space-sm);
     }
 
+    .hero-kicker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
     .hero-title {
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(30px, 5.5vw, 54px);
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: #fff;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: #0f172a;
       margin-bottom: var(--space-sm);
       overflow-wrap: anywhere;
     }
 
     .hero-title span {
-      color: #10b981;
+      color: #64748b;
     }
 
     .hero-desc {
-      font-size: clamp(14px, 2vw, 16px);
-      color: #94a3b8;
+      font-size: clamp(15px, 2vw, 17px);
+      color: #475569;
       max-width: 620px;
-      margin: 0 auto var(--space-md);
+      margin-bottom: var(--space-md);
       line-height: 1.6;
     }
 
     .hero-cta-group {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: stretch;
       gap: 10px;
-      margin-bottom: var(--space-lg);
+      margin-bottom: var(--space-md);
     }
 
     @media (min-width: 540px) {
       .hero-cta-group {
         flex-direction: row;
+        align-items: center;
       }
     }
 
-    .hero-badges {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    @media (min-width: 768px) {
-      .hero-badges {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .badge-card {
-      padding: 12px;
-      border-radius: var(--radius-lg);
-      background: #111927;
-      border: 1px solid #1e293b;
+    .feature-anchors {
       display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .badge-icon {
-      color: #10b981;
-      font-size: 18px;
-    }
-
-    .badge-text strong {
-      display: block;
-      color: #fff;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
       font-size: 12px;
+      color: #64748b;
+      margin-top: var(--space-sm);
     }
 
-    .badge-text span {
-      display: block;
-      color: #94a3b8;
-      font-size: 11px;
-    }
-
-    /* 3. Bento Grid Section */
-    .bento-section {
-      padding: var(--space-xl) 0;
-    }
-
-    .section-head {
+    .anchor-item {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 8px;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: var(--space-sm);
-      margin-bottom: var(--space-md);
+      align-items: center;
+      gap: 5px;
     }
 
-    @media (min-width: 768px) {
-      .section-head {
-        flex-direction: row;
-        align-items: flex-end;
-      }
-    }
-
-    .section-head-title {
-      font-size: 20px;
+    .anchor-check {
+      color: #059669;
       font-weight: 700;
-      color: #fff;
     }
 
-    .section-kicker {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      color: #10b981;
-      font-weight: 600;
-      margin-bottom: 4px;
+    /* 3. Interactive Workbench Section */
+    .workbench-section {
+      padding: var(--space-md) 0 var(--space-xl);
     }
 
-    .bento-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-sm);
+    .workbench-sheet {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-2xl);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
     }
 
-    @media (min-width: 860px) {
-      .bento-grid {
-        grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
-      }
-    }
-
-    .bento-card {
-      background: #111927;
-      border: 1px solid #1e293b;
-      border-radius: var(--radius-xl);
-      padding: var(--space-md);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-    }
-
-    .card-header-line {
+    .workbench-header {
+      padding: 14px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 8px;
     }
 
-    .card-title {
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #10b981;
+    .workbench-dots {
       display: flex;
-      align-items: center;
       gap: 6px;
     }
 
-    .card-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: #94a3b8;
+    .workbench-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #cbd5e1;
     }
 
-    /* Calculator Sandbox */
+    .workbench-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 860px) {
+      .workbench-grid {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+
+    .workbench-left {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .workbench-right {
+      padding: var(--space-md);
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    @media (min-width: 860px) {
+      .workbench-right {
+        border-top: none;
+        border-left: 1px solid #e2e8f0;
+      }
+    }
+
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
     }
 
     .form-label-row {
       display: flex;
       justify-content: space-between;
-      font-size: 13px;
-      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #334155;
     }
 
     .form-label-row strong {
       font-family: var(--font-mono);
-      color: #10b981;
+      color: #0f172a;
+      font-size: 13px;
     }
 
     input[type="range"] {
       width: 100%;
       height: 6px;
-      background: #1e293b;
+      background: #e2e8f0;
       border-radius: 3px;
-      accent-color: #10b981;
+      accent-color: #0f172a;
       outline: none;
       cursor: pointer;
     }
 
-    .player-stepper-grid {
+    .stepper-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .stepper-box {
-      background: #090d16;
-      border: 1px solid #1e293b;
+    .stepper-tile {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: var(--radius-lg);
-      padding: 10px;
-    }
-
-    .stepper-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #94a3b8;
-      margin-bottom: 6px;
-    }
-
-    .stepper-controls {
+      padding: 10px 14px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+    }
+
+    .stepper-info strong {
+      display: block;
+      font-size: 12px;
+      color: #0f172a;
+    }
+
+    .stepper-info span {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .stepper-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 2px 4px;
     }
 
     .stepper-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-sm);
-      background: #1e293b;
-      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #0f172a;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .stepper-btn:hover {
-      background: #334155;
+      background: #e2e8f0;
     }
 
     .stepper-value {
-      flex: 1;
+      width: 20px;
       text-align: center;
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 14px;
-      color: #fff;
+      font-size: 13px;
+      color: #0f172a;
     }
 
-    .toggle-row {
-      background: #090d16;
-      border: 1px solid #1e293b;
+    .toggle-tile {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: var(--radius-lg);
-      padding: 10px 12px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .toggle-text strong {
+    .toggle-tile strong {
       display: block;
       font-size: 12px;
-      color: #fff;
+      color: #0f172a;
     }
 
-    .toggle-text span {
+    .toggle-tile span {
       display: block;
       font-size: 11px;
-      color: #94a3b8;
+      color: #64748b;
     }
 
-    .btn-toggle {
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
+    .btn-toggle-switch {
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
       font-size: 11px;
-      font-weight: 600;
-      background: #1e293b;
-      color: #cbd5e1;
-    }
-
-    .btn-toggle.active {
-      background: #10b981;
-      color: #022c22;
       font-weight: 700;
+      background: #e2e8f0;
+      color: #334155;
     }
 
-    .calc-result-box {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: var(--radius-lg);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .calc-result-text {
-      font-size: 11px;
-      color: #10b981;
-      font-weight: 500;
-    }
-
-    .calc-result-amount {
-      font-family: var(--font-mono);
-      font-size: 20px;
-      font-weight: 800;
+    .btn-toggle-switch.active {
+      background: #0f172a;
       color: #fff;
     }
 
-    /* VietQR Card */
-    .qr-mockup {
+    /* VietQR Mockup */
+    .qr-slip {
       background: #ffffff;
-      color: #090d16;
+      border: 1px solid #e2e8f0;
       border-radius: var(--radius-lg);
-      padding: 14px;
+      padding: 16px;
       text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
     }
 
-    .qr-mockup-head {
+    .qr-slip-top {
       display: flex;
       justify-content: space-between;
       font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 700;
-      color: #475569;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 4px;
-      margin-bottom: 8px;
+      color: #64748b;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
     }
 
-    .qr-box {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 8px;
-      background: #090d16;
+    .qr-slip-code {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 10px;
+      background: #0f172a;
       border-radius: 8px;
-      padding: 8px;
+      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .qr-box svg {
+    .qr-slip-code svg {
       width: 100%;
       height: 100%;
-      fill: #fff;
+      fill: #ffffff;
     }
 
-    .qr-amount {
+    .qr-slip-amount {
       font-family: var(--font-mono);
-      font-size: 14px;
+      font-size: 20px;
       font-weight: 800;
-      color: #090d16;
+      color: #0f172a;
       display: block;
     }
 
-    .qr-memo {
+    .qr-slip-memo {
       font-family: var(--font-mono);
       font-size: 10px;
       color: #64748b;
     }
 
-    /* 3 Bottom Bento Mini Tiles */
-    .mini-bento-row {
+    /* 4. Document Blocks Feature Section */
+    .features-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .features-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-sm);
-      margin-top: var(--space-sm);
+      gap: var(--space-md);
+      margin-top: var(--space-md);
     }
 
     @media (min-width: 768px) {
-      .mini-bento-row {
-        grid-template-columns: repeat(3, 1fr);
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
-    .mini-tile {
-      background: #111927;
-      border: 1px solid #1e293b;
+    .feature-doc-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: var(--radius-xl);
       padding: var(--space-md);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
     }
 
-    .mini-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: var(--radius-md);
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #10b981;
-      font-size: 16px;
-    }
-
-    .mini-tile h3 {
-      font-size: 14px;
-      color: #fff;
+    .feature-doc-card h3 {
+      font-size: 15px;
       font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
     }
 
-    .mini-tile p {
-      font-size: 12px;
-      color: #94a3b8;
-      line-height: 1.5;
+    .feature-doc-card p {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.6;
     }
 
-    /* 4. Workflow Section */
+    /* 5. Workflow Section */
     .workflow-section {
-      background: #0d1320;
-      border-top: 1px solid #1e293b;
-      border-bottom: 1px solid #1e293b;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
       padding: var(--space-xl) 0;
     }
 
     .step-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-sm);
+      gap: var(--space-md);
+      margin-top: var(--space-md);
     }
 
     @media (min-width: 768px) {
@@ -664,35 +610,32 @@
       }
     }
 
-    .step-card {
-      background: #111927;
-      border: 1px solid #1e293b;
-      border-radius: var(--radius-xl);
-      padding: var(--space-md);
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .step-num {
+    .step-number {
       font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      color: #10b981;
-      margin-bottom: 6px;
-    }
-
-    .step-card h3 {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .step-card p {
       font-size: 12px;
+      font-weight: 700;
       color: #94a3b8;
+    }
+
+    .step-item h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .step-item p {
+      font-size: 13px;
+      color: #475569;
       line-height: 1.5;
     }
 
-    /* 5. FAQ Section */
+    /* 6. FAQ Section */
     .faq-section {
       padding: var(--space-xl) 0;
       max-width: 680px;
@@ -700,37 +643,31 @@
     }
 
     .faq-item {
-      background: #111927;
-      border: 1px solid #1e293b;
-      border-radius: var(--radius-lg);
-      margin-bottom: 8px;
-      overflow: hidden;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 16px 0;
     }
 
     .faq-question {
       width: 100%;
-      padding: 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: #f1f5f9;
-      font-weight: 600;
-      font-size: 13px;
+      color: #0f172a;
+      font-weight: 700;
+      font-size: 14px;
       text-align: left;
     }
 
     .faq-question:hover {
-      color: #10b981;
+      color: #334155;
     }
 
     .faq-answer {
       display: none;
-      padding: 0 16px 14px;
-      font-size: 12px;
-      color: #94a3b8;
+      padding-top: 8px;
+      font-size: 13px;
+      color: #475569;
       line-height: 1.6;
-      border-top: 1px solid rgba(30, 41, 59, 0.6);
-      padding-top: 10px;
     }
 
     .faq-item.open .faq-answer {
@@ -739,21 +676,63 @@
 
     .faq-arrow {
       transition: transform 200ms ease;
-      color: #64748b;
+      color: #94a3b8;
+      font-size: 12px;
     }
 
     .faq-item.open .faq-arrow {
       transform: rotate(180deg);
-      color: #10b981;
+      color: #0f172a;
     }
 
-    /* 6. Footer (Ft5 Statement) */
+    /* 7. Final Clean CTA Section */
+    .final-cta-section {
+      background: #0f172a;
+      color: #ffffff;
+      padding: var(--space-2xl) 0;
+      text-align: center;
+    }
+
+    .final-cta-inner {
+      max-width: 580px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .final-cta-inner h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .final-cta-inner p {
+      font-size: 14px;
+      color: #94a3b8;
+    }
+
+    .btn-light {
+      background: #ffffff;
+      color: #0f172a;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      height: 46px;
+      padding: 0 26px;
+    }
+
+    .btn-light:hover {
+      background: #f1f5f9;
+    }
+
+    /* 8. Footer */
     footer {
-      border-top: 1px solid #1e293b;
+      border-top: 1px solid #e2e8f0;
       padding: var(--space-lg) 0;
       font-size: 12px;
-      color: #94a3b8;
-      background: #090d16;
+      color: #64748b;
+      background: #ffffff;
     }
 
     .footer-inner {
@@ -775,18 +754,18 @@
 </head>
 <body>
 
-  <!-- 1. N5 Floating Pill Navigation -->
+  <!-- 1. Floating Pill Navigation -->
   <div class="nav-wrapper">
     <header class="nav-pill">
       <a href="/" class="brand">
-        <div class="brand-icon">🏸</div>
+        <div class="brand-icon">⚡</div>
         <span>Host Badminton</span>
         <span class="badge-tag">v1.0</span>
       </a>
 
       <nav class="nav-links">
+        <a href="#workbench">Bảng tính thử</a>
         <a href="#features">Tính năng</a>
-        <a href="#sandbox">Bảng tính thử</a>
         <a href="#workflow">Quy trình</a>
         <a href="#faq">Hỏi đáp</a>
       </nav>
@@ -802,16 +781,16 @@
   <main>
     <section class="hero container">
       <div class="hero-kicker">
-        <span>✨</span> Dành riêng cho chủ sân & trưởng nhóm cầu lông phong trào
+        <span class="hero-kicker-dot"></span> Dành riêng cho chủ sân & trưởng nhóm cầu lông phong trào
       </div>
 
       <h1 class="hero-title">
         Tính tiền sân & Thu nợ nhóm<br>
-        <span>Chính xác trong 5 giây</span>
+        <span>Chính xác trong 5 giây.</span>
       </h1>
 
       <p class="hero-desc">
-        Không còn nhẩm tính tiền lẻ, ghi chép sổ tay hay nhầm lẫn người về sớm. Tự động xuất mã VietQR Napas247, chia đều theo nam nữ và theo dõi công nợ thành viên chuẩn xác ngay trên sân.
+        Đơn giản như soạn thảo tài liệu. Không còn chia lẻ tiền cầu, quên ai nợ ai hay nhầm người về sớm. Mở trình duyệt, kéo số liệu, có ngay thẻ VietQR Napas247 gửi vào nhóm Zalo.
       </p>
 
       <div class="hero-cta-group">
@@ -823,213 +802,215 @@
         </a>
       </div>
 
-      <!-- Proof Badges -->
-      <div class="hero-badges">
-        <div class="badge-card">
-          <div class="badge-icon">💳</div>
-          <div class="badge-text">
-            <strong>Mã VietQR</strong>
-            <span>Chuyển khoản 1 chạm</span>
-          </div>
+      <div class="feature-anchors">
+        <div class="anchor-item">
+          <span class="anchor-check">✓</span>
+          <strong style="color: #0f172a;">Mã VietQR</strong> tự động
         </div>
-
-        <div class="badge-card">
-          <div class="badge-icon">👥</div>
-          <div class="badge-text">
-            <strong>Chia nam / nữ</strong>
-            <span>Tính người về sớm</span>
-          </div>
+        <div class="anchor-item">
+          <span class="anchor-check">✓</span>
+          <strong style="color: #0f172a;">Sổ nợ FIFO</strong> minh bạch
         </div>
-
-        <div class="badge-card">
-          <div class="badge-icon">📋</div>
-          <div class="badge-text">
-            <strong>Sổ nợ FIFO</strong>
-            <span>Theo dõi & nhắc nợ</span>
-          </div>
+        <div class="anchor-item">
+          <span class="anchor-check">✓</span>
+          <span>Chia 2 chặng người về sớm</span>
         </div>
-
-        <div class="badge-card">
-          <div class="badge-icon">⚡</div>
-          <div class="badge-text">
-            <strong>Offline First</strong>
-            <span>Mất mạng vẫn dùng tốt</span>
-          </div>
+        <div class="anchor-item">
+          <span class="anchor-check">✓</span>
+          <span>100% Offline Ready</span>
         </div>
       </div>
     </section>
 
-    <!-- 3. Bento Grid Section with Interactive Sandbox -->
-    <section class="bento-section container" id="sandbox">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">Bento Grid · Kiến trúc công cụ</div>
-          <h2 class="section-head-title">Bảng điều khiển giả lập trực tiếp</h2>
+    <!-- 3. Interactive Workbench Section -->
+    <section class="workbench-section container" id="workbench">
+      <div class="workbench-sheet">
+        <div class="workbench-header">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="workbench-dots">
+              <div class="workbench-dot"></div>
+              <div class="workbench-dot"></div>
+              <div class="workbench-dot"></div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; color: #0f172a;">
+              Bảng điều khiển giả lập
+            </span>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: #64748b;">
+            Real-time Studio
+          </span>
         </div>
-        <div style="font-size: 12px; color: #94a3b8;">
-          Kéo thanh trượt để thử nghiệm phân bổ chi phí thời gian thực
-        </div>
-      </div>
 
-      <div class="bento-grid">
-        <!-- Tile 1: 2x2 Interactive Sandbox -->
-        <div class="bento-card">
-          <div class="card-header-line">
-            <span class="card-title">🧮 Bảng điều khiển giả lập</span>
-            <span class="card-tag">Realtime Engine</span>
-          </div>
-
-          <div class="form-group">
-            <div class="form-label-row">
-              <span>Tiền thuê sân (2 giờ):</span>
-              <strong id="disp-court-fee">160.000 ₫</strong>
-            </div>
-            <input type="range" id="input-court" min="80000" max="300000" step="10000" value="160000">
-          </div>
-
-          <div class="form-group">
-            <div class="form-label-row">
-              <span>Số quả cầu (25.000₫/quả):</span>
-              <strong id="disp-shuttle">4 quả (100.000 ₫)</strong>
-            </div>
-            <input type="range" id="input-shuttle" min="1" max="12" step="1" value="4">
-          </div>
-
-          <div class="player-stepper-grid">
-            <div class="stepper-box">
-              <div class="stepper-header">
-                <span>Số lượng Nam</span>
-                <span id="disp-male-tag">5 người</span>
+        <div class="workbench-grid">
+          <!-- Left: Form Controls -->
+          <div class="workbench-left">
+            <div class="form-group">
+              <div class="form-label-row">
+                <span>1. Tiền thuê sân (2 giờ)</span>
+                <strong id="disp-court-fee">160.000 ₫</strong>
               </div>
-              <div class="stepper-controls">
-                <button type="button" class="stepper-btn" onclick="adjustMale(-1)">-</button>
-                <span class="stepper-value" id="disp-male-val">5</span>
-                <button type="button" class="stepper-btn" onclick="adjustMale(1)">+</button>
-              </div>
+              <input type="range" id="input-court" min="80000" max="300000" step="10000" value="160000">
             </div>
 
-            <div class="stepper-box">
-              <div class="stepper-header">
-                <span>Số lượng Nữ</span>
-                <span id="disp-female-tag">3 người</span>
+            <div class="form-group">
+              <div class="form-label-row">
+                <span>2. Cầu lông sử dụng (25.000đ/quả)</span>
+                <strong id="disp-shuttle">4 quả · 100.000 ₫</strong>
               </div>
-              <div class="stepper-controls">
-                <button type="button" class="stepper-btn" onclick="adjustFemale(-1)">-</button>
-                <span class="stepper-value" id="disp-female-val">3</span>
-                <button type="button" class="stepper-btn" onclick="adjustFemale(1)">+</button>
-              </div>
+              <input type="range" id="input-shuttle" min="1" max="12" step="1" value="4">
             </div>
-          </div>
 
-          <div class="toggle-row">
-            <div class="toggle-text">
-              <strong>Chia 2 chặng (người về sớm)</strong>
-              <span id="disp-stage-mode">Chia đều cho tất cả người chơi</span>
-            </div>
-            <button type="button" class="btn-toggle" id="btn-toggle-stage" onclick="toggleStage()">Bật 2 chặng</button>
-          </div>
-
-          <div class="calc-result-box">
             <div>
-              <span class="calc-result-text" id="disp-result-label">Mỗi người thanh toán (8 người):</span>
-              <div class="calc-result-amount" id="disp-final-amount">33.000 ₫</div>
+              <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #334155; margin-bottom: 8px;">
+                3. Số lượng người tham gia (<span id="disp-total-tag">8</span> người)
+              </div>
+              <div class="stepper-grid">
+                <div class="stepper-tile">
+                  <div class="stepper-info">
+                    <strong>Nam</strong>
+                    <span id="disp-male-tag">5 người</span>
+                  </div>
+                  <div class="stepper-pill">
+                    <button type="button" class="stepper-btn" onclick="adjustMale(-1)">-</button>
+                    <span class="stepper-value" id="disp-male-val">5</span>
+                    <button type="button" class="stepper-btn" onclick="adjustMale(1)">+</button>
+                  </div>
+                </div>
+
+                <div class="stepper-tile">
+                  <div class="stepper-info">
+                    <strong>Nữ</strong>
+                    <span id="disp-female-tag">3 người</span>
+                  </div>
+                  <div class="stepper-pill">
+                    <button type="button" class="stepper-btn" onclick="adjustFemale(-1)">-</button>
+                    <span class="stepper-value" id="disp-female-val">3</span>
+                    <button type="button" class="stepper-btn" onclick="adjustFemale(1)">+</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <a href="/" class="btn btn-primary btn-sm">Mở trên sân →</a>
-          </div>
-        </div>
 
-        <!-- Tile 2: VietQR Live Card Preview -->
-        <div class="bento-card" id="features">
-          <div class="card-header-line">
-            <span class="card-title">📱 Thẻ VietQR Napas247</span>
-            <span class="card-tag">Auto Quicklink</span>
-          </div>
-
-          <div class="qr-mockup">
-            <div class="qr-mockup-head">
-              <span>VIETQR · NAPAS247</span>
-              <span>MB BANK</span>
+            <div class="toggle-tile">
+              <div>
+                <strong>Phân bổ 2 chặng (người về sớm)</strong>
+                <span id="disp-stage-mode">Chia đều số tiền cho toàn bộ người chơi</span>
+              </div>
+              <button type="button" class="btn-toggle-switch" id="btn-toggle-stage" onclick="toggleStage()">Bật 2 chặng</button>
             </div>
-            <div class="qr-box">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 4h4v4H4zm2 2h0m8-2h4v4h-4zm2 2h0M4 16h4v4H4zm2 2h0m6-6h2v2h-2zm4 0h2v2h-2zm-4 4h2v2h-2zm4 0h2v2h-2zm-2-2h2v2h-2zm-6 2h2v2h-2zm8-8h2v2h-2z"/>
-              </svg>
-            </div>
-            <span class="qr-amount" id="disp-qr-amount">33.000 ₫</span>
-            <span class="qr-memo" id="disp-qr-memo">ND: CAULONG 8N</span>
           </div>
 
-          <p style="font-size: 11px; color: #94a3b8;">
-            Mỗi người chơi chỉ cần mở app ngân hàng quét mã, số tiền và nội dung chuyển khoản tự điền 100%.
-          </p>
+          <!-- Right: Live VietQR Slip -->
+          <div class="workbench-right">
+            <div class="qr-slip">
+              <div class="qr-slip-top">
+                <span>VIETQR · NAPAS247</span>
+                <span>MB BANK</span>
+              </div>
 
-          <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-bill" onclick="copyBillText()" style="width: 100%;">
-            📋 Sao chép bill gửi Zalo
-          </button>
-        </div>
-      </div>
+              <div class="qr-slip-code">
+                <svg viewBox="0 0 24 24">
+                  <path d="M4 4h4v4H4zm2 2h0m8-2h4v4h-4zm2 2h0M4 16h4v4H4zm2 2h0m6-6h2v2h-2zm4 0h2v2h-2zm-4 4h2v2h-2zm4 0h2v2h-2zm-2-2h2v2h-2zm-6 2h2v2h-2zm8-8h2v2h-2z"/>
+                </svg>
+              </div>
 
-      <!-- 3 Bottom Mini Tiles -->
-      <div class="mini-bento-row">
-        <div class="mini-tile">
-          <div class="mini-icon">📍</div>
-          <h3>Quản lý danh sách sân</h3>
-          <p>Lưu sẵn thông tin sân quen, đơn giá thuê mỗi giờ để tự động điền trong một chạm khi bước vào sân.</p>
-        </div>
+              <span style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 600; display: block;" id="disp-result-label">
+                Mỗi người thanh toán
+              </span>
+              <span class="qr-slip-amount" id="disp-final-amount">33.000 ₫</span>
+              <span class="qr-slip-memo" id="disp-qr-memo">Nội dung: CAULONG 8N</span>
+            </div>
 
-        <div class="mini-tile">
-          <div class="mini-icon">🧾</div>
-          <h3>Sổ nợ thành viên FIFO</h3>
-          <p>Ghi nhận ai chuyển thiếu, ai nợ từ tuần trước. Tự động khấu trừ theo thứ tự thời gian khi thành viên thanh toán.</p>
-        </div>
-
-        <div class="mini-tile">
-          <div class="mini-icon">⚡</div>
-          <h3>Hoạt động Offline 100%</h3>
-          <p>Sân nằm ở tầng hầm hoặc góc khuất mất sóng 4G? Dữ liệu vẫn tính toán và lưu cục bộ, tự đồng bộ khi có mạng.</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-bill" onclick="copyBillText()" style="width: 100%; border-radius: var(--radius-md);">
+                📋 Sao chép bill gửi Zalo
+              </button>
+              <a href="/" class="btn btn-primary btn-sm" style="width: 100%; border-radius: var(--radius-md);">
+                Mở bàn tính chính thức →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. Workflow Section -->
+    <!-- 4. Document Blocks Feature Section -->
+    <section class="features-section container" id="features">
+      <div style="margin-bottom: 20px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b; display: block;">
+          Được thiết kế cho Host cầu lông
+        </span>
+        <h2 style="font-size: 24px; font-weight: 800; color: #0f172a;">
+          Tất cả những gì bạn cần sau mỗi trận đấu.
+        </h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-doc-card">
+          <h3>Mã VietQR Napas247 tự động</h3>
+          <p>Tạo mã QR kèm số tiền lẻ chính xác đến từng nghìn đồng. Người chơi quét 1 chạm, tiền về thẳng tài khoản ngân hàng của Host mà không cần thông qua ví trung gian.</p>
+        </div>
+
+        <div class="feature-doc-card">
+          <h3>Công thức chia 2 chặng công bằng</h3>
+          <p>Tự động tính tiền cho người chỉ chơi hiệp 1 và người ở lại trọn buổi. Xóa tan tranh cãi, đảm bảo mọi người đều vui vẻ và minh bạch về chi phí.</p>
+        </div>
+
+        <div class="feature-doc-card">
+          <h3>Sổ nợ FIFO & Lịch sử buổi chơi</h3>
+          <p>Ghi nhận thành viên chuyển thiếu hoặc nợ tuần trước. Khi thành viên thanh toán, hệ thống tự động trừ nợ theo thứ tự thời gian vào sổ kế toán.</p>
+        </div>
+
+        <div class="feature-doc-card">
+          <h3>Offline First · Chạy tốt khi mất mạng</h3>
+          <p>Sân nằm ở tầng hầm hoặc góc khuất không có sóng 4G? Bạn vẫn mở app và tính tiền bình thường. Dữ liệu sẽ tự động đồng bộ lên đám mây khi có kết nối trở lại.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 3-Step Workflow Section -->
     <section class="workflow-section" id="workflow">
       <div class="container">
-        <div class="section-head" style="border: none; margin-bottom: 24px;">
-          <div>
-            <div class="section-kicker">Quy trình 3 bước</div>
-            <h2 class="section-head-title">Vận hành trơn tru ngay tại sân cầu</h2>
-          </div>
+        <div style="margin-bottom: 20px;">
+          <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b; display: block;">
+            3 bước đơn giản
+          </span>
+          <h2 style="font-size: 24px; font-weight: 800; color: #0f172a;">
+            Vận hành trơn tru trong 30 giây
+          </h2>
         </div>
 
         <div class="step-grid">
-          <div class="step-card">
-            <div class="step-num">BƯỚC 01</div>
-            <h3>Nhập thông số buổi chơi</h3>
-            <p>Nhập số giờ sân, số quả cầu đã dùng và danh sách người chơi (hoặc số lượng nam/nữ).</p>
+          <div class="step-item">
+            <span class="step-number">01 /</span>
+            <h3>Nhập thông số trên sân</h3>
+            <p>Nhập số giờ sân, số quả cầu đã dùng và danh sách người chơi nam/nữ.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-num">BƯỚC 02</div>
-            <h3>Kiểm tra chia tiền tự động</h3>
-            <p>Hệ thống áp dụng công thức làm tròn và phân chia chặng người về sớm hoàn toàn minh bạch.</p>
+          <div class="step-item">
+            <span class="step-number">02 /</span>
+            <h3>Kiểm tra phân bổ chi phí</h3>
+            <p>Hệ thống áp dụng công thức làm tròn và phân chia chặng người về sớm hoàn toàn tự động.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-num">BƯỚC 03</div>
-            <h3>Gửi thẻ VietQR vào nhóm</h3>
-            <p>Đưa mã QR cho mọi người quét tại chỗ hoặc sao chép văn bản bill gửi vào nhóm Zalo / Messenger.</p>
+          <div class="step-item">
+            <span class="step-number">03 /</span>
+            <h3>Gửi VietQR vào nhóm</h3>
+            <p>Cho mọi người quét QR trực tiếp hoặc sao chép văn bản bill gửi vào nhóm Zalo / Messenger.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. FAQ Section -->
+    <!-- 6. FAQ Section -->
     <section class="faq-section container" id="faq">
-      <div class="section-head" style="text-align: center; border: none; align-items: center;">
-        <div>
-          <div class="section-kicker">Giải đáp thắc mắc</div>
-          <h2 class="section-head-title">Câu hỏi thường gặp</h2>
-        </div>
+      <div style="margin-bottom: 20px;">
+        <span style="font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; font-weight: 700; color: #64748b; display: block;">
+          Giải đáp thắc mắc
+        </span>
+        <h2 style="font-size: 24px; font-weight: 800; color: #0f172a;">
+          Câu hỏi thường gặp
+        </h2>
       </div>
 
       <div class="faq-item">
@@ -1038,7 +1019,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Hoàn toàn miễn phí 100% dành cho tất cả các chủ sân, trưởng nhóm và người tổ chức cầu lông phong trào tại Việt Nam. Không có phí ẩn và không giới hạn số lượng buổi tính.
+          Hoàn toàn miễn phí 100% dành cho tất cả các chủ sân, trưởng nhóm và người tổ chức cầu lông phong trào tại Việt Nam. Không thu bất kỳ khoản phí nào và không chèn quảng cáo.
         </div>
       </div>
 
@@ -1058,7 +1039,7 @@
           <span class="faq-arrow">▼</span>
         </button>
         <div class="faq-answer">
-          Hệ thống tự động sinh mã VietQR Quicklink chuẩn Napas 247 liên kết với hơn 50 ngân hàng Việt Nam. Tiền được chuyển trực tiếp vào tài khoản ngân hàng của Host mà không qua trung gian.
+          Hệ thống tự động sinh mã VietQR Quicklink chuẩn Napas 247 liên kết với hơn 50 ngân hàng Việt Nam. Tiền được chuyển trực tiếp vào tài khoản ngân hàng của Host mà không qua bất kỳ trung gian nào.
         </div>
       </div>
 
@@ -1082,13 +1063,24 @@
         </div>
       </div>
     </section>
+
+    <!-- 7. Final Clean CTA Section -->
+    <section class="final-cta-section">
+      <div class="container final-cta-inner">
+        <h2>Sẵn sàng cho buổi cầu lông tối nay?</h2>
+        <p>Dùng thử ngay bộ tính tiền chia theo sân, chia theo cầu và tạo mã VietQR hoàn toàn miễn phí.</p>
+        <a href="/" class="btn btn-light btn-lg">
+          🏸 Mở ứng dụng tính tiền ngay →
+        </a>
+      </div>
+    </section>
   </main>
 
-  <!-- 6. Footer (Ft5 Statement) -->
+  <!-- 8. Footer -->
   <footer>
     <div class="container footer-inner">
       <div style="display: flex; align-items: center; gap: 8px;">
-        <span style="font-weight: 700; color: #e2e8f0;">🏸 Host Badminton</span>
+        <span style="font-weight: 700; color: #0f172a;">🏸 Host Badminton</span>
         <span>·</span>
         <span>Nền tảng miễn phí cho cộng đồng cầu lông phong trào Việt Nam</span>
       </div>
@@ -1098,7 +1090,6 @@
     </div>
   </footer>
 
-  <!-- Vanilla JS Interactive Engine -->
   <script>
     let courtFee = 160000;
     let shuttleCount = 4;
@@ -1116,7 +1107,8 @@
       const totalPlayers = Math.max(1, maleCount + femaleCount);
 
       document.getElementById('disp-court-fee').textContent = formatVND(courtFee);
-      document.getElementById('disp-shuttle').textContent = shuttleCount + ' quả (' + formatVND(shuttleFee) + ')';
+      document.getElementById('disp-shuttle').textContent = shuttleCount + ' quả · ' + formatVND(shuttleFee);
+      document.getElementById('disp-total-tag').textContent = totalPlayers;
       document.getElementById('disp-male-val').textContent = maleCount;
       document.getElementById('disp-male-tag').textContent = maleCount + ' người';
       document.getElementById('disp-female-val').textContent = femaleCount;
@@ -1128,16 +1120,14 @@
         const stayers = Math.max(1, totalPlayers - 1);
         const stage1 = Math.round((totalCost * 0.5) / totalPlayers / 1000) * 1000;
         const stage2 = Math.round((totalCost * 0.5) / stayers / 1000) * 1000;
-        document.getElementById('disp-result-label').textContent = 'Phân bổ 2 chặng (' + totalPlayers + ' người):';
+        document.getElementById('disp-result-label').textContent = 'Phân bổ 2 chặng:';
         document.getElementById('disp-final-amount').textContent = 'Sớm: ' + formatVND(stage1) + ' · Ở lại: ' + formatVND(stage1 + stage2);
-        document.getElementById('disp-qr-amount').textContent = formatVND(stage1 + stage2);
       } else {
-        document.getElementById('disp-result-label').textContent = 'Mỗi người thanh toán (' + totalPlayers + ' người):';
+        document.getElementById('disp-result-label').textContent = 'Mỗi người thanh toán:';
         document.getElementById('disp-final-amount').textContent = formatVND(finalPerPerson);
-        document.getElementById('disp-qr-amount').textContent = formatVND(finalPerPerson);
       }
 
-      document.getElementById('disp-qr-memo').textContent = 'ND: CAULONG ' + totalPlayers + 'N';
+      document.getElementById('disp-qr-memo').textContent = 'Nội dung: CAULONG ' + totalPlayers + 'N';
     }
 
     document.getElementById('input-court').addEventListener('input', (e) => {
@@ -1171,7 +1161,7 @@
       } else {
         btn.classList.remove('active');
         btn.textContent = 'Bật 2 chặng';
-        text.textContent = 'Chia đều cho tất cả người chơi';
+        text.textContent = 'Chia đều số tiền cho toàn bộ người chơi';
       }
       updateCalculations();
     }
@@ -1189,7 +1179,7 @@
       const text = `🏸 BILL CẦU LÔNG (HOST BADMINTON)\n━━━━━━━━━━━━━━━━━━━━\n• Tiền sân (2h): ${formatVND(courtFee)}\n• Tiền cầu (${shuttleCount} quả): ${formatVND(shuttleFee)}\n• Tổng chi phí: ${formatVND(totalCost)}\n• Sĩ số: ${totalPlayers} người (${maleCount} Nam, ${femaleCount} Nữ)\n────────────────────\n👉 Mỗi người: ${formatVND(perPerson)}\n💳 VietQR Napas247: Quét mã chuyển khoản trực tiếp`;
       navigator.clipboard?.writeText?.(text);
       const btn = document.getElementById('btn-copy-bill');
-      btn.textContent = '✓ Đã chép nội dung bill';
+      btn.textContent = '✓ Đã sao chép';
       setTimeout(() => {
         btn.textContent = '📋 Sao chép bill gửi Zalo';
       }, 2000);

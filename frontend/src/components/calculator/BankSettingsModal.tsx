@@ -61,24 +61,24 @@ const BankSettingsForm: React.FC<{
       <div className="space-y-4 py-2">
         {/* Selected Bank Selector */}
         <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300">Ngân hàng thụ hưởng</label>
+          <label className="text-xs font-semibold text-slate-700">Ngân hàng thụ hưởng</label>
           <button
             type="button"
             onClick={() => setShowBankPicker(!showBankPicker)}
-            className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-800 bg-slate-950/80 hover:border-slate-700 transition-colors text-left"
+            className="w-full flex items-center justify-between p-3 rounded-xl border border-slate-200 bg-slate-50/80 hover:border-slate-300 hover:bg-slate-100/50 transition-colors text-left cursor-pointer"
           >
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-xs font-bold text-emerald-400">
+              <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-xs font-bold text-emerald-800">
                 {selectedBank.shortName.slice(0, 3)}
               </div>
               <div>
-                <div className="text-xs font-bold text-white">{selectedBank.shortName}</div>
-                <div className="text-[11px] text-slate-400 truncate max-w-[220px]">
+                <div className="text-xs font-bold text-slate-900">{selectedBank.shortName}</div>
+                <div className="text-[11px] text-slate-500 truncate max-w-[220px]">
                   {selectedBank.name}
                 </div>
               </div>
             </div>
-            <span className="text-xs text-emerald-400 font-semibold">
+            <span className="text-xs text-emerald-700 font-semibold">
               {showBankPicker ? 'Đóng' : 'Đổi ngân hàng'}
             </span>
           </button>
@@ -86,15 +86,15 @@ const BankSettingsForm: React.FC<{
 
         {/* Bank Picker Dropdown list */}
         {showBankPicker && (
-          <div className="space-y-2 rounded-2xl bg-slate-950 p-3 border border-slate-800 animate-in fade-in-50">
+          <div className="space-y-2 rounded-2xl bg-slate-50 p-3 border border-slate-200 animate-in fade-in-50">
             <div className="relative">
               <Input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Tìm kiếm ngân hàng (VD: MB, VCB, Techcombank)..."
-                className="pl-8 text-xs bg-slate-900"
+                className="pl-8 text-xs bg-white"
               />
-              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
             </div>
             <div className="max-h-48 overflow-y-auto space-y-1 pr-1">
               {filteredBanks.map((bank: BankInfo) => {
@@ -107,15 +107,15 @@ const BankSettingsForm: React.FC<{
                       setSelectedBin(bank.bin)
                       setShowBankPicker(false)
                     }}
-                    className={`w-full flex items-center justify-between p-2 rounded-lg text-left text-xs transition-colors ${
+                    className={`w-full flex items-center justify-between p-2 rounded-lg text-left text-xs transition-colors cursor-pointer ${
                       isSelected
-                        ? 'bg-emerald-950/60 border border-emerald-500/40 text-white font-bold'
-                        : 'hover:bg-slate-900 text-slate-300'
+                        ? 'bg-slate-900 text-white font-bold'
+                        : 'hover:bg-slate-200/60 text-slate-700'
                     }`}
                   >
                     <div className="flex items-center gap-2">
                       <span className="font-semibold">{bank.shortName}</span>
-                      <span className="text-[10px] text-slate-500 truncate max-w-[170px]">
+                      <span className={`text-[10px] truncate max-w-[170px] ${isSelected ? 'text-slate-300' : 'text-slate-500'}`}>
                         ({bank.name})
                       </span>
                     </div>
@@ -129,7 +129,7 @@ const BankSettingsForm: React.FC<{
 
         {/* Account Number Input */}
         <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300">Số tài khoản (STK)</label>
+          <label className="text-xs font-semibold text-slate-700">Số tài khoản (STK)</label>
           <div className="relative">
             <Input
               value={accountNumber}
@@ -137,13 +137,13 @@ const BankSettingsForm: React.FC<{
               placeholder="VD: 0987654321"
               className="pl-8 font-mono text-sm font-semibold"
             />
-            <CreditCard className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+            <CreditCard className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
           </div>
         </div>
 
         {/* Account Holder Name */}
         <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300">
+          <label className="text-xs font-semibold text-slate-700">
             Tên chủ tài khoản (Không dấu)
           </label>
           <div className="relative">
@@ -153,13 +153,13 @@ const BankSettingsForm: React.FC<{
               placeholder="VD: NGUYEN VAN A"
               className="pl-8 text-xs uppercase font-semibold"
             />
-            <User className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+            <User className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
           </div>
         </div>
 
         {/* Transfer Memo Template */}
         <div className="space-y-1.5">
-          <label className="text-xs font-semibold text-slate-300">
+          <label className="text-xs font-semibold text-slate-700">
             Cú pháp nội dung chuyển khoản
           </label>
           <div className="relative">
@@ -169,7 +169,7 @@ const BankSettingsForm: React.FC<{
               placeholder="VD: TIEN SAN CAU LONG"
               className="pl-8 text-xs font-medium"
             />
-            <FileText className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-500" />
+            <FileText className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
           </div>
         </div>
       </div>
@@ -202,17 +202,17 @@ export const BankSettingsModal: React.FC<BankSettingsModalProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md bg-slate-900 border-slate-800 text-slate-100 p-5 rounded-3xl">
+      <DialogContent className="max-w-md bg-white border-slate-200 text-slate-900 p-5 rounded-3xl shadow-xl">
         <DialogHeader className="space-y-1">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-800">
               <Landmark className="h-4 w-4" />
             </div>
-            <DialogTitle className="text-lg font-bold text-white">
+            <DialogTitle className="text-lg font-bold text-slate-900">
               Cài đặt tài khoản VietQR
             </DialogTitle>
           </div>
-          <DialogDescription className="text-xs text-slate-400">
+          <DialogDescription className="text-xs text-slate-500">
             Thông tin ngân hàng của bạn để tạo mã VietQR nhận tiền tự động
           </DialogDescription>
         </DialogHeader>
