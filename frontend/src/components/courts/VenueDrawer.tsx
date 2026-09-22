@@ -76,32 +76,32 @@ export const VenueDrawer: React.FC<VenueDrawerProps> = ({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[90vh] bg-white border-t border-slate-200 text-slate-900 shadow-2xl">
+      <DrawerContent className="max-h-[90vh] bg-surface border-t border-line text-fg shadow-2xl">
         <DrawerHeader className="text-left">
-          <DrawerTitle className="flex items-center gap-2 text-lg font-bold text-slate-900">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+          <DrawerTitle className="flex items-center gap-2 text-lg font-bold text-fg">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
               <Building2 className="w-4 h-4" />
             </div>
             <span>{venueToEdit ? 'Chỉnh sửa thông tin sân' : 'Thêm sân cầu lông mới'}</span>
           </DrawerTitle>
-          <DrawerDescription className="text-xs text-slate-500">
+          <DrawerDescription className="text-xs text-fg-muted">
             Lưu thông tin sân quen thuộc để tự động điền tiền sân khi tính tiền.
           </DrawerDescription>
         </DrawerHeader>
 
         <form onSubmit={handleSubmit} className="p-4 space-y-4 overflow-y-auto">
           {errorMessage && (
-            <div className="p-3 text-sm text-rose-800 bg-rose-50 border border-rose-200 rounded-xl">
+            <div className="p-3 text-sm text-danger bg-danger/10 border border-danger/30 rounded-xl">
               {errorMessage}
             </div>
           )}
 
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">
-              Tên sân <span className="text-rose-500">*</span>
+            <label className="text-sm font-medium text-fg">
+              Tên sân <span className="text-danger">*</span>
             </label>
             <div className="relative">
-              <Building2 className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+              <Building2 className="absolute left-3 top-3 w-4 h-4 text-fg-subtle" />
               <Input
                 placeholder="VD: Sân Cầu Lông Kỳ Hòa"
                 value={name}
@@ -113,11 +113,11 @@ export const VenueDrawer: React.FC<VenueDrawerProps> = ({
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">
+            <label className="text-sm font-medium text-fg">
               Vị trí / Số sân
             </label>
             <div className="relative">
-              <Tag className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+              <Tag className="absolute left-3 top-3 w-4 h-4 text-fg-subtle" />
               <Input
                 placeholder="VD: Sân 3, 4 hoặc Lầu 2"
                 value={courtNumber}
@@ -128,11 +128,11 @@ export const VenueDrawer: React.FC<VenueDrawerProps> = ({
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">
+            <label className="text-sm font-medium text-fg">
               Địa chỉ
             </label>
             <div className="relative">
-              <MapPin className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+              <MapPin className="absolute left-3 top-3 w-4 h-4 text-fg-subtle" />
               <Input
                 placeholder="VD: 238 Ba Tháng Hai, P.12, Q.10"
                 value={address}
@@ -143,7 +143,7 @@ export const VenueDrawer: React.FC<VenueDrawerProps> = ({
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">
+            <label className="text-sm font-medium text-fg">
               Giá thuê sân mặc định mỗi giờ (VND)
             </label>
             <MoneyInput
@@ -151,7 +151,7 @@ export const VenueDrawer: React.FC<VenueDrawerProps> = ({
               onChangeValue={setDefaultRate}
               placeholder="0"
             />
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-fg-muted">
               Giá này sẽ tự động điền vào máy tính khi bạn chọn sân.
             </p>
           </div>
@@ -165,7 +165,7 @@ export const VenueDrawer: React.FC<VenueDrawerProps> = ({
             <Button
               type="submit"
               disabled={isSubmitting || !name.trim()}
-              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-medium"
+              className="flex-1 bg-volt hover:bg-volt-hover text-ink font-medium"
             >
               {isSubmitting ? 'Đang lưu...' : venueToEdit ? 'Cập nhật' : 'Lưu sân'}
             </Button>

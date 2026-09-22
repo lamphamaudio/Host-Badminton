@@ -18,7 +18,7 @@ describe('CalculatorScreen component', () => {
       </ToastProvider>
     )
 
-    expect(screen.getByText('Tính tiền sân & VietQR')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Tính tiền' })).toBeInTheDocument()
     expect(screen.getByText('Tiền thuê sân')).toBeInTheDocument()
     expect(screen.getByText('Tiền cầu lông')).toBeInTheDocument()
     expect(screen.getByText('Số người tham gia')).toBeInTheDocument()

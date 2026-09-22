@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Home, LogIn } from 'lucide-react'
+import { Home, LogIn, Moon, Sun } from 'lucide-react'
 import { LoginSheet } from '@/components/auth/LoginSheet'
 import { CalculatorScreen } from '@/components/calculator/CalculatorScreen'
 import { CourtManagementView } from '@/components/courts/CourtManagementView'
@@ -9,10 +9,12 @@ import { type NavTabId } from '@/components/layout/bottom-nav'
 import { MobileAppShell } from '@/components/layout/mobile-app-shell'
 import { MemberManagementView } from '@/components/members/MemberManagementView'
 import { ProfileSettingsView } from '@/components/settings/ProfileSettingsView'
+import { TechniqueView } from '@/components/technique/TechniqueView'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { AuthProvider, useAuth } from '@/context/AuthContext'
 import type { SessionDetailResponse } from '@/lib/api'
 import { syncOfflineQueue } from '@/lib/offlineQueue'
+import { useTheme } from '@/lib/theme'
 import { ToastProvider, useToast } from '@/lib/toast'
 
 function AppContent() {
@@ -20,6 +22,7 @@ function AppContent() {
   const [activeTab, setActiveTab] = useState<NavTabId>('calculator')
   const [replaySession, setReplaySession] = useState<SessionDetailResponse | null>(null)
   const { success } = useToast()
+  const { resolved: theme, toggle: toggleTheme } = useTheme()
   const { host, isAuthenticated, isLoginModalOpen, openLoginModal, closeLoginModal } = useAuth()
 
   // Auto transition to app if user logs in
@@ -77,23 +80,23 @@ function AppContent() {
           onTabChange={setActiveTab}
           onLogoClick={() => setViewMode('landing')}
           headerTitle="Host Badminton"
-          headerSubtitle={
-            activeTab === 'calculator'
-              ? 'Tính tiền sân & Tạo VietQR'
-              : activeTab === 'sessions'
-                ? 'Lịch sử buổi chơi'
-                : activeTab === 'courts'
-                  ? 'Quản lý sân cầu lông'
-                  : activeTab === 'members'
-                    ? 'Thành viên & Sổ nợ'
-                    : 'Hồ sơ & Tài khoản VietQR'
-          }
           headerRight={
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
+                onClick={toggleTheme}
+                className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface hover:bg-raised text-fg-muted hover:text-fg transition-colors border border-line"
+                aria-label={theme === 'dark' ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
+                title={theme === 'dark' ? 'Giao diện sáng' : 'Giao diện tối'}
+              >
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </button>
+
+              <button
+                type="button"
                 onClick={() => setViewMode('landing')}
-                className="p-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors border border-slate-200 shadow-xs"
+                className="flex h-11 w-11 items-center justify-center rounded-xl bg-surface hover:bg-raised text-fg-muted hover:text-fg transition-colors border border-line"
+                aria-label="Về trang giới thiệu"
                 title="Về trang giới thiệu"
               >
                 <Home className="w-4 h-4" />
@@ -103,14 +106,15 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={() => setActiveTab('settings')}
-                  className="flex items-center gap-1.5 p-0.5 rounded-full bg-white hover:bg-slate-100 transition-colors border border-slate-200"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-surface hover:bg-raised transition-colors border border-line"
+                  aria-label="Quản lý hồ sơ"
                   title="Quản lý hồ sơ"
                 >
-                  <Avatar className="h-7 w-7 border border-slate-200">
+                  <Avatar className="h-7 w-7 border border-line">
                     {host.avatar_url ? (
                       <AvatarImage src={host.avatar_url} alt={host.full_name} />
                     ) : null}
-                    <AvatarFallback className="bg-slate-100 text-slate-800 text-[10px] font-bold">
+                    <AvatarFallback className="bg-raised text-fg text-[10px] font-bold">
                       {getInitials(host.full_name)}
                     </AvatarFallback>
                   </Avatar>
@@ -119,7 +123,7 @@ function AppContent() {
                 <button
                   type="button"
                   onClick={openLoginModal}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition-all shadow-xs active:scale-95"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-volt hover:bg-volt-hover text-ink text-xs font-medium transition-all shadow-xs active:scale-95"
                 >
                   <LogIn className="w-3.5 h-3.5" />
                   <span>Đăng nhập</span>
@@ -156,6 +160,12 @@ function AppContent() {
           {activeTab === 'members' && (
             <div className="max-w-lg mx-auto w-full px-4 pt-2">
               <MemberManagementView />
+            </div>
+          )}
+
+          {activeTab === 'technique' && (
+            <div className="max-w-lg mx-auto w-full px-4 pt-2">
+              <TechniqueView />
             </div>
           )}
 

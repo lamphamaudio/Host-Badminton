@@ -48,7 +48,7 @@ describe('SessionHistoryView component', () => {
       />
     )
 
-    expect(screen.getByText('Lịch Sử Buổi Chơi')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Lịch sử' })).toBeInTheDocument()
 
     await waitFor(() => {
       expect(screen.getByText(/Sân Kỳ Hòa/)).toBeInTheDocument()

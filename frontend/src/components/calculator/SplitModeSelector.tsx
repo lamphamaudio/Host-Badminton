@@ -62,13 +62,13 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
   ]
 
   return (
-    <Card className="border-slate-200/90 bg-white shadow-sm">
+    <Card className="border-line bg-surface shadow-sm">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
             <Sliders className="h-4 w-4" />
           </div>
-          <CardTitle className="text-base font-bold text-slate-900">Cách chia tiền</CardTitle>
+          <CardTitle className="text-base font-bold text-fg">Cách chia tiền</CardTitle>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -83,15 +83,15 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
                 onClick={() => onSplitModeChange(m.id)}
                 className={`flex flex-col items-start p-3 rounded-xl border text-left transition-all cursor-pointer ${
                   isActive
-                    ? 'border-slate-900 bg-slate-900 text-white shadow-sm'
-                    : 'border-slate-200 bg-slate-50/60 text-slate-600 hover:border-slate-300 hover:bg-slate-100/60 hover:text-slate-900'
+                    ? 'border-accent bg-volt text-ink shadow-sm'
+                    : 'border-line bg-raised/60 text-fg-muted hover:border-line-strong hover:bg-raised/60 hover:text-fg'
                 }`}
               >
                 <div className="flex items-center gap-1.5 font-bold text-xs">
-                  <span className={isActive ? 'text-emerald-400' : 'text-slate-500'}>{m.icon}</span>
+                  <span className={isActive ? 'text-ink' : 'text-fg-muted'}>{m.icon}</span>
                   <span>{m.label}</span>
                 </div>
-                <p className={`text-[10px] mt-1 leading-tight ${isActive ? 'text-slate-300' : 'text-slate-500'}`}>
+                <p className={`text-[10px] mt-1 leading-tight ${isActive ? 'text-fg-subtle' : 'text-fg-muted'}`}>
                   {m.desc}
                 </p>
               </button>
@@ -101,12 +101,12 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
 
         {/* Dynamic Parameter Settings */}
         {splitMode === 'fixed_female_discount' && (
-          <div className="space-y-2 rounded-xl bg-slate-50/90 p-3 border border-slate-200/80 animate-in fade-in-50 duration-200">
+          <div className="space-y-2 rounded-xl bg-raised/90 p-3 border border-line animate-in fade-in-50 duration-200">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-semibold text-slate-700">
+              <label className="text-xs font-semibold text-fg">
                 Mức giảm giá cho Nữ (VND)
               </label>
-              <span className="font-mono text-xs text-rose-700 font-bold tabular-nums">
+              <span className="font-mono text-xs text-danger font-bold tabular-nums">
                 -{formatVND(femaleDiscount)}
               </span>
             </div>
@@ -120,12 +120,12 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
         )}
 
         {splitMode === 'fixed_female' && (
-          <div className="space-y-2 rounded-xl bg-slate-50/90 p-3 border border-slate-200/80 animate-in fade-in-50 duration-200">
+          <div className="space-y-2 rounded-xl bg-raised/90 p-3 border border-line animate-in fade-in-50 duration-200">
             <div className="flex justify-between items-center">
-              <label className="text-xs font-semibold text-slate-700">
+              <label className="text-xs font-semibold text-fg">
                 Tiền cố định cho mỗi Nữ (VND)
               </label>
-              <span className="font-mono text-xs text-rose-700 font-bold tabular-nums">
+              <span className="font-mono text-xs text-danger font-bold tabular-nums">
                 {formatVND(fixedFemaleFee)} / người
               </span>
             </div>
@@ -139,14 +139,14 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
         )}
 
         {splitMode === 'multi_stage' && (
-          <div className="space-y-3.5 rounded-xl bg-slate-50/90 p-3.5 border border-slate-200/80 animate-in fade-in-50 duration-200">
-            <div className="text-xs font-bold text-amber-800">Cấu hình 2 hiệp & Người về sớm</div>
+          <div className="space-y-3.5 rounded-xl bg-raised/90 p-3.5 border border-line animate-in fade-in-50 duration-200">
+            <div className="text-xs font-bold text-warn">Cấu hình 2 hiệp & Người về sớm</div>
 
             {/* Early Leaver Count */}
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs font-semibold text-slate-800">Số người về sớm</div>
-                <div className="text-[10px] text-slate-500">Chỉ chơi hiệp 1</div>
+                <div className="text-xs font-semibold text-fg">Số người về sớm</div>
+                <div className="text-[10px] text-fg-muted">Chỉ chơi hiệp 1</div>
               </div>
               <Stepper
                 value={earlyLeaverConfig.count}
@@ -161,10 +161,10 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
             </div>
 
             {/* Stage 1 Duration Ratio */}
-            <div className="space-y-1.5 pt-1 border-t border-slate-200">
+            <div className="space-y-1.5 pt-1 border-t border-line">
               <div className="flex justify-between text-xs">
-                <span className="text-slate-700 font-medium">Thời lượng hiệp 1</span>
-                <span className="font-semibold text-emerald-700">
+                <span className="text-fg font-medium">Thời lượng hiệp 1</span>
+                <span className="font-semibold text-accent">
                   {Math.round(earlyLeaverConfig.stage1Ratio * 100)}% thời gian sân
                 </span>
               </div>
@@ -185,8 +185,8 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
                     }
                     className={`py-1.5 text-[11px] font-semibold rounded-lg border transition-colors cursor-pointer ${
                       Math.abs(earlyLeaverConfig.stage1Ratio - item.ratio) < 0.05
-                        ? 'border-slate-900 bg-slate-900 text-white shadow-xs'
-                        : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900'
+                        ? 'border-accent bg-volt text-ink shadow-xs'
+                        : 'border-line bg-surface text-fg-muted hover:border-line-strong hover:text-fg'
                     }`}
                   >
                     {item.label}
@@ -196,10 +196,10 @@ export const SplitModeSelector: React.FC<SplitModeSelectorProps> = ({
             </div>
 
             {/* Stage 1 Shuttlecocks */}
-            <div className="flex items-center justify-between pt-1 border-t border-slate-200">
+            <div className="flex items-center justify-between pt-1 border-t border-line">
               <div>
-                <div className="text-xs font-semibold text-slate-800">Số cầu hiệp 1 đã dùng</div>
-                <div className="text-[10px] text-slate-500">
+                <div className="text-xs font-semibold text-fg">Số cầu hiệp 1 đã dùng</div>
+                <div className="text-[10px] text-fg-muted">
                   Tổng buổi dùng {totalShuttleCount} quả
                 </div>
               </div>

@@ -15,13 +15,13 @@ describe('Button component', () => {
   it('renders different variants correctly', () => {
     // covers: AC-3
     const { rerender } = render(<Button variant="secondary">Secondary</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-slate-100')
+    expect(screen.getByRole('button')).toHaveClass('bg-raised')
 
     rerender(<Button variant="accent">Accent</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-emerald-600')
+    expect(screen.getByRole('button')).toHaveClass('bg-volt')
 
     rerender(<Button variant="destructive">Destructive</Button>)
-    expect(screen.getByRole('button')).toHaveClass('bg-red-600')
+    expect(screen.getByRole('button')).toHaveClass('bg-danger')
   })
 
   it('handles click events and disabled state', async () => {

@@ -65,14 +65,14 @@ export const CourtFeeSection: React.FC<CourtFeeSectionProps> = ({
   }
 
   return (
-    <Card className="border-slate-200/90 bg-white shadow-sm">
+    <Card className="border-line bg-surface shadow-sm">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
               <Building2 className="h-4 w-4" />
             </div>
-            <CardTitle className="text-base font-bold text-slate-900">Tiền thuê sân</CardTitle>
+            <CardTitle className="text-base font-bold text-fg whitespace-nowrap">Tiền thuê sân</CardTitle>
           </div>
 
           <Button
@@ -80,10 +80,10 @@ export const CourtFeeSection: React.FC<CourtFeeSectionProps> = ({
             variant="ghost"
             size="sm"
             onClick={() => setDrawerOpen(true)}
-            className="h-7 px-2 text-xs text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50 flex items-center gap-1 font-medium"
+            className="h-11 min-h-[44px] shrink-0 px-2.5 text-xs text-accent hover:text-accent hover:bg-accent/10 flex items-center gap-1 font-semibold whitespace-nowrap"
           >
-            <Plus className="w-3.5 h-3.5" />
-            <span>Thêm sân mới</span>
+            <Plus className="w-4 h-4" />
+            <span>Thêm sân</span>
           </Button>
         </div>
       </CardHeader>
@@ -92,14 +92,14 @@ export const CourtFeeSection: React.FC<CourtFeeSectionProps> = ({
         {/* Saved Venues Quick Select */}
         {venues.length > 0 && (
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-600 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-emerald-600" />
+            <label className="text-xs font-semibold text-fg-muted flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-accent" />
               Chọn từ sân đã lưu
             </label>
             <select
               value={selectedVenueId || ''}
               onChange={(e) => handleSelectVenue(e.target.value)}
-              className="w-full h-9 rounded-xl bg-slate-50 border border-slate-200 px-3 text-xs text-slate-800 font-medium focus:border-slate-900 focus:bg-white focus:outline-none transition-colors"
+              className="w-full h-11 min-h-[44px] rounded-xl bg-raised border border-line px-3 text-xs text-fg font-medium focus:border-accent focus:bg-raised focus:outline-none transition-colors"
             >
               <option value="">-- Nhập tự do hoặc chọn sân --</option>
               {venues.map((v) => (
@@ -112,27 +112,27 @@ export const CourtFeeSection: React.FC<CourtFeeSectionProps> = ({
         )}
 
         {/* Venue & Court Number */}
-        <div className="grid grid-cols-3 gap-2">
-          <div className="col-span-2 space-y-1">
-            <label className="text-xs font-semibold text-slate-600">Tên sân / Địa điểm</label>
+        <div className="space-y-3">
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-fg-muted">Tên sân / Địa điểm</label>
             <div className="relative">
               <Input
                 value={venueName}
                 onChange={(e) => onVenueNameChange(e.target.value)}
                 placeholder="VD: Sân Kỳ Hòa"
-                className="pl-8 text-xs font-medium"
+                className="pl-8 text-sm font-medium"
               />
-              <MapPin className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-400" />
+              <MapPin className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-fg-subtle" />
             </div>
           </div>
-          <div className="col-span-1 space-y-1">
-            <label className="text-xs font-semibold text-slate-600">Số sân</label>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-fg-muted">Số sân</label>
             <div className="relative">
               <Input
                 value={courtNumber}
                 onChange={(e) => onCourtNumberChange?.(e.target.value)}
                 placeholder="VD: Sân 3"
-                className="text-center text-xs font-medium"
+                className="text-sm font-medium"
               />
             </div>
           </div>
@@ -140,7 +140,7 @@ export const CourtFeeSection: React.FC<CourtFeeSectionProps> = ({
 
         {/* Court Fee Input */}
         <div className="space-y-2">
-          <label className="text-xs font-semibold text-slate-700">Tổng tiền sân (VND)</label>
+          <label className="text-xs font-semibold text-fg">Tổng tiền sân (VND)</label>
           <MoneyInput
             value={courtFee}
             onChangeValue={onCourtFeeChange}

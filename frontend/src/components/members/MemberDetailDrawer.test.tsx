@@ -74,8 +74,8 @@ describe('MemberDetailDrawer component', () => {
     )
 
     expect(screen.getByText('Nguyễn Văn Nam')).toBeInTheDocument()
-    expect(screen.getByText('Lời nhắc thanh toán VietQR')).toBeInTheDocument()
-    expect(screen.getByText('Sao chép tin nhắn')).toBeInTheDocument()
+    expect(screen.getByText('Lời nhắc trả nợ')).toBeInTheDocument()
+    expect(screen.getByText('Sao chép')).toBeInTheDocument()
 
     await waitFor(() => {
       expect(screen.getByText('5')).toBeInTheDocument()

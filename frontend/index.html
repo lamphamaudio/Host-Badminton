@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#fafbfc" />
+    <meta name="theme-color" content="#05070a" />
     <meta
       name="description"
       content="Host Badminton - Ứng dụng hỗ trợ chủ sân chia tiền cầu lông, tạo mã VietQR nhanh chóng và theo dõi công nợ thành viên."
@@ -18,10 +18,25 @@
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <!-- Apply the saved light/dark choice before first paint (mirrors src/lib/theme.ts) -->
+    <script>
+      (function () {
+        var pref = 'dark'
+        try {
+          var stored = localStorage.getItem('host_badminton_theme')
+          if (stored === 'dark' || stored === 'light' || stored === 'system') pref = stored
+        } catch (e) {}
+        var light = pref === 'light' ||
+          (pref === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
+        document.documentElement.dataset.theme = light ? 'light' : 'dark'
+        var meta = document.querySelector('meta[name="theme-color"]')
+        if (meta) meta.setAttribute('content', light ? '#f4f6f1' : '#05070a')
+      })()
+    </script>
     <title>Host Badminton · Court Host Assistant</title>
   </head>
   <body
-    class="bg-[#fafbfc] text-[#0f172a] antialiased selection:bg-emerald-100 selection:text-emerald-900 font-sans"
+    class="bg-canvas text-fg antialiased selection:bg-volt selection:text-ink font-sans"
   >
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

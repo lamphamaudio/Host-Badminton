@@ -57,96 +57,99 @@ export const SessionDetailDrawer: React.FC<SessionDetailDrawerProps> = ({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[92vh] bg-white border-t border-slate-200 text-slate-900 shadow-2xl">
+      <DrawerContent className="max-h-[92vh] bg-surface border-t border-line text-fg shadow-2xl">
         <DrawerHeader className="text-left pb-2">
-          <div className="flex items-start justify-between gap-2">
+          <div className="pr-8">
             <div>
-              <DrawerTitle className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <DrawerTitle className="text-lg font-bold text-fg flex items-center gap-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
                   <Calendar className="w-4 h-4" />
                 </div>
                 <span>{formattedDate}</span>
               </DrawerTitle>
-              <DrawerDescription className="flex items-center gap-2 mt-1 text-slate-500">
+              <DrawerDescription asChild>
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 mt-1 text-sm text-fg-muted">
                 {session.venue_name ? (
-                  <span className="flex items-center gap-1 text-slate-700 font-medium">
-                    <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="flex items-center gap-1 text-fg font-medium">
+                    <Building2 className="w-3.5 h-3.5 text-fg-subtle" />
                     {session.venue_name}
                   </span>
                 ) : (
                   <span>Chưa gán sân</span>
                 )}
                 {session.start_time && (
-                  <span className="flex items-center gap-1 text-slate-400">
+                  <span className="flex items-center gap-1 text-fg-subtle">
                     <Clock className="w-3.5 h-3.5" />
                     {session.start_time.slice(0, 5)}
                     {session.end_time ? ` - ${session.end_time.slice(0, 5)}` : ''}
                   </span>
                 )}
+                <Badge
+                  variant={session.status === 'completed' ? 'paid' : 'outline'}
+                  size="sm"
+                  className="whitespace-nowrap"
+                >
+                  {session.status === 'completed' ? 'Hoàn thành' : session.status}
+                </Badge>
+                </div>
               </DrawerDescription>
             </div>
-            <Badge
-              variant={session.status === 'completed' ? 'paid' : 'outline'}
-              className="capitalize"
-            >
-              {session.status === 'completed' ? 'Hoàn thành' : session.status}
-            </Badge>
           </div>
 
           {/* Tab Switcher */}
-          <div className="flex p-1 bg-slate-100 rounded-xl border border-slate-200 mt-3">
+          <div className="flex p-1 bg-raised rounded-xl border border-line mt-3">
             <button
               type="button"
               onClick={() => setActiveTab('details')}
-              className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
+              className={`flex-1 min-h-[44px] whitespace-nowrap text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
                 activeTab === 'details'
-                  ? 'bg-white text-slate-900 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-surface text-fg shadow-xs'
+                  : 'text-fg-muted hover:text-fg'
               }`}
             >
-              Chi tiết chi phí & Người chơi
+              Chi tiết
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('qr')}
-              className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
+              className={`flex-1 min-h-[44px] whitespace-nowrap text-xs font-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 cursor-pointer ${
                 activeTab === 'qr'
-                  ? 'bg-white text-slate-900 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-surface text-fg shadow-xs'
+                  : 'text-fg-muted hover:text-fg'
               }`}
             >
-              Xem hóa đơn VietQR
+              Hóa đơn VietQR
             </button>
           </div>
         </DrawerHeader>
 
-        <div className="p-4 space-y-4 overflow-y-auto max-h-[60vh]">
+        <div className="p-4 space-y-4 overflow-y-auto overflow-x-hidden max-h-[60vh]">
           {activeTab === 'details' ? (
             <>
               {/* Financial Summary */}
               <div className="grid grid-cols-2 gap-2.5">
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-xs text-slate-500 font-medium">Tổng chi phí</span>
-                  <p className="text-lg font-bold text-slate-900 tabular-nums mt-0.5">
+                <div className="p-3 rounded-xl bg-raised border border-line">
+                  <span className="text-xs text-fg-muted font-medium">Tổng chi phí</span>
+                  <p className="text-lg font-bold text-fg tabular-nums mt-0.5">
                     {session.total_expenses.toLocaleString('vi-VN')} đ
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-xs text-slate-500 font-medium">Tiền sân</span>
-                  <p className="text-base font-semibold text-slate-800 tabular-nums mt-0.5">
+                <div className="p-3 rounded-xl bg-raised border border-line">
+                  <span className="text-xs text-fg-muted font-medium">Tiền sân</span>
+                  <p className="text-base font-semibold text-fg tabular-nums mt-0.5">
                     {session.court_fee.toLocaleString('vi-VN')} đ
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-xs text-slate-500 font-medium">Tiền cầu</span>
-                  <p className="text-base font-semibold text-slate-800 tabular-nums mt-0.5">
+                <div className="p-3 rounded-xl bg-raised border border-line">
+                  <span className="text-xs text-fg-muted font-medium">Tiền cầu</span>
+                  <p className="text-base font-semibold text-fg tabular-nums mt-0.5">
                     {session.shuttlecock_fee.toLocaleString('vi-VN')} đ
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                  <span className="text-xs text-slate-500 font-medium">Người tham gia</span>
-                  <p className="text-base font-semibold text-slate-800 flex items-center gap-1 mt-0.5">
-                    <Users className="w-4 h-4 text-slate-400" />
+                <div className="p-3 rounded-xl bg-raised border border-line">
+                  <span className="text-xs text-fg-muted font-medium">Người tham gia</span>
+                  <p className="text-base font-semibold text-fg flex items-center gap-1 mt-0.5">
+                    <Users className="w-4 h-4 text-fg-subtle" />
                     {session.participants.length} người
                   </p>
                 </div>
@@ -155,19 +158,19 @@ export const SessionDetailDrawer: React.FC<SessionDetailDrawerProps> = ({
               {/* Extra Expenses Breakdown */}
               {session.expenses.length > 0 && (
                 <div className="space-y-2">
-                  <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  <h4 className="text-xs font-semibold text-fg-muted uppercase tracking-wider">
                     Chi phí phát sinh khác
                   </h4>
                   <div className="space-y-1.5">
                     {session.expenses.map((exp, idx) => (
                       <div
                         key={exp.id || idx}
-                        className="flex items-center justify-between text-xs p-2.5 rounded-lg bg-slate-50 border border-slate-200"
+                        className="flex items-center justify-between text-xs p-2.5 rounded-lg bg-raised border border-line"
                       >
-                        <span className="text-slate-700">
+                        <span className="text-fg">
                           {exp.item_name} ({exp.quantity}x)
                         </span>
-                        <span className="font-semibold text-slate-900 tabular-nums">
+                        <span className="font-semibold text-fg tabular-nums">
                           {exp.total_amount.toLocaleString('vi-VN')} đ
                         </span>
                       </div>
@@ -179,7 +182,7 @@ export const SessionDetailDrawer: React.FC<SessionDetailDrawerProps> = ({
               {/* Participants List */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+                  <h4 className="text-xs font-semibold text-fg-muted uppercase tracking-wider">
                     Danh sách người chơi ({paidCount}/{session.participants.length} đã trả)
                   </h4>
                 </div>
@@ -188,38 +191,38 @@ export const SessionDetailDrawer: React.FC<SessionDetailDrawerProps> = ({
                   {session.participants.map((part, idx) => (
                     <div
                       key={part.id || idx}
-                      className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs"
+                      className="flex items-center justify-between p-2.5 rounded-lg bg-raised border border-line text-xs"
                     >
                       <div className="flex items-center gap-2">
                         <div
                           className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
                             part.gender === 'female'
-                              ? 'bg-rose-100 text-rose-700 border border-rose-200'
-                              : 'bg-sky-100 text-sky-700 border border-sky-200'
+                              ? 'bg-female/10 text-female border border-female/30'
+                              : 'bg-info/10 text-info border border-info/30'
                           }`}
                         >
                           {part.gender === 'female' ? 'Nữ' : 'Nam'}
                         </div>
                         <div>
-                          <span className="font-medium text-slate-900">
+                          <span className="font-medium text-fg">
                             {part.display_name}
                           </span>
                           {part.play_stage !== 'full' && (
-                            <span className="ml-1.5 text-[10px] text-amber-800 bg-amber-100 px-1 py-0.5 rounded font-medium">
+                            <span className="ml-1.5 text-[10px] text-warn bg-warn/10 px-1 py-0.5 rounded font-medium">
                               {part.play_stage === 'early_leaver' ? 'Về sớm' : 'Đến trễ'}
                             </span>
                           )}
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-slate-900 tabular-nums">
+                      <div className="flex shrink-0 items-center gap-2">
+                        <span className="whitespace-nowrap font-bold text-fg tabular-nums">
                           {part.calculated_fee.toLocaleString('vi-VN')} đ
                         </span>
                         {part.is_paid ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                          <CheckCircle2 className="w-4 h-4 text-accent" />
                         ) : (
-                          <XCircle className="w-4 h-4 text-slate-300" />
+                          <XCircle className="w-4 h-4 text-fg-subtle" />
                         )}
                       </div>
                     </div>
@@ -262,7 +265,7 @@ export const SessionDetailDrawer: React.FC<SessionDetailDrawerProps> = ({
           )}
         </div>
 
-        <DrawerFooter className="pt-3 border-t border-slate-200 flex flex-row gap-3">
+        <DrawerFooter className="pt-3 border-t border-line flex flex-row gap-3">
           <DrawerClose asChild>
             <Button variant="outline" className="flex-1">
               Đóng
@@ -273,7 +276,7 @@ export const SessionDetailDrawer: React.FC<SessionDetailDrawerProps> = ({
               onReplayInCalculator(session)
               onOpenChange(false)
             }}
-            className="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-medium flex items-center justify-center gap-1.5"
+            className="flex-1 bg-volt hover:bg-volt-hover text-ink font-medium flex items-center justify-center gap-1.5"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Nạp vào máy tính</span>

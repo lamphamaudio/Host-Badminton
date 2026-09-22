@@ -79,38 +79,38 @@ export const MemberFormDrawer: React.FC<MemberFormDrawerProps> = ({
 
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="max-h-[90vh] bg-white border-t border-slate-200 text-slate-900 shadow-2xl">
+      <DrawerContent className="max-h-[90vh] bg-surface border-t border-line text-fg shadow-2xl">
         <DrawerHeader className="text-left">
-          <DrawerTitle className="flex items-center gap-2 text-lg font-bold text-slate-900">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+          <DrawerTitle className="flex items-center gap-2 text-lg font-bold text-fg">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
               <Users className="w-4 h-4" />
             </div>
             <span>{memberToEdit ? 'Chỉnh sửa thành viên' : 'Thêm thành viên mới'}</span>
           </DrawerTitle>
-          <DrawerDescription className="text-xs text-slate-500">
+          <DrawerDescription className="text-xs text-fg-muted">
             Lưu danh sách người chơi thường xuyên để chọn nhanh khi tính tiền sân.
           </DrawerDescription>
         </DrawerHeader>
 
         <form onSubmit={handleSubmit} className="p-4 space-y-4 overflow-y-auto">
           {errorMessage && (
-            <div className="p-3 text-sm text-rose-800 bg-rose-50 border border-rose-200 rounded-xl">
+            <div className="p-3 text-sm text-danger bg-danger/10 border border-danger/30 rounded-xl">
               {errorMessage}
             </div>
           )}
 
           {/* Member Name */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">
-              Tên người chơi <span className="text-rose-500">*</span>
+            <label className="text-sm font-medium text-fg">
+              Tên người chơi <span className="text-danger">*</span>
             </label>
             <div className="relative">
-              <User className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+              <User className="absolute left-3 top-3 w-4 h-4 text-fg-subtle" />
               <Input
                 placeholder="VD: Nguyễn Văn Nam"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="pl-9 bg-white border-slate-200"
+                className="pl-9 bg-surface border-line"
                 required
               />
             </div>
@@ -118,20 +118,20 @@ export const MemberFormDrawer: React.FC<MemberFormDrawerProps> = ({
 
           {/* Gender Selector */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">Giới tính</label>
+            <label className="text-sm font-medium text-fg">Giới tính</label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 type="button"
                 onClick={() => setGender('male')}
                 className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
                   gender === 'male'
-                    ? 'bg-sky-50 border-sky-300 text-sky-800 font-semibold shadow-xs'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300'
+                    ? 'bg-info/10 border-info/30 text-info font-semibold shadow-xs'
+                    : 'bg-raised border-line text-fg-muted hover:text-fg hover:border-line-strong'
                 }`}
               >
-                <User className="w-4 h-4 text-sky-600" />
+                <User className="w-4 h-4 text-info" />
                 <span>Nam</span>
-                {gender === 'male' && <Check className="w-4 h-4 ml-auto text-sky-600 stroke-[2.5]" />}
+                {gender === 'male' && <Check className="w-4 h-4 ml-auto text-info stroke-[2.5]" />}
               </button>
 
               <button
@@ -139,49 +139,49 @@ export const MemberFormDrawer: React.FC<MemberFormDrawerProps> = ({
                 onClick={() => setGender('female')}
                 className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
                   gender === 'female'
-                    ? 'bg-rose-50 border-rose-300 text-rose-800 font-semibold shadow-xs'
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300'
+                    ? 'bg-female/10 border-female/30 text-female font-semibold shadow-xs'
+                    : 'bg-raised border-line text-fg-muted hover:text-fg hover:border-line-strong'
                 }`}
               >
-                <UserCheck className="w-4 h-4 text-rose-600" />
+                <UserCheck className="w-4 h-4 text-female" />
                 <span>Nữ</span>
-                {gender === 'female' && <Check className="w-4 h-4 ml-auto text-rose-600 stroke-[2.5]" />}
+                {gender === 'female' && <Check className="w-4 h-4 ml-auto text-female stroke-[2.5]" />}
               </button>
             </div>
           </div>
 
           {/* Phone Number */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">Số điện thoại (tùy chọn)</label>
+            <label className="text-sm font-medium text-fg">Số điện thoại (tùy chọn)</label>
             <div className="relative">
-              <Phone className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+              <Phone className="absolute left-3 top-3 w-4 h-4 text-fg-subtle" />
               <Input
                 placeholder="VD: 0901234567"
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="pl-9 bg-white border-slate-200"
+                className="pl-9 bg-surface border-line"
               />
             </div>
           </div>
 
           {/* Default Note */}
           <div className="space-y-1.5">
-            <label className="text-sm font-medium text-slate-700">Ghi chú mặc định</label>
+            <label className="text-sm font-medium text-fg">Ghi chú mặc định</label>
             <Input
               placeholder="VD: Chuyên đánh đôi, hay về sớm 30p..."
               value={defaultNote}
               onChange={(e) => setDefaultNote(e.target.value)}
-              className="bg-white border-slate-200"
+              className="bg-surface border-line"
             />
           </div>
 
           {/* Active status toggle (when editing) */}
           {memberToEdit && (
-            <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div className="flex items-center justify-between p-3 rounded-xl bg-raised border border-line">
               <div>
-                <div className="text-sm font-medium text-slate-800">Đang hoạt động</div>
-                <div className="text-xs text-slate-500">
+                <div className="text-sm font-medium text-fg">Đang hoạt động</div>
+                <div className="text-xs text-fg-muted">
                   Thành viên sẽ hiển thị trong danh sách chọn nhanh khi bật
                 </div>
               </div>
@@ -189,11 +189,11 @@ export const MemberFormDrawer: React.FC<MemberFormDrawerProps> = ({
                 type="button"
                 onClick={() => setIsActive(!isActive)}
                 className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors cursor-pointer ${
-                  isActive ? 'bg-slate-900' : 'bg-slate-300'
+                  isActive ? 'bg-volt' : 'bg-line-strong'
                 }`}
               >
                 <div
-                  className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${
+                  className={`bg-surface w-4 h-4 rounded-full shadow-md transform transition-transform ${
                     isActive ? 'translate-x-5' : 'translate-x-0'
                   }`}
                 />
@@ -206,7 +206,7 @@ export const MemberFormDrawer: React.FC<MemberFormDrawerProps> = ({
               <Button
                 type="button"
                 variant="outline"
-                className="flex-1 border-slate-200 text-slate-700 hover:bg-slate-100"
+                className="flex-1 border-line text-fg hover:bg-raised"
               >
                 Hủy
               </Button>
@@ -214,7 +214,7 @@ export const MemberFormDrawer: React.FC<MemberFormDrawerProps> = ({
             <Button
               type="submit"
               disabled={isSubmitting || !name.trim()}
-              className="flex-1 bg-slate-900 hover:bg-slate-800 text-white font-medium"
+              className="flex-1 bg-volt hover:bg-volt-hover text-ink font-medium"
             >
               {isSubmitting ? 'Đang lưu...' : memberToEdit ? 'Cập nhật' : 'Thêm người chơi'}
             </Button>

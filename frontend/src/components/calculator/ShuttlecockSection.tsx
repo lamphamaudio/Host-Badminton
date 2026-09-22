@@ -23,26 +23,26 @@ export const ShuttlecockSection: React.FC<ShuttlecockSectionProps> = ({
   const totalShuttleFee = shuttlecockCount * unitPrice
 
   return (
-    <Card className="border-slate-200/90 bg-white shadow-sm">
+    <Card className="border-line bg-surface shadow-sm">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
               <CircleDot className="h-4 w-4" />
             </div>
-            <CardTitle className="text-base font-bold text-slate-900">Tiền cầu lông</CardTitle>
+            <CardTitle className="text-base font-bold text-fg">Tiền cầu lông</CardTitle>
           </div>
-          <span className="font-mono text-sm font-bold text-emerald-700 tabular-nums">
+          <span className="font-mono text-sm font-bold text-accent tabular-nums">
             {formatVND(totalShuttleFee)}
           </span>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Shuttlecock Count */}
-        <div className="flex items-center justify-between rounded-xl bg-slate-50/80 p-3 border border-slate-200/80">
+        <div className="flex items-center justify-between rounded-xl bg-raised/80 p-3 border border-line">
           <div>
-            <div className="text-xs font-semibold text-slate-800">Số lượng cầu đã dùng</div>
-            <div className="text-[11px] text-slate-500">Đơn vị: Quả</div>
+            <div className="text-xs font-semibold text-fg">Số lượng cầu đã dùng</div>
+            <div className="text-[11px] text-fg-muted">Đơn vị: Quả</div>
           </div>
           <Stepper
             value={shuttlecockCount}
@@ -57,8 +57,8 @@ export const ShuttlecockSection: React.FC<ShuttlecockSectionProps> = ({
         {/* Unit Price */}
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-xs font-semibold text-slate-700">Đơn giá mỗi quả (VND)</label>
-            <span className="font-mono text-xs text-slate-500 tabular-nums">{formatVND(unitPrice)} / quả</span>
+            <label className="text-xs font-semibold text-fg">Đơn giá mỗi quả (VND)</label>
+            <span className="font-mono text-xs text-fg-muted tabular-nums">{formatVND(unitPrice)} / quả</span>
           </div>
           <MoneyInput
             value={unitPrice}

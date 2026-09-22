@@ -39,7 +39,7 @@ describe('CourtManagementView component', () => {
 
     render(<CourtManagementView />)
 
-    expect(screen.getByText('Sân Cầu Lông')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Sân bãi' })).toBeInTheDocument()
 
     await waitFor(() => {
       expect(screen.getByText('Sân Cầu Lông Kỳ Hòa')).toBeInTheDocument()

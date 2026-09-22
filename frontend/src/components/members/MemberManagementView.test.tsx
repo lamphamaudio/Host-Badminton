@@ -49,7 +49,7 @@ describe('MemberManagementView component', () => {
       </AuthProvider>
     )
 
-    expect(screen.getByText('Thành Viên & Sổ Nợ')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Thành viên' })).toBeInTheDocument()
 
     await waitFor(() => {
       expect(screen.getByText('Nguyễn Văn Nam')).toBeInTheDocument()
@@ -98,7 +98,7 @@ describe('MemberManagementView component', () => {
       </AuthProvider>
     )
 
-    const addBtn = screen.getByRole('button', { name: /Thêm người/i })
+    const addBtn = screen.getByRole('button', { name: 'Thêm' })
     fireEvent.click(addBtn)
 
     await waitFor(() => {
@@ -151,7 +151,7 @@ describe('MemberManagementView component', () => {
     })
 
     // Click "Đang hoạt động" filter chip
-    const activeBtn = screen.getByRole('button', { name: /Đang hoạt động/i })
+    const activeBtn = screen.getByRole('button', { name: /^Hoạt động$/i })
     fireEvent.click(activeBtn)
 
     expect(screen.getByText('Nguyễn Văn Nam')).toBeInTheDocument()

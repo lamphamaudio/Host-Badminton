@@ -10,6 +10,10 @@ import {
   Save,
   ShieldAlert,
   Sparkles,
+  Smartphone,
+  Sun,
+  SunMoon,
+  Moon,
   User,
 } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
@@ -17,6 +21,7 @@ import {
   loadCalculatorState,
   saveCalculatorState,
 } from '../../lib/storage'
+import { useTheme } from '../../lib/theme'
 import { VIETNAM_BANKS } from '../../lib/vietqr'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Button } from '../ui/button'
@@ -25,6 +30,7 @@ import { Input } from '../ui/input'
 
 export const ProfileSettingsView: React.FC = () => {
   const { host, isAuthenticated, updateProfile, logout, openLoginModal } = useAuth()
+  const { preference: themePreference, setPreference: setThemePreference } = useTheme()
 
   // Profile fields
   const [fullName, setFullName] = useState(host?.full_name || '')
@@ -114,25 +120,25 @@ export const ProfileSettingsView: React.FC = () => {
     <div className="space-y-6 pb-24">
       {/* Account Status Banner */}
       {!isAuthenticated ? (
-        <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4">
+        <div className="rounded-2xl bg-warn/10 border border-warn/30 p-4">
           <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-800">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-warn/10 text-warn">
               <ShieldAlert className="h-5 w-5" />
             </div>
             <div className="flex-1 space-y-1">
-              <h3 className="text-sm font-bold text-amber-900">
+              <h3 className="text-sm font-bold text-warn">
                 Bạn đang sử dụng ở chế độ Khách (Chưa đăng nhập)
               </h3>
-              <p className="text-xs text-amber-800/80 leading-relaxed">
+              <p className="text-xs text-warn leading-relaxed">
                 Đăng nhập để lưu trữ vĩnh viễn các sân cầu lông, lịch sử trận đấu và đồng bộ giữa các thiết bị.
               </p>
               <div className="pt-2">
                 <Button
                   type="button"
                   onClick={openLoginModal}
-                  className="h-9 px-4 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-lg shadow-xs"
+                  className="h-9 px-4 bg-volt hover:bg-volt-hover text-ink text-xs font-semibold rounded-lg shadow-xs"
                 >
-                  <Sparkles className="w-3.5 h-3.5 mr-1.5 text-emerald-400" />
+                  <Sparkles className="w-3.5 h-3.5 mr-1.5 text-ink" />
                   Đăng nhập ngay
                 </Button>
               </div>
@@ -140,63 +146,109 @@ export const ProfileSettingsView: React.FC = () => {
           </div>
         </div>
       ) : (
-        <Card className="border-slate-200 bg-white shadow-xs">
+        <Card className="border-line bg-surface shadow-xs">
           <CardContent className="pt-6">
             <div className="flex items-center gap-4">
-              <Avatar className="h-16 w-16 border border-slate-200 shadow-xs">
+              <Avatar className="h-14 w-14 shrink-0 border border-line">
                 {avatarUrl ? (
                   <AvatarImage src={avatarUrl} alt={fullName} />
                 ) : null}
-                <AvatarFallback className="bg-slate-900 text-white text-lg font-bold">
+                <AvatarFallback className="bg-volt text-ink text-lg font-bold">
                   {getInitials(fullName)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-bold text-slate-900 truncate">{fullName}</h2>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 border border-emerald-200">
-                    <CheckCircle2 className="w-3 h-3" />
-                    Host
-                  </span>
-                </div>
-                <p className="text-xs text-slate-500 truncate mt-0.5">
-                  {email || phone || 'Tài khoản Organizer'}
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.14em] text-accent">
+                  <CheckCircle2 className="w-3 h-3" />
+                  Chủ sân
+                </span>
+                <h2 className="mt-0.5 text-lg font-extrabold leading-tight tracking-tight text-fg break-words">
+                  {fullName}
+                </h2>
+                <p className="mt-0.5 text-xs text-fg-muted truncate">
+                  {email || phone || 'Tài khoản chủ sân'}
                 </p>
               </div>
               <Button
                 type="button"
                 variant="outline"
                 onClick={logout}
-                className="h-9 px-3 text-xs border-slate-200 text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl"
+                aria-label="Đăng xuất"
+                title="Đăng xuất"
+                className="h-11 w-11 min-h-[44px] shrink-0 p-0 border-line text-fg-muted hover:text-danger hover:bg-danger/10 rounded-xl"
               >
-                <LogOut className="w-3.5 h-3.5 mr-1" />
-                Đăng xuất
+                <LogOut className="w-4 h-4" />
               </Button>
             </div>
           </CardContent>
         </Card>
       )}
 
+      {/* Appearance */}
+      <Card className="border-line bg-surface shadow-xs">
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
+              <SunMoon className="h-4 w-4" />
+            </div>
+            <CardTitle className="text-base font-bold text-fg">Giao diện</CardTitle>
+          </div>
+          <CardDescription className="text-xs text-fg-muted">
+            Nền tối dễ nhìn trong nhà thi đấu, nền sáng rõ hơn dưới nắng
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div
+            role="radiogroup"
+            aria-label="Chế độ giao diện"
+            className="grid grid-cols-3 gap-1 rounded-xl border border-line bg-raised p-1"
+          >
+            {(
+              [
+                ['dark', 'Tối', Moon],
+                ['light', 'Sáng', Sun],
+                ['system', 'Theo máy', Smartphone],
+              ] as const
+            ).map(([value, label, Icon]) => {
+              const selected = themePreference === value
+              return (
+                <button
+                  key={value}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected}
+                  onClick={() => setThemePreference(value)}
+                  className={`flex min-h-[44px] items-center justify-center gap-1 whitespace-nowrap rounded-lg px-1 text-[13px] font-semibold transition-colors cursor-pointer ${
+                    selected ? 'bg-surface text-fg shadow-sm' : 'text-fg-muted hover:text-fg'
+                  }`}
+                >
+                  <Icon className="h-3.5 w-3.5 shrink-0" />
+                  {label}
+                </button>
+              )
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Main Settings Form */}
       <form onSubmit={handleSave} className="space-y-6">
         {/* Profile Card */}
-        <Card className="border-slate-200 bg-white shadow-xs">
-          <CardHeader className="pb-3 border-b border-slate-100">
+        <Card className="border-line bg-surface shadow-xs">
+          <CardHeader className="pb-3 border-b border-line">
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
                 <User className="h-4 w-4" />
               </div>
-              <CardTitle className="text-base font-bold text-slate-900">
-                Thông tin người tổ chức (Host)
-              </CardTitle>
+              <CardTitle className="text-base font-bold text-fg">Thông tin của bạn</CardTitle>
             </div>
-            <CardDescription className="text-xs text-slate-500">
+            <CardDescription className="text-xs text-fg-muted">
               Tên hiển thị và liên hệ của bạn
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-4 space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700">
+              <label className="text-xs font-semibold text-fg">
                 Họ và tên hiển thị *
               </label>
               <Input
@@ -204,14 +256,14 @@ export const ProfileSettingsView: React.FC = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Ví dụ: Nguyễn Văn A"
-                className="h-11 bg-white border-slate-200 text-slate-900 rounded-xl"
+                className="h-11 bg-surface border-line text-fg rounded-xl"
                 required
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-700">
+                <label className="text-xs font-semibold text-fg">
                   Số điện thoại
                 </label>
                 <div className="relative">
@@ -220,14 +272,14 @@ export const ProfileSettingsView: React.FC = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="0912 345 678"
-                    className="h-11 pl-9 bg-white border-slate-200 text-slate-900 rounded-xl"
+                    className="h-11 pl-9 bg-surface border-line text-fg rounded-xl"
                   />
-                  <Phone className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+                  <Phone className="absolute left-3 top-3.5 h-4 w-4 text-fg-subtle" />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-slate-700">
+                <label className="text-xs font-semibold text-fg">
                   Email
                 </label>
                 <div className="relative">
@@ -236,9 +288,9 @@ export const ProfileSettingsView: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="host@gmail.com"
-                    className="h-11 pl-9 bg-white border-slate-200 text-slate-900 rounded-xl"
+                    className="h-11 pl-9 bg-surface border-line text-fg rounded-xl"
                   />
-                  <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+                  <Mail className="absolute left-3 top-3.5 h-4 w-4 text-fg-subtle" />
                 </div>
               </div>
             </div>
@@ -246,50 +298,43 @@ export const ProfileSettingsView: React.FC = () => {
         </Card>
 
         {/* VietQR Bank Account Card */}
-        <Card className="border-slate-200 bg-white shadow-xs">
-          <CardHeader className="pb-3 border-b border-slate-100">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
-                  <QrCode className="h-4 w-4" />
-                </div>
-                <CardTitle className="text-base font-bold text-slate-900">
-                  Tài khoản nhận tiền VietQR mặc định
-                </CardTitle>
+        <Card className="border-line bg-surface shadow-xs">
+          <CardHeader className="pb-3 border-b border-line">
+            <div className="flex items-center gap-2">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent border border-accent/30">
+                <QrCode className="h-4 w-4" />
               </div>
-              <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-800 border border-emerald-200">
-                Tự động đồng bộ
-              </span>
+              <CardTitle className="text-base font-bold text-fg">Tài khoản nhận tiền</CardTitle>
             </div>
-            <CardDescription className="text-xs text-slate-500">
-              Tài khoản này sẽ được tự động điền vào mã thanh toán VietQR cho mọi trận đấu
+            <CardDescription className="text-xs text-fg-muted">
+              Ngân hàng và số tài khoản lưu trên hồ sơ của bạn
             </CardDescription>
           </CardHeader>
           <CardContent className="pt-4 space-y-4">
             {/* Bank Select */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700">
+              <label className="text-xs font-semibold text-fg">
                 Ngân hàng thụ hưởng
               </label>
               <div className="relative">
                 <select
                   value={bankBin}
                   onChange={(e) => setBankBin(e.target.value)}
-                  className="w-full h-11 pl-9 pr-4 appearance-none rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-slate-900 focus:bg-white"
+                  className="w-full h-11 pl-9 pr-4 appearance-none rounded-xl bg-raised border border-line text-fg text-sm focus:outline-none focus:border-accent focus:bg-raised"
                 >
                   {VIETNAM_BANKS.map((b) => (
-                    <option key={b.bin} value={b.bin} className="bg-white text-slate-900">
+                    <option key={b.bin} value={b.bin} className="bg-surface text-fg">
                       {b.shortName} - {b.name}
                     </option>
                   ))}
                 </select>
-                <Building2 className="absolute left-3 top-3.5 h-4 w-4 text-slate-400 pointer-events-none" />
+                <Building2 className="absolute left-3 top-3.5 h-4 w-4 text-fg-subtle pointer-events-none" />
               </div>
             </div>
 
             {/* Account Number */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700">
+              <label className="text-xs font-semibold text-fg">
                 Số tài khoản nhận tiền
               </label>
               <div className="relative">
@@ -298,15 +343,15 @@ export const ProfileSettingsView: React.FC = () => {
                   value={bankAccountNumber}
                   onChange={(e) => setBankAccountNumber(e.target.value)}
                   placeholder="Ví dụ: 0912345678"
-                  className="h-11 pl-9 font-mono bg-white border-slate-200 text-slate-900 rounded-xl"
+                  className="h-11 pl-9 font-mono bg-surface border-line text-fg rounded-xl"
                 />
-                <CreditCard className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
+                <CreditCard className="absolute left-3 top-3.5 h-4 w-4 text-fg-subtle" />
               </div>
             </div>
 
             {/* Account Name */}
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-700">
+              <label className="text-xs font-semibold text-fg">
                 Tên chủ tài khoản (In hoa không dấu)
               </label>
               <Input
@@ -314,25 +359,25 @@ export const ProfileSettingsView: React.FC = () => {
                 value={bankAccountName}
                 onChange={(e) => setBankAccountName(e.target.value.toUpperCase())}
                 placeholder="Ví dụ: NGUYEN VAN A"
-                className="h-11 uppercase font-semibold bg-white border-slate-200 text-slate-900 rounded-xl"
+                className="h-11 uppercase font-semibold bg-surface border-line text-fg rounded-xl"
               />
             </div>
 
             {/* Preview Card */}
             {bankAccountNumber && bankAccountName && (
-              <div className="rounded-xl bg-slate-50 p-3.5 border border-slate-200 flex items-center justify-between">
+              <div className="rounded-xl bg-raised p-3.5 border border-line flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <span className="text-[10px] font-semibold uppercase text-emerald-800 tracking-wider">
+                  <span className="text-[10px] font-semibold uppercase text-accent tracking-wider">
                     {selectedBank.shortName}
                   </span>
-                  <p className="font-mono text-sm font-bold text-slate-900">
+                  <p className="font-mono text-sm font-bold text-fg">
                     {bankAccountNumber}
                   </p>
-                  <p className="text-xs text-slate-600 uppercase font-semibold">
+                  <p className="text-xs text-fg-muted uppercase font-semibold">
                     {bankAccountName}
                   </p>
                 </div>
-                <QrCode className="h-8 w-8 text-slate-700 opacity-80" />
+                <QrCode className="h-8 w-8 text-fg opacity-80" />
               </div>
             )}
           </CardContent>
@@ -343,13 +388,13 @@ export const ProfileSettingsView: React.FC = () => {
           <Button
             type="submit"
             disabled={isSaving}
-            className="w-full h-12 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-base shadow-sm flex items-center justify-center gap-2"
+            className="w-full h-12 bg-volt hover:bg-volt-hover text-ink font-semibold rounded-xl text-base shadow-sm flex items-center justify-center gap-2"
           >
             {isSaving ? (
               'Đang lưu...'
             ) : saveSuccess ? (
               <>
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                <CheckCircle2 className="w-5 h-5 text-ink" />
                 Đã lưu thành công!
               </>
             ) : (

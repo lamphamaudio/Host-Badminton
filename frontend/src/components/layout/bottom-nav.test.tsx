@@ -12,6 +12,7 @@ describe('BottomNav component', () => {
     expect(screen.getByText('Sân bãi')).toBeInTheDocument()
     expect(screen.getByText('Thành viên')).toBeInTheDocument()
     expect(screen.getByText('Cài đặt')).toBeInTheDocument()
+    expect(screen.getByText('Kỹ thuật')).toBeInTheDocument()
   })
 
   it('highlights the active tab', () => {

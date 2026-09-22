@@ -1,8 +1,8 @@
 import React from 'react'
-import { Building2, Calculator, CalendarDays, Settings, Users } from 'lucide-react'
+import { Building2, Calculator, CalendarDays, Feather, Settings, Users } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-export type NavTabId = 'calculator' | 'sessions' | 'courts' | 'members' | 'settings'
+export type NavTabId = 'calculator' | 'sessions' | 'courts' | 'members' | 'technique' | 'settings'
 
 export interface NavTabItem {
   id: NavTabId
@@ -33,6 +33,11 @@ export const DEFAULT_NAV_TABS: NavTabItem[] = [
     icon: Users,
   },
   {
+    id: 'technique',
+    label: 'Kỹ thuật',
+    icon: Feather,
+  },
+  {
     id: 'settings',
     label: 'Cài đặt',
     icon: Settings,
@@ -55,7 +60,7 @@ export function BottomNav({
   return (
     <nav
       className={cn(
-        'fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200 px-2 py-1.5 pb-safe flex items-center justify-around max-w-md mx-auto shadow-[0_-2px_12px_rgba(0,0,0,0.03)] transition-all',
+        'fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-lg border-t border-line px-2 py-1.5 pb-safe flex items-center justify-around max-w-md mx-auto shadow-[0_-2px_12px_rgba(0,0,0,0.03)] transition-all',
         className
       )}
       aria-label="Bottom Navigation"
@@ -71,13 +76,13 @@ export function BottomNav({
             onClick={() => onTabChange(tab.id)}
             className={cn(
               'relative flex flex-col items-center justify-center flex-1 py-1 min-h-[48px] rounded-xl transition-all duration-150 select-none cursor-pointer group outline-none',
-              isActive ? 'text-slate-900 font-bold' : 'text-slate-400 hover:text-slate-700'
+              isActive ? 'text-fg font-bold' : 'text-fg-subtle hover:text-fg'
             )}
             aria-current={isActive ? 'page' : undefined}
           >
             {/* Active Pill Indicator */}
             {isActive && (
-              <span className="absolute -top-1.5 w-7 h-1 bg-slate-900 rounded-full animate-in fade-in zoom-in-75 duration-150" />
+              <span className="absolute -top-1.5 w-7 h-1 bg-volt rounded-full animate-in fade-in zoom-in-75 duration-150" />
             )}
 
             <div className="relative flex items-center justify-center">
@@ -88,7 +93,7 @@ export function BottomNav({
                 )}
               />
               {tab.badgeCount !== undefined && tab.badgeCount > 0 && (
-                <span className="absolute -top-1.5 -right-2 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-600 px-1 text-[9px] font-bold text-white shadow-sm">
+                <span className="absolute -top-1.5 -right-2 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-danger px-1 text-[9px] font-bold text-canvas shadow-sm">
                   {tab.badgeCount}
                 </span>
               )}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Zap } from 'lucide-react'
+import { ShuttleMark } from '@/components/brand/ShuttleMark'
 import { cn } from '@/lib/utils'
 
 export interface AppHeaderProps {
@@ -13,7 +13,7 @@ export interface AppHeaderProps {
 
 export function AppHeader({
   title = 'Host Badminton',
-  subtitle = 'Court Host Assistant',
+  subtitle,
   rightElement,
   showLogo = true,
   onLogoClick,
@@ -22,7 +22,7 @@ export function AppHeader({
   return (
     <header
       className={cn(
-        'sticky top-0 z-40 w-full border-b border-slate-200/90 bg-white/90 backdrop-blur-md px-4 py-3 pt-safe flex items-center justify-between shadow-[0_1px_3px_rgba(0,0,0,0.02)]',
+        'sticky top-0 z-40 w-full border-b border-line bg-canvas/80 backdrop-blur-md px-4 py-3 pt-safe flex items-center justify-between',
         className
       )}
     >
@@ -34,16 +34,14 @@ export function AppHeader({
         onClick={onLogoClick}
       >
         {showLogo && (
-          <div className="w-8 h-8 min-w-[32px] rounded-xl bg-slate-900 flex items-center justify-center shadow-sm">
-            <Zap className="w-4 h-4 text-emerald-400 fill-emerald-400" />
-          </div>
+          <ShuttleMark className="h-8 w-8 min-w-[32px] text-fg" />
         )}
         <div className="flex flex-col">
-          <h1 className="font-bold text-sm leading-tight tracking-tight text-slate-900 line-clamp-1">
+          <h1 className="font-bold text-sm leading-tight tracking-tight text-fg line-clamp-1">
             {title}
           </h1>
           {subtitle && (
-            <span className="text-[11px] font-medium text-slate-500 leading-none">
+            <span className="text-[11px] font-medium text-fg-muted leading-none">
               {subtitle}
             </span>
           )}

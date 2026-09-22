@@ -94,12 +94,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           >
             <div className="flex items-start gap-3">
               {t.variant === 'success' && (
-                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
               )}
               {t.variant === 'error' && (
-                <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-danger shrink-0 mt-0.5" />
               )}
-              {t.variant === 'info' && <Info className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />}
+              {t.variant === 'info' && <Info className="w-5 h-5 text-info shrink-0 mt-0.5" />}
               <div className="grid gap-0.5">
                 <ToastTitle>{t.title}</ToastTitle>
                 {t.description && <ToastDescription>{t.description}</ToastDescription>}

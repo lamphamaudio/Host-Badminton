@@ -102,21 +102,21 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="bottom" className="max-h-[90vh] overflow-y-auto px-4 pb-8 pt-6 sm:max-w-md sm:mx-auto rounded-t-3xl border-t border-slate-200 bg-white text-slate-900 shadow-2xl">
-        <SheetHeader className="text-center pb-4 border-b border-slate-100">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-700">
+      <SheetContent side="bottom" className="max-h-[90vh] overflow-y-auto px-4 pb-8 pt-6 sm:max-w-md sm:mx-auto rounded-t-3xl border-t border-line bg-surface text-fg shadow-2xl">
+        <SheetHeader className="text-center pb-4 border-b border-line">
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 border border-accent/30 text-accent">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <SheetTitle className="text-xl font-bold text-slate-900">
+          <SheetTitle className="text-xl font-bold text-fg">
             Đăng nhập Host Badminton
           </SheetTitle>
-          <SheetDescription className="text-sm text-slate-500">
+          <SheetDescription className="text-sm text-fg-muted">
             Lưu trữ danh sách sân, lịch sử chia tiền và đồng bộ thông tin nhận tiền VietQR
           </SheetDescription>
         </SheetHeader>
 
         {/* Tab Switcher */}
-        <div className="mt-4 flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+        <div className="mt-4 flex rounded-xl bg-raised p-1 border border-line">
           <button
             type="button"
             onClick={() => {
@@ -125,8 +125,8 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
             }}
             className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'google'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-surface text-fg shadow-xs'
+                : 'text-fg-muted hover:text-fg'
             }`}
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -157,17 +157,17 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
             }}
             className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'phone'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-surface text-fg shadow-xs'
+                : 'text-fg-muted hover:text-fg'
             }`}
           >
-            <Phone className="w-4 h-4 text-emerald-600" />
+            <Phone className="w-4 h-4 text-accent" />
             Số điện thoại
           </button>
         </div>
 
         {errorMessage && (
-          <div className="mt-3 rounded-lg bg-rose-50 border border-rose-200 p-3 text-xs text-rose-800 font-medium">
+          <div className="mt-3 rounded-lg bg-danger/10 border border-danger/30 p-3 text-xs text-danger font-medium">
             {errorMessage}
           </div>
         )}
@@ -175,11 +175,11 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
         {/* Tab 1: Google OAuth */}
         {activeTab === 'google' && (
           <div className="mt-5 space-y-4">
-            <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-center">
-              <p className="text-sm text-slate-700">
+            <div className="rounded-xl bg-raised p-4 border border-line text-center">
+              <p className="text-sm text-fg">
                 Đăng nhập nhanh chỉ với 1 chạm thông qua tài khoản Google.
               </p>
-              <div className="mt-2 flex items-center justify-center gap-2 text-xs text-emerald-700 font-medium">
+              <div className="mt-2 flex items-center justify-center gap-2 text-xs text-accent font-medium">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Tự động chuyển dữ liệu khách cũ vào tài khoản</span>
               </div>
@@ -189,10 +189,10 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
               type="button"
               onClick={handleGoogleLogin}
               disabled={isSubmitting || isLoading}
-              className="w-full h-12 bg-white text-slate-900 hover:bg-slate-50 border border-slate-300 font-semibold rounded-xl text-base flex items-center justify-center gap-3 shadow-xs"
+              className="w-full h-12 bg-surface text-fg hover:bg-raised border border-line-strong font-semibold rounded-xl text-base flex items-center justify-center gap-3 shadow-xs"
             >
               {isSubmitting || isLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin text-slate-900" />
+                <Loader2 className="h-5 w-5 animate-spin text-fg" />
               ) : (
                 <>
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
             {!otpSent ? (
               <form onSubmit={handleSendOTP} className="space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
+                  <label className="text-xs font-semibold text-fg">
                     Số điện thoại di động (Việt Nam)
                   </label>
                   <div className="relative">
@@ -235,12 +235,12 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
                       placeholder="0912 345 678"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="h-12 pl-10 text-base bg-white border-slate-200 text-slate-900 rounded-xl"
+                      className="h-12 pl-10 text-base bg-surface border-line text-fg rounded-xl"
                       autoFocus
                     />
-                    <Phone className="absolute left-3.5 top-3.5 h-5 w-5 text-slate-400" />
+                    <Phone className="absolute left-3.5 top-3.5 h-5 w-5 text-fg-subtle" />
                   </div>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-fg-muted">
                     Hỗ trợ các đầu số 03, 05, 07, 08, 09 (10 số).
                   </p>
                 </div>
@@ -248,7 +248,7 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
                 <Button
                   type="submit"
                   disabled={isSubmitting || isLoading || !phone.trim()}
-                  className="w-full h-12 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-base shadow-sm"
+                  className="w-full h-12 bg-volt hover:bg-volt-hover text-ink font-semibold rounded-xl text-base shadow-sm"
                 >
                   {isSubmitting ? (
                     <Loader2 className="h-5 w-5 animate-spin" />
@@ -259,9 +259,9 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
               </form>
             ) : (
               <form onSubmit={handleVerifyOTP} className="space-y-4">
-                <div className="flex items-center justify-between rounded-xl bg-slate-50 p-3 border border-slate-200">
-                  <div className="text-xs text-slate-600">
-                    Đã gửi mã đến: <span className="font-semibold text-slate-900">{phone}</span>
+                <div className="flex items-center justify-between rounded-xl bg-raised p-3 border border-line">
+                  <div className="text-xs text-fg-muted">
+                    Đã gửi mã đến: <span className="font-semibold text-fg">{phone}</span>
                   </div>
                   <button
                     type="button"
@@ -269,14 +269,14 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
                       setOtpSent(false)
                       setOtpCode('')
                     }}
-                    className="text-xs font-medium text-emerald-700 hover:underline cursor-pointer"
+                    className="text-xs font-medium text-accent hover:underline cursor-pointer"
                   >
                     Đổi số
                   </button>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-700">
+                  <label className="text-xs font-semibold text-fg">
                     Mã xác thực OTP (6 chữ số)
                   </label>
                   <div className="relative">
@@ -287,23 +287,23 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
                       placeholder="123456"
                       value={otpCode}
                       onChange={(e) => setOtpCode(e.target.value)}
-                      className="h-12 pl-10 text-lg tracking-widest font-mono font-bold bg-white border-slate-200 text-slate-900 rounded-xl"
+                      className="h-12 pl-10 text-lg tracking-widest font-mono font-bold bg-surface border-line text-fg rounded-xl"
                       autoFocus
                     />
-                    <KeyRound className="absolute left-3.5 top-3.5 h-5 w-5 text-slate-400" />
+                    <KeyRound className="absolute left-3.5 top-3.5 h-5 w-5 text-fg-subtle" />
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-500">Chưa nhận được mã?</span>
+                  <span className="text-fg-muted">Chưa nhận được mã?</span>
                   <button
                     type="button"
                     disabled={countdown > 0 || isSubmitting}
                     onClick={() => handleSendOTP()}
                     className={`font-semibold cursor-pointer ${
                       countdown > 0
-                        ? 'text-slate-400 cursor-not-allowed'
-                        : 'text-emerald-700 hover:underline'
+                        ? 'text-fg-subtle cursor-not-allowed'
+                        : 'text-accent hover:underline'
                     }`}
                   >
                     {countdown > 0 ? `Gửi lại sau (${countdown}s)` : 'Gửi lại mã'}
@@ -311,15 +311,15 @@ export const LoginSheet: React.FC<LoginSheetProps> = ({ open, onOpenChange }) =>
                 </div>
 
                 {/* Dev hint */}
-                <div className="rounded-lg bg-slate-50 p-2.5 border border-slate-200 text-[11px] text-slate-600 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <div className="rounded-lg bg-raised p-2.5 border border-line text-[11px] text-fg-muted flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
                   <span>Mẹo: Trong môi trường thử nghiệm, bạn có thể nhập mã <strong>123456</strong>.</span>
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSubmitting || isLoading || otpCode.length < 4}
-                  className="w-full h-12 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-base shadow-sm"
+                  className="w-full h-12 bg-volt hover:bg-volt-hover text-ink font-semibold rounded-xl text-base shadow-sm"
                 >
                   {isSubmitting ? (
                     <Loader2 className="h-5 w-5 animate-spin" />

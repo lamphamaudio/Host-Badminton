@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { PageHeader } from '@/components/layout/page-header'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useSessionHistory } from '@/hooks/useSessionHistory'
 import { useVenues } from '@/hooks/useVenues'
+import { formatVND } from '@/lib/formatters'
 import {
   fetchSessionDetail,
   type SessionDetailResponse,
@@ -78,95 +80,86 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
   return (
     <div className="space-y-4 pb-20">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
-              <History className="w-4 h-4" />
-            </div>
-            <span>Lịch Sử Buổi Chơi</span>
-          </h1>
-          <p className="text-xs text-slate-500">
-            Xem lại các buổi đã tính tiền, sao chép QR và đối soát
-          </p>
-        </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setShowFilters(!showFilters)}
-          className={`text-xs flex items-center gap-1.5 ${
-            filters.startDate || filters.endDate || filters.venueId
-              ? 'border-slate-900 text-slate-900 font-semibold'
-              : 'border-slate-200 text-slate-600'
-          }`}
-        >
-          <Filter className="w-3.5 h-3.5" />
-          <span>Bộ lọc</span>
-        </Button>
-      </div>
+      <PageHeader
+        title="Lịch sử"
+        description="Các buổi đã tính tiền, mở lại bill và đối soát."
+        actions={
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowFilters(!showFilters)}
+            aria-expanded={showFilters}
+            className={`h-11 min-h-[44px] px-3.5 text-sm flex items-center gap-1.5 ${
+              filters.startDate || filters.endDate || filters.venueId
+                ? 'border-accent text-accent font-semibold'
+                : 'border-line text-fg-muted'
+            }`}
+          >
+            <Filter className="w-4 h-4" />
+            <span>Lọc</span>
+          </Button>
+        }
+      />
 
       {/* Summary Statistics Banner */}
       <div className="grid grid-cols-3 gap-2">
-        <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-xs text-center">
-          <span className="text-[11px] text-slate-500 font-medium block">
-            Tổng buổi
-          </span>
-          <span className="text-base font-bold text-slate-900 block mt-0.5 tabular-nums">
-            {totalCount}
-          </span>
-        </div>
-
-        <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-xs text-center">
-          <span className="text-[11px] text-slate-500 font-medium block">
-            Tổng chi phí
-          </span>
-          <span className="text-base font-bold text-emerald-700 block mt-0.5 truncate tabular-nums">
-            {totalRevenue >= 1_000_000
-              ? `${(totalRevenue / 1_000_000).toFixed(1)}Tr`
-              : `${totalRevenue.toLocaleString('vi-VN')} đ`}
-          </span>
-        </div>
-
-        <div className="p-3 rounded-xl bg-white border border-slate-200 shadow-xs text-center">
-          <span className="text-[11px] text-slate-500 font-medium block">
-            Lượt người chơi
-          </span>
-          <span className="text-base font-bold text-slate-900 block mt-0.5 tabular-nums">
-            {totalParticipants}
-          </span>
-        </div>
+        {[
+          { label: 'Số buổi', value: String(totalCount), accent: false },
+          {
+            label: 'Tổng chi',
+            value:
+              totalRevenue >= 1_000_000
+                ? `${(totalRevenue / 1_000_000).toFixed(1)}Tr`
+                : formatVND(totalRevenue),
+            accent: true,
+          },
+          { label: 'Lượt chơi', value: String(totalParticipants), accent: false },
+        ].map((stat) => (
+          <div key={stat.label} className="rounded-xl border border-line bg-surface px-2 py-3 text-center">
+            <span className="block whitespace-nowrap text-[11px] font-medium text-fg-muted">
+              {stat.label}
+            </span>
+            <span
+              className={`mt-0.5 block whitespace-nowrap text-[15px] font-bold tabular-nums ${
+                stat.accent ? 'text-accent' : 'text-fg'
+              }`}
+            >
+              {stat.value}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* Filter Controls Accordion */}
       {showFilters && (
-        <Card className="bg-slate-50 border-slate-200 p-3 space-y-3 shadow-xs">
+        <Card className="bg-raised border-line p-3 space-y-3 shadow-xs">
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="text-[11px] font-medium text-slate-600">Từ ngày</label>
+              <label className="text-[11px] font-medium text-fg-muted">Từ ngày</label>
               <Input
                 type="date"
                 value={filters.startDate || ''}
                 onChange={(e) => updateFilters({ startDate: e.target.value || undefined })}
-                className="h-8 text-xs bg-white border-slate-200"
+                className="h-8 text-xs bg-surface border-line"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-[11px] font-medium text-slate-600">Đến ngày</label>
+              <label className="text-[11px] font-medium text-fg-muted">Đến ngày</label>
               <Input
                 type="date"
                 value={filters.endDate || ''}
                 onChange={(e) => updateFilters({ endDate: e.target.value || undefined })}
-                className="h-8 text-xs bg-white border-slate-200"
+                className="h-8 text-xs bg-surface border-line"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-[11px] font-medium text-slate-600">Sân cầu lông</label>
+            <label className="text-[11px] font-medium text-fg-muted">Sân cầu lông</label>
             <select
               value={filters.venueId || ''}
               onChange={(e) => updateFilters({ venueId: e.target.value || undefined })}
-              className="w-full h-8 text-xs rounded-md bg-white border border-slate-200 px-2 text-slate-800"
+              className="w-full h-8 text-xs rounded-md bg-surface border border-line px-2 text-fg"
             >
               <option value="">Tất cả các sân</option>
               {venues.map((v) => (
@@ -182,7 +175,7 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
               size="sm"
               variant="ghost"
               onClick={() => updateFilters({ startDate: undefined, endDate: undefined, venueId: undefined })}
-              className="w-full text-xs text-slate-500 hover:text-slate-900 h-7"
+              className="w-full text-xs text-fg-muted hover:text-fg h-7"
             >
               Xóa bộ lọc
             </Button>
@@ -192,7 +185,7 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
 
       {/* Error Message */}
       {error && (
-        <div className="p-3 text-sm text-rose-800 bg-rose-50 border border-rose-200 rounded-xl">
+        <div className="p-3 text-sm text-danger bg-danger/10 border border-danger/30 rounded-xl">
           {error}
         </div>
       )}
@@ -201,32 +194,32 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
       {isLoading ? (
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="bg-white border-slate-200 animate-pulse shadow-sm">
+            <Card key={i} className="bg-surface border-line animate-pulse shadow-sm">
               <CardContent className="p-4 h-24" />
             </Card>
           ))}
         </div>
       ) : sessions.length === 0 ? (
         /* Empty State */
-        <Card className="bg-slate-50 border-slate-200 border-dashed text-center p-8">
+        <Card className="bg-raised border-line border-dashed text-center p-8">
           <CardContent className="flex flex-col items-center justify-center space-y-3 p-0">
-            <div className="w-12 h-12 rounded-full bg-slate-200/70 flex items-center justify-center text-slate-500">
+            <div className="w-12 h-12 rounded-full bg-line-strong/70 flex items-center justify-center text-fg-muted">
               <History className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <p className="text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold text-fg">
                 {filters.startDate || filters.endDate || filters.venueId
                   ? 'Không tìm thấy buổi chơi phù hợp bộ lọc'
                   : 'Chưa có buổi chơi nào được lưu'}
               </p>
-              <p className="text-xs text-slate-500 max-w-xs">
+              <p className="text-xs text-fg-muted max-w-xs">
                 Khi bạn tính tiền buổi chơi, bấm "Lưu buổi chơi" để lưu vào nhật ký này.
               </p>
             </div>
             <Button
               onClick={onNavigateToCalculator}
               variant="outline"
-              className="mt-2 text-slate-900 border-slate-300 hover:bg-slate-100"
+              className="mt-2 text-fg border-line-strong hover:bg-raised"
             >
               Đi đến máy tính chia tiền
             </Button>
@@ -247,7 +240,7 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
               <Card
                 key={s.id}
                 onClick={() => handleSelectSession(s)}
-                className={`bg-white border-slate-200 hover:border-slate-300 transition-all cursor-pointer shadow-sm active:scale-[0.99] ${
+                className={`bg-surface border-line hover:border-line-strong transition-all cursor-pointer shadow-sm active:scale-[0.99] ${
                   loadingDetailId === s.id ? 'opacity-60 pointer-events-none' : ''
                 }`}
               >
@@ -255,14 +248,14 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
                   <div className="flex items-start justify-between gap-2">
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-sm text-slate-900 flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                        <span className="font-semibold text-sm text-fg flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-fg-subtle" />
                           {formattedDate}
                         </span>
                       </div>
                       {s.venue_name && (
-                        <span className="text-xs text-slate-500 flex items-center gap-1">
-                          <Building2 className="w-3 h-3 text-slate-400" />
+                        <span className="text-xs text-fg-muted flex items-center gap-1">
+                          <Building2 className="w-3 h-3 text-fg-subtle" />
                           {s.venue_name}
                         </span>
                       )}
@@ -274,30 +267,30 @@ export const SessionHistoryView: React.FC<SessionHistoryViewProps> = ({
                         variant="ghost"
                         disabled={deletingId === s.id}
                         onClick={(e) => handleDelete(e, s)}
-                        className="h-7 w-7 p-0 text-slate-400 hover:text-rose-600 hover:bg-rose-50"
+                        className="h-7 w-7 p-0 text-fg-subtle hover:text-danger hover:bg-danger/10"
                         title="Xóa buổi chơi"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </Button>
-                      <ChevronRight className="w-4 h-4 text-slate-400" />
+                      <ChevronRight className="w-4 h-4 text-fg-subtle" />
                     </div>
                   </div>
 
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-2 text-slate-500">
+                  <div className="pt-2 border-t border-line flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-2 text-fg-muted">
                       <span className="flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5 text-slate-400" />
+                        <Users className="w-3.5 h-3.5 text-fg-subtle" />
                         {s.participant_count} người
                       </span>
                       {s.paid_count > 0 && (
-                        <span className="text-emerald-800 text-[11px] font-semibold bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
+                        <span className="text-accent text-[11px] font-semibold bg-accent/10 border border-accent/30 px-1.5 py-0.5 rounded">
                           {s.paid_count}/{s.participant_count} đã trả
                         </span>
                       )}
                     </div>
 
                     <div className="text-right">
-                      <span className="font-bold text-slate-900 text-sm tabular-nums">
+                      <span className="font-bold text-fg text-sm tabular-nums">
                         {s.total_expenses.toLocaleString('vi-VN')} đ
                       </span>
                     </div>

@@ -13,7 +13,8 @@ import { PlayerCountSection } from './PlayerCountSection'
 import { ShuttlecockSection } from './ShuttlecockSection'
 import { SplitModeSelector } from './SplitModeSelector'
 import { BillCardPreview, type BillSessionData } from '@/components/bill/bill-card-preview'
-import { Badge } from '@/components/ui/badge'
+import { FlipAmount } from '@/components/brand/FlipAmount'
+import { PageHeader } from '@/components/layout/page-header'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -335,53 +336,45 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
 
   return (
     <div className="flex flex-col gap-4 pb-28 max-w-lg mx-auto w-full px-4 pt-2">
-      {/* Top Action Bar */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-            <span>Tính tiền sân & VietQR</span>
-            <Badge variant="paid" size="sm">
-              Tally
-            </Badge>
-          </h2>
-          <p className="text-xs text-slate-500">
-            Chia đều, giảm giá nữ, về sớm & tạo QR thanh toán tức thì
-          </p>
-        </div>
-
-        <div className="flex items-center gap-1.5">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setBankModalOpen(true)}
-            className="h-8 px-2 text-xs text-emerald-700 hover:text-emerald-800 hover:bg-emerald-50 font-medium"
-          >
-            <CreditCard className="w-3.5 h-3.5 mr-1" />
-            <span>STK VietQR</span>
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleReset}
-            className="h-8 px-2 text-xs text-slate-500 hover:text-slate-900 hover:bg-slate-100"
-            title="Đặt lại thông số"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-          </Button>
-        </div>
-      </div>
+      <PageHeader
+        title="Tính tiền"
+        description="Chia tiền sân, tiền cầu và tạo mã VietQR cho cả nhóm."
+        actions={
+          <>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setBankModalOpen(true)}
+              className="h-11 min-h-[44px] px-3 text-xs text-accent hover:text-accent hover:bg-accent/10 font-semibold"
+            >
+              <CreditCard className="w-4 h-4 mr-1" />
+              <span>STK</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleReset}
+              className="h-11 w-11 min-h-[44px] p-0 text-fg-muted hover:text-fg hover:bg-raised"
+              title="Đặt lại thông số"
+              aria-label="Đặt lại thông số"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </Button>
+          </>
+        }
+      />
 
       {/* Warning banner if bank account not configured */}
       {!bankProfile.accountNumber && (
         <div
           onClick={() => setBankModalOpen(true)}
-          className="flex items-center justify-between p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs cursor-pointer hover:bg-amber-100/80 transition-colors"
+          className="flex items-center justify-between p-3 rounded-2xl bg-warn/10 border border-warn/30 text-warn text-xs cursor-pointer hover:bg-warn/10 transition-colors"
         >
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-warn shrink-0" />
             <span>Chưa cài STK ngân hàng. Nhấn để tạo mã VietQR</span>
           </div>
-          <span className="font-semibold text-amber-700 underline shrink-0">Cài đặt</span>
+          <span className="font-semibold text-warn underline shrink-0">Cài đặt</span>
         </div>
       )}
 
@@ -433,77 +426,62 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
       />
 
       {/* 5. Live Calculation Summary Card */}
-      <div className="rounded-3xl bg-white border border-slate-900 p-4 shadow-sm space-y-3">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Kết quả tính tiền tức thì</span>
-          </div>
-          <Badge variant="outline" size="sm">
-            {result.totalParticipants} người · Tổng {formatVND(result.totalExpenses)}
-          </Badge>
+      <section
+        aria-label="Kết quả chia tiền"
+        className="rounded-3xl border border-accent/40 bg-surface p-4 shadow-[0_0_0_1px_rgba(200,255,61,0.06),0_20px_50px_-30px_rgba(200,255,61,0.35)]"
+      >
+        <div className="flex items-center justify-between border-b border-line pb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-fg-muted">
+          <span className="flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-accent" />
+            Bảng điểm
+          </span>
+          <span className="font-mono normal-case tracking-normal">
+            {result.totalParticipants} người · {formatVND(result.totalExpenses)}
+          </span>
         </div>
 
-        {/* Split fees grid */}
-        {inputs.splitMode === 'multi_stage' && result.earlyCount && result.earlyCount > 0 ? (
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-amber-50/70 rounded-2xl p-2.5 border border-amber-200/80 text-center">
-              <div className="text-[10px] text-amber-800 font-semibold uppercase">
-                Về sớm ({result.earlyCount} người)
+        <div className="divide-y divide-line">
+          {(inputs.splitMode === 'multi_stage' && result.earlyCount && result.earlyCount > 0
+            ? [
+                { label: 'Về sớm', count: result.earlyCount, fee: result.earlyFee || 0, warn: true },
+                { label: 'Chơi hết', count: result.stayCount || 0, fee: result.stayFee || 0, warn: false },
+              ]
+            : [
+                { label: 'Nam', count: result.maleCount, fee: result.maleFee, warn: false },
+                { label: 'Nữ', count: result.femaleCount, fee: result.femaleFee, warn: false },
+              ]
+          ).map((row) => (
+            <div key={row.label} className="flex items-center justify-between gap-3 py-3.5">
+              <div>
+                <span className={`block text-sm font-bold ${row.warn ? 'text-warn' : 'text-fg'}`}>
+                  {row.label}
+                </span>
+                <span className="font-mono text-xs text-fg-muted">× {row.count}</span>
               </div>
-              <div className="text-base font-black font-mono text-amber-900 tabular-nums">
-                {formatVND(result.earlyFee || 0)}
-              </div>
+              <FlipAmount value={row.count > 0 ? row.fee : 0} muted={row.count === 0} />
             </div>
-            <div className="bg-slate-50 rounded-2xl p-2.5 border border-slate-200 text-center">
-              <div className="text-[10px] text-slate-500 font-semibold uppercase">
-                Chơi hết ({result.stayCount} người)
-              </div>
-              <div className="text-base font-black font-mono text-slate-900 tabular-nums">
-                {formatVND(result.stayFee || 0)}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-slate-50 rounded-2xl p-2.5 border border-slate-200 text-center">
-              <div className="text-[10px] text-slate-500 font-semibold uppercase">
-                Nam ({result.maleCount} người)
-              </div>
-              <div className="text-base font-black font-mono text-slate-900 tabular-nums">
-                {formatVND(result.maleFee)}
-              </div>
-            </div>
-            <div className="bg-emerald-50/70 rounded-2xl p-2.5 border border-emerald-200/80 text-center">
-              <div className="text-[10px] text-emerald-800 font-semibold uppercase">
-                Nữ ({result.femaleCount} người)
-              </div>
-              <div className="text-base font-black font-mono text-emerald-900 tabular-nums">
-                {formatVND(result.femaleFee)}
-              </div>
-            </div>
-          </div>
-        )}
+          ))}
+        </div>
 
         {/* Buffer & collected info */}
-        <div className="flex justify-between items-center text-[11px] text-slate-500 px-1 pt-1">
-          <span>Thu về: {formatVND(result.totalCollected)}</span>
-          <span className="text-emerald-700 font-semibold">
+        <div className="flex justify-between items-center border-t border-line pt-3 font-mono text-[11px] text-fg-muted">
+          <span>Thu về {formatVND(result.totalCollected)}</span>
+          <span className="font-semibold text-accent">
             {result.fundBuffer > 0
-              ? `Dư quỹ: +${formatVND(result.fundBuffer)}`
+              ? `Dư quỹ +${formatVND(result.fundBuffer)}`
               : 'Vừa khớp chi phí'}
           </span>
         </div>
-      </div>
+      </section>
 
       {/* Sticky Bottom Bill Card Launcher */}
-      <div className="fixed bottom-16 left-0 right-0 p-3 bg-gradient-to-t from-[#fafbfc] via-[#fafbfc]/90 to-transparent z-40 max-w-lg mx-auto pointer-events-auto">
+      <div className="fixed bottom-16 left-0 right-0 p-3 bg-gradient-to-t from-canvas via-canvas/90 to-transparent z-40 max-w-lg mx-auto pointer-events-auto">
         <Button
           size="lg"
           onClick={() => setBillDrawerOpen(true)}
-          className="w-full h-12 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold shadow-lg shadow-slate-900/15 flex items-center justify-center gap-2"
+          className="w-full h-12 rounded-2xl bg-volt hover:bg-volt-hover text-ink font-bold shadow-lg shadow-black/40 flex items-center justify-center gap-2"
         >
-          <QrCode className="w-5 h-5 text-emerald-400" />
+          <QrCode className="w-5 h-5 text-ink" />
           <span>Xem hóa đơn & Lưu lịch sử</span>
         </Button>
       </div>
@@ -512,14 +490,14 @@ export const CalculatorScreen: React.FC<CalculatorScreenProps> = ({
       <Sheet open={billDrawerOpen} onOpenChange={setBillDrawerOpen}>
         <SheetContent
           side="bottom"
-          className="max-h-[92vh] overflow-y-auto bg-white border-t border-slate-200 p-4 rounded-t-3xl shadow-2xl"
+          className="max-h-[92vh] overflow-y-auto bg-surface border-t border-line p-4 rounded-t-3xl shadow-2xl"
         >
           <SheetHeader className="pb-3 text-left">
-            <SheetTitle className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <SheetTitle className="text-base font-bold text-fg flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-accent" />
               <span>Hóa đơn VietQR hoàn chỉnh</span>
             </SheetTitle>
-            <SheetDescription className="text-xs text-slate-500">
+            <SheetDescription className="text-xs text-fg-muted">
               Quét mã QR để chuyển khoản hoặc lưu buổi chơi vào lịch sử
             </SheetDescription>
           </SheetHeader>

@@ -29,9 +29,9 @@ export function MobileAppShell({
   className,
 }: MobileAppShellProps) {
   return (
-    <div className="min-h-screen bg-[#fafbfc] text-[#0f172a] flex justify-center selection:bg-emerald-100 selection:text-emerald-900 font-sans">
+    <div className="min-h-screen bg-canvas text-fg flex justify-center selection:bg-volt selection:text-ink font-sans">
       {/* Centered Mobile Container */}
-      <div className="w-full max-w-md min-h-screen flex flex-col bg-white border-x border-slate-200/80 shadow-[0_0_30px_rgba(0,0,0,0.03)] relative">
+      <div className="w-full max-w-md min-h-screen flex flex-col bg-canvas border-x border-line relative">
         {showHeader && (
           <AppHeader
             title={headerTitle}
