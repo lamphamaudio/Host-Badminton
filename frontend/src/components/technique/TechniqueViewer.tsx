@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ServeSceneHandle } from './serveScene'
+import type { Technique } from '@/lib/technique/techniques'
+import type { TechniqueSceneHandle } from './techniqueScene'
 
-export interface ServeViewerProps {
+export interface TechniqueViewerProps {
+  technique: Technique
   /** Receives the scene controls once three.js has loaded, and null on unmount */
-  onReady: (handle: ServeSceneHandle | null) => void
+  onReady: (handle: TechniqueSceneHandle | null) => void
   onFrame: (time: number, playing: boolean) => void
   className?: string
 }
@@ -18,10 +20,10 @@ function supportsWebGL(): boolean {
 }
 
 /**
- * Touch-orbitable 3D serve. The scene is lazily imported so three.js only downloads
- * when the Kỹ thuật tab is opened.
+ * Touch-orbitable 3D technique. The scene is lazily imported so three.js only downloads
+ * when a technique is opened.
  */
-export function ServeViewer({ onReady, onFrame, className }: ServeViewerProps) {
+export function TechniqueViewer({ technique, onReady, onFrame, className }: TechniqueViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [fallback, setFallback] = useState(() => !supportsWebGL())
   const [loading, setLoading] = useState(true)
@@ -37,15 +39,16 @@ export function ServeViewer({ onReady, onFrame, className }: ServeViewerProps) {
     const canvas = canvasRef.current
     if (!canvas || fallback) return
 
-    let handle: ServeSceneHandle | null = null
+    let handle: TechniqueSceneHandle | null = null
     let cancelled = false
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    import('./serveScene')
-      .then(({ createServeScene }) => {
+    import('./techniqueScene')
+      .then(({ createTechniqueScene }) => {
         // StrictMode mounts twice; never build a scene for an unmounted canvas
         if (cancelled) return
-        handle = createServeScene(canvas, {
+        handle = createTechniqueScene(canvas, {
+          technique,
           reducedMotion,
           onFrame: (time, playing) => onFrameRef.current(time, playing),
         })
@@ -59,7 +62,7 @@ export function ServeViewer({ onReady, onFrame, className }: ServeViewerProps) {
       onReadyRef.current(null)
       handle?.dispose()
     }
-  }, [fallback])
+  }, [fallback, technique])
 
   if (fallback) {
     return (
@@ -75,7 +78,7 @@ export function ServeViewer({ onReady, onFrame, className }: ServeViewerProps) {
       <canvas
         ref={canvasRef}
         className="block h-full w-full touch-none"
-        aria-label="Mô phỏng 3D động tác giao cầu cao thuận tay. Kéo để xoay, chụm hai ngón để phóng to."
+        aria-label={`Mô phỏng 3D động tác ${technique.name.toLowerCase()}. Kéo để xoay, chụm hai ngón để phóng to.`}
         role="img"
       />
       {loading && (
